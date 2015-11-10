@@ -2,7 +2,7 @@
 """
 Created on Tue Nov  3 15:50:16 2015
 
-@author: NSouthor
+@author: Nick Southorn
 """
 
 import os
