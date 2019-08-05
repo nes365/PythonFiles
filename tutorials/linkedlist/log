@@ -1,0 +1,6 @@
+--2014-05-15 08:46:19--  http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=
+Resolving wpad.mbhpe.net... 192.168.199.71
+Connecting to wpad.mbhpe.net|192.168.199.71|:8080... connected.
+Proxy request sent, awaiting response... 407 Proxy Authorization Required
+2014-05-15 08:46:19 ERROR 407: Proxy Authorization Required.
+

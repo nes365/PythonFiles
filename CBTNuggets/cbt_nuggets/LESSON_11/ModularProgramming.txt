@@ -1,0 +1,215 @@
+Modular Programming
+===================
+Making python programs more robust.
+
+* Using modules
+* Module search path (sys.path)
+* Python Packages
+
+What are modules?
+-----------------
+
+* Self contained namespace of:
+	names - classes
+		functions
+		variables
+
+Plain text file (.py, pyc (bytecode compiled module)) containing Python code.
+
+* Benefits
+	Code reuse
+	Shared components
+	Avoiding name collisions
+
+* All lines in the imported module are run on first import. (__main__ trick)
+
+Importing Modules
+-----------------
+
+import os 
+
+# imports the whole os namespace, meaning all of os is now available to the Python program
+# As a result, the namespace of the imported module is reserved. So os needs to prepend each function.
+
+os.chdir()
+
+# Another way to import is using the from import construct (csv list)
+# Using this can overwrite the namespace by mistake, best to stick with the above method
+# Now the function can be used without referencing the parent module.
+
+from os import chdir
+chdir('C:\\spam')
+
+# This is more memory efficient
+
+Examples:
+
+
+>>> import sys
+>>> dir(sys)
+['__displayhook__', '__doc__', '__excepthook__', '__name__', '__package__', '__stderr__', '__stdin__', '__stdout__', '_clear_type_cache', '_current_frames', '_getframe', 'api_version', 'argv', 'builtin_module_names', 'byteorder', 'call_tracing', 'callstats', 'copyright', 'displayhook', 'dont_write_bytecode', 'exc_info', 'excepthook', 'exec_prefix', 'executable', 'exit', 'flags', 'float_info', 'float_repr_style', 'getcheckinterval', 'getdefaultencoding', 'getdlopenflags', 'getfilesystemencoding', 'getprofile', 'getrecursionlimit', 'getrefcount', 'getsizeof', 'gettrace', 'hexversion', 'int_info', 'intern', 'maxsize', 'maxunicode', 'meta_path', 'modules', 'path', 'path_hooks', 'path_importer_cache', 'platform', 'prefix', 'pydebug', 'setcheckinterval', 'setdlopenflags', 'setfilesystemencoding', 'setprofile', 'setrecursionlimit', 'settrace', 'stderr', 'stdin', 'stdout', 'subversion', 'version', 'version_info', 'warnoptions']
+>>> 
+
+
+Reloading modules
+-----------------
+>>> import os
+>>> import imp
+>>> imp.reload(os)
+<module 'os' from '/usr/lib/python3.1/os.py'>
+>>> 
+
+
+The __name__ trick
+------------------
+# squaremath.py
+
+def sq(x):
+    return x * x
+
+if __name__ == '__main__':
+    print('Testing: Square of 2 == ' , sq(2))
+
+
+So why is this particular if statement a trick? Modules are objects, and all modules have a built-in attribute __name__. 
+A module's __name__ depends on how you're using the module. 
+If you import the module, then __name__ is the module's filename, without a directory path or file extension. 
+But you can also run the module directly as a standalone program, in which case __name__ will be a special default value, __main__.
+
+>>> import odbchelper
+>>> odbchelper.__name__
+'odbchelper'
+
+Knowing this, you can design a test suite for your module within the module itself by putting it in this if statement. 
+When you run the module directly, __name__ is __main__, so the test suite executes. 
+When you import the module, __name__ is something else, so the test suite is ignored. 
+This makes it easier to develop and debug new modules before integrating them into a larger program.
+
+Example:
+Short script - 
+#!/usr/bin/python
+# Adapted from www.ibiblio.org/g2swap/byteofpython
+
+if __name__ = '__main__':
+    print ('This program is being run by itself')
+else:
+    print ('I am being imported from another module')
+
+If this module is run from a command prompt, the following output occurs:
+
+nicksouthorn@eeepc-1:~/documents/Python_learning/LESSON_11$ python modtest2.py
+This program is being run by itself
+
+If this module is being imported into another Python program then the following output occurs:
+
+>>> import modtest2
+I am being imported from another module
+
+
+## If you want to reload the module after making some changes, you can use the imp module.
+
+
+>>> import imp
+>>> imp.reload(modtest2)
+I am being imported from another module
+<module 'modtest2' from '/home/nicksouthorn/documents/Python_learning/LESSON_11/modtest2.py'>
+>>> 
+
+
+Example:
+Short script - 
+#!/usr/bin/python
+
+'''
+Name: modtest.py
+Author: Nick Southorn
+Purpose: Test out module imports
+'''
+
+def square(x):
+    # Returns the square of a given integer
+    return x * x
+
+if __name__ == '__main__':
+    print('Testing: square of 2 == ', square(2))
+
+
+If this module is run from the command line:
+
+nicksouthorn@eeepc-1:~/documents/Python_learning/LESSON_11$ python modtest.py
+('Testing: square of 2 == ', 4)
+
+
+If this module is imported into another module:
+
+>>> import modtest
+>>> help(modtest)
+Help on module modtest:
+
+NAME
+    modtest
+
+DESCRIPTION
+    Name: modtest.py
+    Author: Nick Southorn
+    Purpose: Test out module imports
+
+FUNCTIONS
+    square(x)
+
+FILE
+    /home/nicksouthorn/documents/Python_learning/LESSON_11/modtest.py
+
+>>> modtest.square(10)
+100
+>>> 
+
+
+The Module Search Path
+======================
+* Makes imports transparent
+* OS        -> PYTHONPATH environment variable
+* Python    -> sys.path
+		- list (append, remove etc)
+		- session scope
+
+* .pth file -> a list that Python will parse every time it is run.
+	       save in install dir or site-packages
+
+>>> import sys
+>>> sys.path
+['/home/nicksouthorn/documents/Python_learning/LESSON_11', '/usr/bin', '/usr/lib/python3.1', '/usr/lib/python3.1/plat-linux2', '/usr/lib/python3.1/lib-dynload', '/usr/local/lib/python3.1/dist-packages', '/usr/lib/python3/dist-packages']
+
+# Append a file path to sys.path
+
+>>> sys.path.append('/users/nicksouthorn/documents/Python_learning/')
+>>> sys.path
+['/home/nicksouthorn/documents/Python_learning/LESSON_11', '/usr/bin', '/usr/lib/python3.1', '/usr/lib/python3.1/plat-linux2', '/usr/lib/python3.1/lib-dynload', '/usr/local/lib/python3.1/dist-packages', '/usr/lib/python3/dist-packages', '/users/nicksouthorn/documents/Python_learning/']
+>>> 
+
+
+
+Module Packages
+---------------
+* Collection of folder(s) and modules
+* Python package index (PyPI)
+
+Example:
+
+parrot/
++-- __init__.py
++-- feeding/
+     +-- __init__.py
+     +-- eating.py
+     +-- drinking.py
++-- fighting.py
++-- flying.py
++-- sleeping.py
++-- talking.p
+
+>>> import parrot                                    # loads parrot/__init__.py
+>>> import parrot.talking                            # loads parrot/talking.py
+>>> from parrot import sleeping                      # 
+>>> import parrot.feeding                            #
+>>> from parrot.feeding.eating import eat_cracker 
+

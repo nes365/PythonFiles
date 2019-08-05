@@ -1,0 +1,87 @@
+Strings Revisited
+=================
+* Advanced string methods
+* String formatting
+* Obtaining keyboard input
+
+http://docs.python.org.py3k/library/stdtypes.html
+
+* Remember that strings are immutable!
+
+>>> a='abc'
+>>> a=a+'abc'
+>>> a
+'abcabc'
+>>> 
+
+Examples:
+
+>>> str1='this is a sample string'
+>>> str1.capitalize ()
+'This is a sample string'
+
+## Count string instances
+
+>>> str1.count('is')
+2
+>>> str1.count(' is ')
+1
+>>> str1.find('amp')
+11
+
+## Check case
+
+>>> str1.isupper()
+False
+
+## Change cases
+
+>>> str1.upper()
+'THIS IS A SAMPLE STRING'
+>>> str1.lower()
+'this is a sample string'
+>>> str1.title()
+'This Is A Sample String'
+
+## Strip whitespace
+
+>>> str2='     five taps of the SPACBAR     '
+>>> str2.lstrip()
+'five taps of the SPACEBAR     '
+>>> str2.rstrip()
+'     five taps of the SPACEBAR'
+
+## Replace strings
+
+>>> str1.replace('sample','test')
+'this is a test string'
+
+## Split and join strings
+
+>>> str3='1,2,,4,5'
+>>> str3
+'1,2,,4,5'
+>>> str3.split(',')
+['1', '2', '', '4', '5']
+>>> days=['Monday', 'Tuesday', 'Wednesday']
+>>> days
+['Monday', 'Tuesday', 'Wednesday']
+>>> week = ' '.join(days)
+>>> week
+'Monday Tuesday Wednesday'
+
+## String formatting method calls
+
+>>> s="{0} has {1} vacation days left.".format('Nick', 14)
+>>> s
+'Nick has 14 vacation days left.'
+
+Obtaining Keyboard Input
+------------------------
+* Stdin (keyboard)
+* Stdout (screen)
+
+* Input([prompt]) -> string (a transformation will need to be applied if a integer or a float is needed)
+* sh> python program.py > result.txt (redirecting output to a file)
+
+

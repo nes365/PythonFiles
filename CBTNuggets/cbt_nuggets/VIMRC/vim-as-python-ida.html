@@ -1,0 +1,1007 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html
+xmlns="http://www.w3.org/1999/xhtml"><head
+profile="http://gmpg.org/xfn/11"><link
+rel='stylesheet' href='http://blog.dispatched.ch/wp-content/plugins/wp-minify/min/?f=wp-content/themes/p_theme/style.css,wp-content/plugins/nextgen-gallery/css/nggallery.css,wp-content/plugins/nextgen-gallery/shutter/shutter-reloaded.css,wp-content/plugins/lightbox-2/Themes/Black/lightbox.css,wp-content/plugins/wp-syntax/wp-syntax.css&amp;m=1336078524' type='text/css' media='screen' /> <script type='text/javascript' src='http://blog.dispatched.ch/wp-content/plugins/wp-minify/min/?f=wp-includes/js/l10n.js,wp-includes/js/prototype.js,wp-includes/js/scriptaculous/wp-scriptaculous.js,wp-includes/js/scriptaculous/effects.js,wp-content/plugins/lightbox-2/lightbox-resize.js,wp-content/plugins/nextgen-gallery/shutter/shutter-reloaded.js,wp-includes/js/jquery/jquery.js,wp-content/plugins/nextgen-gallery/js/jquery.cycle.all.min.js,wp-content/plugins/nextgen-gallery/js/ngg.slideshow.min.js,wp-content/plugins/google-analyticator/external-tracking.min.js&amp;m=1336078524'></script> <meta
+http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>VIM as Python IDE | Alain M. Lafon</title><meta
+name="generator" content="WordPress 792" /><link
+rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://blog.dispatched.ch/feed/" /><link
+rel="alternate" type="text/xml" title="RSS .92" href="http://blog.dispatched.ch/feed/rss/" /><link
+rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://blog.dispatched.ch/feed/atom/" /><link
+rel="pingback" href="http://blog.dispatched.ch/xmlrpc.php" /><link
+rel="shortcut icon" href="http://blog.dispatched.ch/wp-content/themes/p_theme/favicon.ico" /><link
+rel='archives' title='November 2011' href='http://blog.dispatched.ch/2011/11/' /><link
+rel='archives' title='June 2011' href='http://blog.dispatched.ch/2011/06/' /><link
+rel='archives' title='May 2011' href='http://blog.dispatched.ch/2011/05/' /><link
+rel='archives' title='February 2011' href='http://blog.dispatched.ch/2011/02/' /><link
+rel='archives' title='December 2010' href='http://blog.dispatched.ch/2010/12/' /><link
+rel='archives' title='November 2010' href='http://blog.dispatched.ch/2010/11/' /><link
+rel='archives' title='October 2010' href='http://blog.dispatched.ch/2010/10/' /><link
+rel='archives' title='August 2010' href='http://blog.dispatched.ch/2010/08/' /><link
+rel='archives' title='July 2010' href='http://blog.dispatched.ch/2010/07/' /><link
+rel='archives' title='June 2010' href='http://blog.dispatched.ch/2010/06/' /><link
+rel='archives' title='May 2010' href='http://blog.dispatched.ch/2010/05/' /><link
+rel='archives' title='December 2009' href='http://blog.dispatched.ch/2009/12/' /><link
+rel='archives' title='November 2009' href='http://blog.dispatched.ch/2009/11/' /><link
+rel='archives' title='June 2009' href='http://blog.dispatched.ch/2009/06/' /><link
+rel='archives' title='May 2009' href='http://blog.dispatched.ch/2009/05/' /><link
+rel='archives' title='April 2009' href='http://blog.dispatched.ch/2009/04/' /><link
+rel='archives' title='March 2009' href='http://blog.dispatched.ch/2009/03/' /><link
+rel='archives' title='February 2009' href='http://blog.dispatched.ch/2009/02/' /><link
+rel='archives' title='January 2009' href='http://blog.dispatched.ch/2009/01/' /><link
+rel='archives' title='November 2008' href='http://blog.dispatched.ch/2008/11/' /><link
+rel='archives' title='October 2008' href='http://blog.dispatched.ch/2008/10/' /><link
+rel="alternate" type="application/rss+xml" title="Alain M. Lafon &raquo; VIM as Python IDE Comments Feed" href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/feed/" /> <script type='text/javascript'>/*  */
+var shutterSettings = {
+	msgLoading: "L O A D I N G",
+	msgClose: "Click to Close",
+	imageCount: "1"
+};
+/*  */</script> <link
+rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.dispatched.ch/wp-includes/wlwmanifest.xml" /><link
+rel='index' title='Alain M. Lafon' href='http://blog.dispatched.ch/' /><link
+rel='start' title='AMP stack in Solaris 05/08' href='http://blog.dispatched.ch/2008/10/04/amp-stack-in-solaris-0508/' /><link
+rel='prev' title='Juno on Solaris 10' href='http://blog.dispatched.ch/2009/05/18/juno-on-solaris-10/' /><link
+rel='next' title='Server outage' href='http://blog.dispatched.ch/2009/06/25/server-outage/' /><link
+rel='shortlink' href='http://blog.dispatched.ch/?p=777' /><meta
+name="description" content="Finding the perfect IDE for Python isn't an easy feat. There are a great many to chose from, but even though some of them offer really nifty features, I can't" /><link
+rel="canonical" href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/" /> <script type="text/javascript">//
+    document.write('');
+    //</script> <link
+id='MediaRSS' rel='alternate' type='application/rss+xml' title='NextGEN Gallery RSS Feed' href='http://blog.dispatched.ch/wp-content/plugins/nextgen-gallery/xml/media-rss.php' /><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><meta
+id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />  <script type="text/javascript">var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';</script> <script type="text/javascript">var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-15881245-1']);
+	_gaq.push(['_trackPageview']);
+	_gaq.push(['_trackPageLoadTime']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();</script> </head><link
+rel="shortcut icon" href="http://blog.dispatched.ch/wp-content/themes/p_theme/favicon.ico" /><body><div ><a
+name='up' id='up'></a></div><div
+id="wrapper"><div
+id="header"><div
+align="right"> <a
+href="http://blog.dispatched.ch/" title="Home">Home</a> <a
+href="http://blog.dispatched.ch/about/" title="About">About</a> <a
+href="http://blog.dispatched.ch/alain.lafon_cv.pdf" title="CV">CV</a> <script type="text/javascript" language="javascript">/*<![CDATA[*/// Email obfuscator script 2.1 by Tim Williams, University of Arizona
+// Random encryption key feature by Andrew Moulden, Site Engineering Ltd
+// This code is freeware provided these four comment lines remain intact
+// A wizard to generate this code is at http://www.jottings.com/obfuscator/
+{ coded = "q7q5Y.7qMsY@z5X6qQaVUz.aV"
+  key = "Jx7By9reKsS0aigOukhQb1fjY8P2AFZCUpXd4q5lIEHVW3oMTcDGLmRNtv6wzn"
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write("<a href='mailto:"+link+"'>"+"Contact"+"</a>")
+}/*]]>*/</script><noscript> </noscript></div><p
+class="description"> <br><br> code, life and struggles thereof</p><h1><a
+href="http://blog.dispatched.ch">Alain M. Lafon</a></h1></div><div
+id="content2"><div
+class="post" id="post-777"><h2><a
+href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/" rel="bookmark" title="Permanent Link to VIM as Python IDE">VIM as Python IDE</a></h2><div
+class="entry"><p>Finding the perfect IDE for Python isn&#8217;t an easy feat. There are a great many to chose from, but even though some of them offer really nifty features, I can&#8217;t help myself but feel attracted to VIM anyway. I feel that no IDE accomplishes the task of giving the comfort of complete power over the code &#8211; something is always missing out. This is why I always come back to using IDLE and VIM. Those two seem to be best companions when doing some quick and agile hacking &#8211; but when it comes to managing bigger and longer term projects, this combo needs some tweaking. But when it&#8217;s done, VIM will be a powerful IDE for Python &#8211; including code completion(with pydoc display), graphical debugging, task-management and a project view.</p><p>This is where we are going:</p><p
+style="text-align: center;"><a
+href="http://blog.dispatched.ch/wp-content/uploads/2009/05/vim-as-python-ide.png" rel="lightbox[777]"><img
+class="size-full wp-image-799 aligncenter" title="vim-as-python-ide" src="http://blog.dispatched.ch/wp-content/uploads/2009/05/vim-as-python-ide.png" alt="VIM as Python IDE" width="491" height="401" /></a></p><p>So, these are my thoughts on a VIM setup for coding (Python).</p><p>Modern GUI VIM implementations like GVIM or MacVIM give the user the opportunity to organize their open files in tabs. This might look convenient, but to me it is rather bad practice, because a second tab will not be in the in the same buffer scope as the first one which takes away from future interaction options between the two. Using <a
+title="MiniBuf" href="http://www.vim.org/scripts/script.php?script_id=159" target="_blank">MiniBufExplorer</a>, however, gives the user tabs(not only in the GUI, but also in command line) and leaves the classic buffer interaction intact.</p><p
+style="text-align: center;"><a
+href="http://blog.dispatched.ch/wp-content/uploads/2009/05/minibuf.png" rel="lightbox[777]"><img
+class="size-full wp-image-784 aligncenter" title="minibuf" src="http://blog.dispatched.ch/wp-content/uploads/2009/05/minibuf.png" alt="MiniBuf Explorer" width="484" height="87" /></a></p><p>Being able to neatly work on multiple files, the user still misses the potential his favourite IDE gives him in visualizing classes, functions and variables. Luckily there are quite a few plugins around to accomplish this task just as well. My favourite one would be <a
+title="TagList" href="http://vim-taglist.sourceforge.net/" target="_blank">TagList</a>. TagList uses <a
+title="Exuberant CTags" href="http://ctags.sourceforge.net/" target="_blank">Exuberant Ctags</a> for actually generating the tags(note: it really relies on this specific version of ctags &#8211; preinstalled implementations on UNIX systems won&#8217;t work).</p><p
+style="text-align: center;"><a
+href="http://blog.dispatched.ch/wp-content/uploads/2009/05/taglist.png" rel="lightbox[777]"><img
+class="size-full wp-image-787 aligncenter" title="taglist" src="http://blog.dispatched.ch/wp-content/uploads/2009/05/taglist.png" alt="TagList" width="481" height="260" /></a></p><p>A lot of coders have the habit of using TODO or FIXME statements in their code. Other IDEs often rely on having good third party project management software, but not VIM. There are great plugins like <a
+title="TaskList" href="http://www.vim.org/scripts/script.php?script_id=2607" target="_blank">Tasklist</a> reminding the programmer of those lines of code. Tasklist even implements custom lists &#8211; to me that&#8217;s an incredible productivity gain.</p><p
+style="text-align: center;"><a
+href="http://blog.dispatched.ch/wp-content/uploads/2009/05/tasklist.png" rel="lightbox[777]"><img
+class="size-full wp-image-781 aligncenter" title="tasklist" src="http://blog.dispatched.ch/wp-content/uploads/2009/05/tasklist.png" alt="TaskList" width="491" height="163" /></a></p><p>In these times, the programmer knows his or her programming language more or less by interactively finding out what it can do. Therefore code completion(sometimes also called IntelliSense*ugh*) is a major feature. I have heard  many people saying that this is where VIM fails &#8211; but luckily they are plain wrong(; In V7, VIM introduced <a
+title="Omni Completion" href="http://vim.wikia.com/wiki/Omni_completion" target="_blank">omni completion</a> &#8211; given it is configured to recognize Python (if not, this feature is only a <a
+title="Python Omni Completion" href="http://www.vim.org/scripts/script.php?script_id=1542" target="_blank">plugin</a> away) Ctrl+x Ctrl+o opens a drop down dialog like any other IDE &#8211; even the whole Pydoc gets to be displayed in a split window.</p><p
+style="text-align: center;"><a
+href="http://blog.dispatched.ch/wp-content/uploads/2009/05/omnicompletion.png" rel="lightbox[777]"><img
+class="size-full wp-image-791 aligncenter" title="omnicompletion" src="http://blog.dispatched.ch/wp-content/uploads/2009/05/omnicompletion.png" alt="Omni Completion" width="436" height="312" /></a></p><p>Probably the most wanted feature(besides code completion) is debugging graphically. <a
+title="VimPDB" href="http://code.google.com/p/vimpdb/" target="_blank">VimPDB</a> is a plugin that lets you do just that(. I acknowledge it is no complete substitution for a full fledged graphical debugger, but I honour the thought that having to rely on a debugger (often), is a hint of bad design.</p><p
+style="text-align: center;"><a
+href="http://blog.dispatched.ch/wp-content/uploads/2009/05/vimpdb.png" rel="lightbox[777]"><img
+class="size-full wp-image-794 aligncenter" title="vimpdb" src="http://blog.dispatched.ch/wp-content/uploads/2009/05/vimpdb.png" alt="VimPDB" width="498" height="134" /></a></p><p>&#8211;</p><p
+style="text-align: center;"><p
+style="text-align: left;">From the eye-candy to the implementation. Don&#8217;t worry, it&#8217;s no sorcery.</p><p
+style="text-align: left;">First of all, make sure you have VIM version 7.x installed, compiled with Python support. To check for the second, enter <em>:python print &#8220;hello, world&#8221;</em> into VIM. If you see an error message like <em>&#8220;E319: Sorry, the command is not available in this version&#8221;</em>, then it&#8217;s time to get a new one. If you&#8217;re on a Mac, just install MacVIM(there&#8217;s also a binary for the console in /Applications/MacVim.app/Contents/MacOS/). If you&#8217;re on Windows, GVIM will suffice(for versions != 2.4 search for the right <a
+title="Vim for Windows32" href="http://www.gooli.org/blog/gvim-72-with-python-2526-support-windows-binaries/" target="_blank">plugin</a>). If you&#8217;re on any other machine, you will probably know how to compile your very own VIM with Python support.</p><p
+style="text-align: left;">Second, check if you have a plugin directory. In Unix it would typically be located in <em>$HOME/.vim/plugin</em>, in Windows in the <em>Program Files </em>directory. If it doesn&#8217;t exist, create it.</p><p
+style="text-align: left;">Now, let&#8217;s start with the MiniBufExplorer. <a
+title="MiniBuf Explorer" href="http://www.vim.org/scripts/script.php?script_id=159" target="_blank">Get</a> it and copy it into your plugin directory. To start it automatically when needed and be able to use it with keyboard and mouse commands, append these lines in your vimrc configuration:</p><p><code>let g:miniBufExplMapWindowNavVim = 1<br
+/> let g:miniBufExplMapWindowNavArrows = 1<br
+/> let g:miniBufExplMapCTabSwitchBufs = 1<br
+/> let g:miniBufExplModSelTarget = 1</code></p><p
+style="text-align: left;">For a project view, get <a
+title="TagList" href="http://vim-taglist.sourceforge.net/" target="_blank">TagList</a> and <a
+title="Exuberant CTags" href="http://ctags.sourceforge.net/" target="_blank">Exuberant Ctags</a>. To install Ctags, unpack it, go into the directory and do a compile/install via:</p><p><code>./configure &amp;&amp; sudo make install</code></p><p>Ctags will then be installed in /usr/local/bin. When using a Windows machine, I recommend <a
+href="http://cygwin.com/">Cygwin</a> with GCC and Make; it&#8217;ll work just fine. If you don&#8217;t want to tamper with your original ctags installation, you can propagate the location to VIM by appending the following line to vimrc:</p><p><code>let Tlist_Ctags_Cmd='/usr/local/bin/ctags'</code></p><p>To install TagList, just drop it into VIMs plugin directory. You will now be able to use the project view by typing the command <em>:TlistToggle</em>.</p><p><a
+title="TaskList" href="http://www.vim.org/scripts/script.php?script_id=2607" target="_blank">Tasklist</a> is a simple plugin, too. Copying it into the plugin directory will suffice. I like to have shortcuts and have added<br
+/> <code><br
+/> map T :TaskList&lt;CR&gt;<br
+/> map P :TlistToggle&lt;CR&gt;<br
+/> </code></p><p>to vimrc. Pressing <em>T </em>will then open the TaskList if there are any tasks to process. <em>q </em>quits the TaskList again.</p><p><a
+title="VimPDB" href="http://code.google.com/p/vimpdb/" target="_blank">VimPDB</a> is a plugin, as well. Install as before and see the readme for documentation. If it doesn&#8217;t work out of the box, watch for the known <a
+title="Issuses VimPDB" href="http://code.google.com/p/vimpdb/issues/list" target="_blank">issues</a>.</p><p>To enable code(omni) completion, add this line to your vimrc:</p><p><code>autocmd FileType python set omnifunc=pythoncomplete#Complete</code></p><p>If it doesn&#8217;t work then, you&#8217;ll need this <a
+title="Python Omni Completion" href="http://www.vim.org/scripts/script.php?script_id=1542" target="_blank">plugin</a>.</p><p
+style="text-align: left;">My last two recommondations are setting these lines to comply to <a
+title="PEP 8" href="http://www.python.org/dev/peps/pep-0008/" target="_blank">PEP 8</a>(Pythons&#8217; style guide) and to have decent eye candy:</p><p><code>set expandtab<br
+/> set textwidth=79<br
+/> set tabstop=8<br
+/> set softtabstop=4<br
+/> set shiftwidth=4<br
+/> set autoindent<br
+/> :syntax on</code></p><p>There are certainly a lot more flags to help productivity, but those will probably be more user specific.</p><p>Have fun coding Python while not being bound to a specific IDE, but having all the benefits of VIM bundled with a few helping hands. Enjoy, everyone.</p><p>If you liked this article, please feel free to re-tweet it and let others know.</p><table
+border="0"><tbody><tr><td><script type="text/javascript">tweetmeme_url = 'http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/';</script><br
+/> <script src="http://tweetmeme.com/i/scripts/button.js" type="text/javascript"></script></td><td>&nbsp;&nbsp;&nbsp;</td><td> You should follow me on twitter <a
+href="http://twitter.com/preek">here</a><br
+/> <a
+href="http://twitter.com/preek"><img
+class="alignnone" style="border: 0pt none;" title="twitter_preek" src="http://blog.dispatched.ch/wp-content/uploads/2009/05/twitter_preek.gif" border="0" alt="twitter_preek" width="180" height="18" /></a></td></tr></tbody></table></div><p
+class="info">Category: <a
+href="http://blog.dispatched.ch/category/articles/" title="View all posts in articles" rel="category tag">articles</a><strong> |</strong> Tags: <a
+href="http://blog.dispatched.ch/tag/coding/" rel="tag">coding</a>, <a
+href="http://blog.dispatched.ch/tag/ctags/" rel="tag">ctags</a>, <a
+href="http://blog.dispatched.ch/tag/exuberant-ctags/" rel="tag">exuberant ctags</a>, <a
+href="http://blog.dispatched.ch/tag/ide/" rel="tag">ide</a>, <a
+href="http://blog.dispatched.ch/tag/minibuf/" rel="tag">minibuf</a>, <a
+href="http://blog.dispatched.ch/tag/omni-completion/" rel="tag">omni completion</a>, <a
+href="http://blog.dispatched.ch/tag/pep-8/" rel="tag">pep 8</a>, <a
+href="http://blog.dispatched.ch/tag/programming/" rel="tag">programming</a>, <a
+href="http://blog.dispatched.ch/tag/python/" rel="tag">python</a>, <a
+href="http://blog.dispatched.ch/tag/python-ide/" rel="tag">python ide</a>, <a
+href="http://blog.dispatched.ch/tag/taglist/" rel="tag">taglist</a>, <a
+href="http://blog.dispatched.ch/tag/tasklist/" rel="tag">tasklist</a>, <a
+href="http://blog.dispatched.ch/tag/tutorial/" rel="tag">tutorial</a>, <a
+href="http://blog.dispatched.ch/tag/vi/" rel="tag">vi</a>, <a
+href="http://blog.dispatched.ch/tag/vim/" rel="tag">vim</a>, <a
+href="http://blog.dispatched.ch/tag/vimpdb/" rel="tag">vimpdb</a>, <a
+href="http://blog.dispatched.ch/tag/walkthrough/" rel="tag">walkthrough</a> <a
+href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/#comments" title="Comment on VIM as Python IDE">105 comments &raquo;</a></p></div><h3 id="comments">105 Responses to &#8220;VIM as Python IDE&#8221;</h3><ol
+class="commentlist"><li
+altid="comment-507"><div
+class="alignright"></div><a
+href='http://www.netcrema.com/?p=1025' rel='external nofollow' class='url'>VIM as Python IDE | Alain M. Lafon &laquo; Netcrema - creme de la social news via digg + delicious + stumpleupon + reddit</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-507" title="">May 24th, 2009 at 6:39 am</a> </small> <small><p>[...] VIM as Python IDE | Alain M. Lafon [...]</p> </small></li><li
+id="comment-508"><div
+class="alignright"></div><a
+href='http://popurls.com/pop' rel='external nofollow' class='url'>popurls.com // popular today</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-508" title="">May 24th, 2009 at 6:54 am</a> </small> <small><p><strong>popurls.com // popular today&#8230;</strong></p><p>story has entered the popular today section on popurls.com&#8230;</p> </small></li><li
+class="alt" id="comment-509"><div
+class="alignright"></div><a
+href='http://real-url.org/twitted.php?id=1901214051' rel='external nofollow' class='url'>Twitted by preek</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-509" title="">May 24th, 2009 at 9:34 am</a> </small> <small><p>[...] This post was Twitted by preek &#8211; Real-url.org [...]</p> </small></li><li
+id="comment-510"><div
+class="alignright"></div>pekuja <br
+/> <small
+class="commentmetadata"><a
+href="#comment-510" title="">May 24th, 2009 at 10:06 am</a> </small> <small><p>You don&#8217;t actually need MiniBufExplorer to get tabs in Vim. Vim 7 comes with tab support built right in! Just :tabe myfile to edit a file in a new tab, then :tabp and :tabn to switch between tabs.<br
+/> There&#8217;s a little tutorial that explains more about using the feature at: <a
+href="http://www.linux.com/archive/articles/59533" rel="nofollow">http://www.linux.com/archive/articles/59533</a></p> </small></li><li
+class="alt" id="comment-511"><div
+class="alignright"></div><a
+href='http://www.gefechtsdienst.de' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-511" title="">May 24th, 2009 at 12:01 pm</a> </small> <small><p>Hiho pekuja,<br
+/> you&#8217;re right, tabs are built in nowadays. But if you&#8217;re using those, using buffers will be quite uncomfortable. Your tab-names will keep changing and ultimately you&#8217;ll lose oversight. With MiniBuf everything keeps in place.<br
+/> Best,<br
+/> Alain</p> </small></li><li
+id="comment-512"><div
+class="alignright"></div>mark <br
+/> <small
+class="commentmetadata"><a
+href="#comment-512" title="">May 24th, 2009 at 12:06 pm</a> </small> <small><p>Thanks, in particular for taglist, that&#8217;ll make things easier.<br
+/> Technically your settings for PEP8 conformance are incorrect, instead you should use:<br
+/> set tabstop=8<br
+/> set expandtab<br
+/> set softtabstop=4<br
+/> set shiftwidth=4<br
+/> set textwidth=79<br
+/> the difference being that the actual tab character is still eight columns wide (as specified by the python language), but using the tab key, backspace and indent/deindent ( keys) will correctly shift you by 4 spaces.</p> </small></li><li
+class="alt" id="comment-513"><div
+class="alignright"></div>steve <br
+/> <small
+class="commentmetadata"><a
+href="#comment-513" title="">May 24th, 2009 at 2:09 pm</a> </small> <small><p>I&#8217;m so glad I don&#8217;t code in a language that requires soft-tabs</p> </small></li><li
+id="comment-514"><div
+class="alignright"></div><a
+href='http://www.gefechtsdienst.de' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-514" title="">May 24th, 2009 at 2:21 pm</a> </small> <small><p>@Mark.<br
+/> You&#8217;re absolutely right &#8211; I have corrected it right away. Thanks for the advice.</p> </small></li><li
+class="alt" id="comment-515"><div
+class="alignright"></div><a
+href='http://www.gefechtsdienst.de' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-515" title="">May 24th, 2009 at 2:22 pm</a> </small> <small><p>@Steve<br
+/> Well.. <em>requires</em> probably isn&#8217;t quite that right. To quote PEP 8:<br
+/> <em>&#8220;The most popular way of indenting Python is with spaces only.  The second-most popular way is with tabs only.&#8221;</em></p> </small></li><li
+id="comment-518"><div
+class="alignright"></div><a
+href='http://www.nexnova.net/links/2009/05/24/links-del-giorno-may-24-2009/' rel='external nofollow' class='url'>NexNova &raquo; Blog Archive &raquo; Links del giorno: May 24, 2009</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-518" title="">May 24th, 2009 at 7:25 pm</a> </small> <small><p>[...] VIM as Python IDE | Alain M. Lafon [...]</p> </small></li><li
+class="alt" id="comment-519"><div
+class="alignright"></div>Bomif <br
+/> <small
+class="commentmetadata"><a
+href="#comment-519" title="">May 24th, 2009 at 7:50 pm</a> </small> <small><p>Hey Alain,</p><p>much respect for ur article, u really didn&#8217;t need to complete studies with the rest of us like it seems :)</p><p>Good luck for ur future</p><p>Manuel</p> </small></li><li
+id="comment-521"><div
+class="alignright"></div><a
+href='http://www.joselise.com/wp/2009/05/25/links-for-2009-05-24/' rel='external nofollow' class='url'>links for 2009-05-24 at DeStructUred Blog</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-521" title="">May 25th, 2009 at 2:56 am</a> </small> <small><p>[...] VIM as Python IDE | Alain M. Lafon (tags: python Vim programming IDE tips howto) [...]</p> </small></li><li
+class="alt" id="comment-522"><div
+class="alignright"></div>Daelin the Cruel <br
+/> <small
+class="commentmetadata"><a
+href="#comment-522" title="">May 25th, 2009 at 7:00 am</a> </small> <small><p>God, that image zoom script is SLOW!</p> </small></li><li
+id="comment-523"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-523" title="">May 25th, 2009 at 7:41 am</a> </small> <small><p>@Daelin<br
+/> Sorry to say, but that would be your machine. My server is on gigabit, so it should feed you the images quick enough. And it work&#8217;s on my workstation.<br
+/> I hope you enjoyed the article, anyways. Take care Mr. Cruel.</p> </small></li><li
+class="alt" id="comment-524"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-524" title="">May 25th, 2009 at 8:26 am</a> </small> <small><p>I&#8217;m a Vim diehard, but I&#8217;ve really been enjoying NetBeans with the jVi plugin.  It feels like Vim, but has the additional benefits of an IDE.  Being a Vim fanatic, I didn&#8217;t really fully understand those benefits until I tried it out for a few days.</p><p><a
+href="http://jjinux.blogspot.com/2009/01/ide-netbeans.html" rel="nofollow">http://jjinux.blogspot.com/2009/01/ide-netbeans.html</a></p><p><a
+href="http://jjinux.blogspot.com/2009/01/vim-jvi.html" rel="nofollow">http://jjinux.blogspot.com/2009/01/vim-jvi.html</a></p> </small></li><li
+id="comment-525"><div
+class="alignright"></div><a
+href='http://www.schockwellenreiter.de/blog/2009/05/25/geek-stuff-vim-als-python-ide/' rel='external nofollow' class='url'>Geek Stuff: VIM als Python IDE &#8211; Der Schockwellenreiter</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-525" title="">May 25th, 2009 at 10:24 am</a> </small> <small><p>[...] sich den VIM zurechtgelegt hat, bastelt sich auch eine Python-IDE damit. So auch Alain M. Lafon: VIM as Python IDE. Mein Editor meines Vertrauens ist ja bekanntlich TextWrangler, der freie (frei wie Freibier) [...]</p> </small></li><li
+class="alt" id="comment-526"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-526" title="">May 25th, 2009 at 12:02 pm</a> </small> <small><p>@Shannon-jj Behrens<br
+/> Hi there,<br
+/> as a former Sun employee(back in the days.. before Oracle*urgh*), I am quite familiar with Netbeans and jVi. To say the truth, I never felt quite satisfied with the Vi implementation there and always went back to plain Netbeans.<br
+/> However, Netbeans is no option, because Python is not supported. There&#8217;s a team working on it, but it&#8217;s far from being usable at the moment.<br
+/> Thanks for your comment and congrats to the storks present(;</p> </small></li><li
+id="comment-528"><div
+class="alignright"></div><a
+href='http://www.bestnotizie.com/16452/vim-come-ide-per-python/' rel='external nofollow' class='url'>&raquo; Vim come IDE per Python</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-528" title="">May 25th, 2009 at 7:05 pm</a> </small> <small><p>[...] Via | Dispatched [...]</p> </small></li><li
+class="alt" id="comment-529"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-529" title="">May 25th, 2009 at 9:55 pm</a> </small> <small><p>Alain, I too worked at Sun&#8211;very long ago.</p><p>jVi is definitely not perfect, but it&#8217;s the best Vi emulation that I&#8217;ve ever used.  Most Vi emulators drive me nuts (for instance, the Vi emulation in WingIDE or KomodoEdit), perhaps because I prefer Vim.  I guess jVi is close enough that it doesn&#8217;t drive me nuts.</p><p>I like all the other goodies I get with NetBeans.  I still use Vim in those cases where NetBeans isn&#8217;t helpful.</p><p>Can you tell me more about why you prefer MiniBufExplorer over tabs?  I used to use MiniBufExplorer, but when tabs came out, I switched to those instead.  I create a new tab for every file (using :tabedit filename), and I even have a shell alias (gvim &#8211;remote-tab filename) so that I can open up a file in a new tab from the shell.  Hence, I follow the one tab for every file rule, and I never get confused.  Can you walk me through why MiniBufExplorer is better?</p><p>&gt; Thanks for your comment and congrats to the storks present(;</p><p>Thanks! :)</p> </small></li><li
+id="comment-530"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-530" title="">May 25th, 2009 at 10:24 pm</a> </small> <small><p>&gt; However, Netbeans is no option, because Python is not supported.</p><p>Why do you say that? <a
+href="http://www.netbeans.org/features/python/index.html" rel="nofollow">http://www.netbeans.org/features/python/index.html</a></p><p>It might not be quite as polished as WingIDE (which really, really understand Python), but it&#8217;s not bad at all.  (I prefer NetBeans over WingIDE because I also have to code HTML, CSS, JavaScript, PHP, Ruby, etc.</p><p>IntelliSense, warnings, documentation, etc. all work: <a
+href="http://jjinux.blogspot.com/2009/01/ide-netbeans.html" rel="nofollow">http://jjinux.blogspot.com/2009/01/ide-netbeans.html</a></p> </small></li><li
+class="alt" id="comment-531"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-531" title="">May 26th, 2009 at 4:52 am</a> </small> <small><p>&gt; Netbeans is no option, because Python is not supported.</p><p>Why do you say that?  See <a
+href="http://www.netbeans.org/features/python/index.html" rel="nofollow">http://www.netbeans.org/features/python/index.html</a>.</p><p>I think it works fairly well with Python.  See <a
+href="http://jjinux.blogspot.com/2009/01/ide-netbeans.html" rel="nofollow">http://jjinux.blogspot.com/2009/01/ide-netbeans.html</a>.  Autocomplete, tags, previewing documentation, etc. all work.  It&#8217;s not perfect yet, since Python support is fairly new, but it&#8217;s definitely workable.  I like the way it even tells me when I&#8217;m doing stupid things like unused imports, etc.</p> </small></li><li
+id="comment-532"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-532" title="">May 26th, 2009 at 7:00 am</a> </small> <small><p>Welcome, then, former Sunny. It really is a good feeling to have you write comments here, even though I don&#8217;t post under blogs.sun.com anymore(;</p><p>I think you are perfectly right, VI emulation in commercial editors is especially bad implemented &#8211; there&#8217;s no way I could use them seriously. And while jVi might not be a bad implementation, Netbeans felt obstructed to me anyway. I just felt the workflow being interrupted by it, even though I really gave it a weeks try. Personally, I didn&#8217;t experience that much a gain, but limited in the use of Netbeans&#8217; internal features. Certainly that&#8217;s a very personal opinion &#8211; maybe boosted, because I prefer VIM over VI, too.</p><p>The MiniBuf over Tabs preference, however, is a objectively measurable reason. If you work with legacy software (like TagList which I have described in the article), they will most likely work with buffers, not tabs. Of course tabs share a buffer namespace(I wrote they didn&#8217;t, but I chose this phrasing to not confuse a beginner even more), but in a very jumbling way.<br
+/> Say you open file A and B in tabs. While still working in tab A, you do <code>:bNext</code>. You will have your second buffer/file opened, but your tabs will now display B and B &#8211; buffer/file A isn&#8217;t lost, but you can&#8217;t see or click it anymore.<br
+/> Of course this example is constructed, because the right way to change tabs is <code>:tabNext</code>, but when you use Vimscripts, they often use buffers and will therefore produce a lot of confusion on the screen.</p><p>The <code>-remote-tab</code> feature is certainly nice, indeed. But I try to get along and use the mouse sometime. In GVim dragging a new file in the GUI will result in opening it in a new buffer &#8211; MiniBuf will create a new tab for me and everything moves along smoothly.</p> </small></li><li
+class="alt" id="comment-533"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-533" title="">May 26th, 2009 at 7:14 am</a> </small> <small><p>Well, I say that, because Netbeans for Python is still in Alpha/(Beta?). Only last week I tried it again &#8211; all I did was a &#8220;Hello, world&#8221; mockup with a single variable which I tried to debug. While doing that, Netbeans crashed. Besides Jython took like.. a minute or so to power up on my Core2Duo machine.<br
+/> I tried it once before, then the debugger worked, but well.. it gave me the whole Jython stacktrace &#8211; finding my variables was more confusing than in a J2EE app^^ And then.. it crashed, too.</p><p>I&#8217;ll certainly give it more tries in the future, because I really like Netbeans and feel very comfortable using it in my J2SE, J2EE and RoR apps. But for the moment, I will respect the tag &#8220;early access&#8221;.</p><p>Your article seems to imply that it works for you better, than it did for me, though. I haven&#8217;t read it yet &#8211; I should get ready for work where I will have the time to do so^^</p><p>But even if it did work, the features you named (autocomplete, preview pydoc, unused imports..) are all available in VIM, too. Autocomplete and preview via OmniComplete and unused imports via <a
+href="http://www.vim.org/scripts/script.php?script_id=2441" rel="nofollow">PyFlakes</a>, for example.<br
+/> I don&#8217;t know fore sure as of now, but probably I&#8217;ll stick with VIM for Python even if Netbeans will support Python as it does Ruby. Imho Python doesn&#8217;t need as much IDE comfort as other languages(like Java). I think I gain more performance in being able to completely configure my IDE &#8211; use custom snippets, chose a well suited color scheme for the current daylight, even write my own Vimscripts using Python(;</p><p>Besides, my last reasoning will always be, that I can use VIM on servers(my own as well as from clients). My server is running Solaris 10 and my prefered access is via SSH. And on a clients server, there&#8217;s always the need for a quickfix(yeah, I know it&#8217;s bad practice &#8211; but it&#8217;s not always my code or choice^^).</p> </small></li><li
+id="comment-535"><div
+class="alignright"></div>Philluminati <br
+/> <small
+class="commentmetadata"><a
+href="#comment-535" title="">May 26th, 2009 at 7:28 am</a> </small> <small><p>Excellent article!</p><p>Also I found out today you can do :set mouse=a which gives you the ability to click to position the cursor and visual selection with the cursor which is very cool.</p><p>This aught to be posted to the Vim reddit purely so it &#8220;lives longer&#8221; there and becomes a better knowledge base for vim,</p> </small></li><li
+class="alt" id="comment-536"><div
+class="alignright"></div><a
+href='http://www.reddit.com/user/kilowatt' rel='external nofollow' class='url'>kilowatt</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-536" title="">May 26th, 2009 at 7:29 am</a> </small> <small><p>/shameless self-plug[in]</p><p>With pyflakes-vim, vim will check your code on the fly for obvious errors. You never have to check in a NameError typo again :p</p><p><a
+href="http://www.vim.org/scripts/script.php?script_id=2441" rel="nofollow">http://www.vim.org/scripts/script.php?script_id=2441</a></p> </small></li><li
+id="comment-537"><div
+class="alignright"></div><a
+href='http://www.reddit.com/user/talklittle/' rel='external nofollow' class='url'>talklittle</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-537" title="">May 26th, 2009 at 7:29 am</a> </small> <small><p>Whoa nice article, I didn&#8217;t know about omni completion. I&#8217;d been trying to tell myself that not having intellisense is a good thing in some ways, but pshh yeah right, I&#8217;m thrilled to learn that vim has it.</p> </small></li><li
+class="alt" id="comment-538"><div
+class="alignright"></div><a
+href='http://www.reddit.com/user/adamzap' rel='external nofollow' class='url'>adamzap</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-538" title="">May 26th, 2009 at 7:30 am</a> </small> <small><p>this set of cheat sheets is a great way to learn vim. master one at a time</p><p><a
+href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html" rel="nofollow">http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html</a></p> </small></li><li
+id="comment-539"><div
+class="alignright"></div><a
+href='http://news.ycombinator.com/user?id=erlanger' rel='external nofollow' class='url'>erlanger</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-539" title="">May 26th, 2009 at 7:34 am</a> </small> <small><p>My favorite Vim customization for Python coding:</p><p> :nnoremap  :w !python</p><p>Also works for PHP</p><p> :nnoremap  :w !php</p><p>You put these in the respective ftplugin files.</p> </small></li><li
+class="alt" id="comment-540"><div
+class="alignright"></div><a
+href='http://news.ycombinator.com/user?id=wooby' rel='external nofollow' class='url'>wooby</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-540" title="">May 26th, 2009 at 7:34 am</a> </small> <small><p>Similar setup for PHP: <a
+href="http://gravitonic.com/files/talks/php-quebec-2009/vim-for-php-programmers.pdf" rel="nofollow">http://gravitonic.com/files/talks/php-quebec-2009/vim-for-php-programmers.pdf</a></p> </small></li><li
+id="comment-541"><div
+class="alignright"></div><a
+href='http://news.ycombinator.com/user?id=slmbrhrt' rel='external nofollow' class='url'>slmbrhrt</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-541" title="">May 26th, 2009 at 7:35 am</a> </small> <small><p>grr, formatting.</p><p><a
+href="http://ed.cranford.googlepages.com/vimrc" rel="nofollow">http://ed.cranford.googlepages.com/vimrc</a> if you&#8217;re really interested in seeing my vimrc. I&#8217;m not fond of plugins.</p> </small></li><li
+class="alt" id="comment-542"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-542" title="">May 27th, 2009 at 6:46 am</a> </small> <small><p>Alain,</p><p>Yeah, NetBeans definitely works better for me than it does for you.  It&#8217;s never crashed on me, and it doesn&#8217;t take a minute to start.  Perhaps the difference is that I don&#8217;t use Jython&#8211;Jython&#8217;s slow.</p><p>As for the coolness of Vim, you don&#8217;t have to convince me!  I&#8217;ve been using Vim as my main editor for years, and I consider myself a low-level expert.  I only switched to NetBeans because I was burnt out and was looking for ways to &#8220;mix it up&#8221;.</p><p>As for your mouse problem, if I really needed to do that, I would do :tabnew and then drag the file to the window.</p><p>I agree that Python doesn&#8217;t need an IDE&#8211;which is one of the reasons I use it ;)  I also use Vim when logging into remote servers.  However, there&#8217;s nothing wrong with using something more friendly when editing locally.</p><p>Thanks for the heads up about pyflakes-vim.  I knew about it, but had never tried it.</p><p>I use TagList, and it seems to work just fine with tabs.</p><p>One thing I really like about tabs in Vim on my Mac is that tabs work the same in the shell, in Vim, and in Firefox.  That&#8217;s a huge win because I have the hot keys (Apple-Shift-{ and Apple-Shift-}) memorized.</p><p>I rarely use bNext, so I don&#8217;t encounter the problem you mentioned.  If I do need to operate on multiple buffers instead of tabs (for instance if I pass multiple files on the command line), I open up another window.  In general, I stick to the one buffer per one tab rule, so things make sense.</p><p>I haven&#8217;t tried to debug anything in NetBeans.  I always use pdb in the shell for some reason, perhaps because I don&#8217;t know how to connect the debugger to my Web server process.</p><p>I&#8217;ve used Vim for about 10 years now at a pretty advanced level.  However, as part of my plan to recover from burnout, I decided to open my mind a bit.  As much as I like Vim, the fact of the matter is that you&#8217;re better off using Emacs for Lisp, Erlang, and Oz.  You&#8217;re better off using IntelliJ or NetBeans for Java.  I think editing CSS and JavaScript in NetBeans is nicer than in Vim.  Fortunately, Python is easy to work with in a range of editors and IDEs.  I still use Vim as my main editor and for editing my TODO file which I keep in outline form (I love the VimOutliner plugin).</p><p>I&#8217;m trying to be less religious about it these days and be more pragmatic.  That&#8217;s why I like the jVi plugin so much.  It was written by a fellow Vim fanatic, so I can use NetBeans without having to learn a new keyset.  Although, apparently, it works better for me than for you.</p><p>Happy Hacking!<br
+/> -jj</p> </small></li><li
+id="comment-543"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-543" title="">May 27th, 2009 at 9:07 am</a> </small> <small><p>I have a few more tips.  I like different indentation settings for different languages, so I have the following:</p><p>augroup vimrc<br
+/> au!<br
+/> autocmd FileType css         setlocal sw=4 sts=4 et<br
+/> autocmd FileType eruby       setlocal sw=2 sts=2 et<br
+/> autocmd FileType haskell     setlocal sw=4 sts=4 et<br
+/> autocmd FileType htmlcheetah setlocal sw=2 sts=2 et<br
+/> autocmd FileType html        setlocal sw=2 sts=2 et<br
+/> autocmd FileType javascript  setlocal sw=2 sts=2 et<br
+/> autocmd FileType java        setlocal sw=4 sts=4 et<br
+/> autocmd FileType mason       setlocal sw=2 sts=2 et<br
+/> autocmd FileType ocaml       setlocal sw=2 sts=2 et<br
+/> autocmd FileType perl        setlocal sw=4 sts=4 et<br
+/> autocmd FileType php         setlocal sw=4 sts=4 et<br
+/> autocmd FileType python      setlocal sw=4 sts=4 et tw=72<br
+/> autocmd FileType ruby        setlocal sw=2 sts=2 et<br
+/> autocmd FileType scheme      setlocal sw=2 sts=2 et<br
+/> autocmd FileType sql         setlocal et<br
+/> autocmd FileType text        setlocal sw=2 sts=2 et tw=79<br
+/> augroup END</p><p>Note, I set tw=72 for Python because the PEP 8 says that comments should be wrapped at 72 columns.</p><p>To use tags more completely:</p><p>Setup:<br
+/> Install exuberant-ctags.<br
+/> :cd project_root<br
+/> :!ctags -R .<br
+/> :set tags=tags<br
+/> Jump to the definition of the symbol under the cursor:<br
+/> ^]<br
+/> Go back to where you were:<br
+/> ^o</p><p>I still think NetBeans&#8217; autocomplete is better and WingIDE&#8217;s is best, but to tell you the truth, one of my favorite things in Vim is ^n which will finish typing whatever word you were currently typing based on other words in the current buffer.  ^n works everywhere.  It&#8217;s super stupid, and super useful.</p> </small></li><li
+class="alt" id="comment-544"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-544" title="">May 27th, 2009 at 9:24 am</a> </small> <small><p>Hmm, I wanted to try out pyflakes.vim, but it looks like MacVim comes compiled with Python 2.3 so pyflakes.vim crashes horribly.  Can anyone else confirm this?</p> </small></li><li
+id="comment-545"><div
+class="alignright"></div><a
+href='http://www.keyongtech.com/5198955-what-text-editor-is-everyone/4' rel='external nofollow' class='url'>What text editor is everyone using for Python - Page 4 | keyongtech</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-545" title="">May 27th, 2009 at 12:01 pm</a> </small> <small><p>[...] | &gt; `</p> </small></li><li
+class="alt" id="comment-546"><div
+class="alignright"></div><a
+href='http://blogs.sun.com/tor' rel='external nofollow' class='url'>Tor Norbye</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-546" title="">May 27th, 2009 at 11:35 pm</a> </small> <small><p>Don&#8217;t get the NetBeans Python &#8220;EA&#8221; access bits from here:<br
+/> <a
+href="http://www.netbeans.org/features/python/index.html" rel="nofollow">http://www.netbeans.org/features/python/index.html</a></p><p>Those bits are really really old (as in 6 months or more). There&#8217;s a lot of new functionality, and many fixes, since then. I think the development update centers have up to date bits, if not, you can grab a kit here:<br
+/> <a
+href="http://deadlock.netbeans.org/hudson/job/python/" rel="nofollow">http://deadlock.netbeans.org/hudson/job/python/</a></p><p>For some of the features added since then, see<br
+/> <a
+href="http://blogs.sun.com/tor/category/NetBeans" rel="nofollow">http://blogs.sun.com/tor/category/NetBeans</a><br
+/> (scroll past the first entry on JavaScript) &#8212; code coverage, test runner, type assertions, etc.</p><p>&#8211; Tor</p> </small></li><li
+id="comment-547"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-547" title="">May 28th, 2009 at 12:33 am</a> </small> <small><p>Hmm, I&#8217;m also having a problem with minibufexpl.  If I&#8217;m editing a Vim outline file, I can&#8217;t use ^k to jump to the window with the buffer list.  It says something about &#8220;no TAGS file&#8221;.  It works just fine when editing other types of files.  Weird.  I can&#8217;t use ^up either since my Mac switches to a different space (i.e. virtual desktop) when I do that.  ^tab works, but that&#8217;s painful.  Hmm.  There&#8217;s definitely a benefit to having Vim tabs behave like tabs in Terminal.app and Firefox :-/  I wonder if there&#8217;s a Vim setting to enforce the rule of one tab per writable buffer, which I enforce informally.</p> </small></li><li
+class="alt" id="comment-549"><div
+class="alignright"></div><a
+href='http://www.wisdomandwonder.com/link/3032/vim-as-python-ide' rel='external nofollow' class='url'>VIM as Python IDE | Wisdom and Wonder</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-549" title="">May 28th, 2009 at 4:44 am</a> </small> <small><p>[...] Here is a nice article about using VIM as a Python IDE. [...]</p> </small></li><li
+id="comment-550"><div
+class="alignright"></div><a
+href='http://drozdyuk.blogspot.com' rel='external nofollow' class='url'>drozzy</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-550" title="">May 28th, 2009 at 4:57 pm</a> </small> <small><p>Why can&#8217;t all of this be BUILT-IN into Vim?<br
+/> Really &#8211; why must I much arund with all these plugin that don&#8217;t work together half of the time&#8230; how hard would it be to just integrate it into the vim installer?</p><p>Or at least make some kind of central repo for an easier way of installing them, something like apt-get:</p><p> vim install package-name</p> </small></li><li
+class="alt" id="comment-551"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-551" title="">May 28th, 2009 at 9:14 pm</a> </small> <small><p>Well, that one is easy. VIM already ships with a ton of features built-in, which make it one of the greatest editors around. But on top of that VIM is able to provide a framework for job-related customization. It doesn&#8217;t matter if you need to write your next paper in LaTex/Roff, if you&#8217;re a sys admin and confronted with logs, if you&#8217;re not satisfied with your installed pagers(less/more), if you need to extend your other applications(like mutt), if you&#8217;re writing C or in this case Python. It doesn&#8217;t enforce a certain feature-set like the big IDEs, it doesn&#8217;t wedge you into a macro-world of possibilities, but rather opens up all the opportunities &#8211; like every other good UNIX derived tool.<br
+/> Besides.. since you implied you were using Debian; there&#8217;s a <a
+href="http://packages.debian.org/sid/vim-addon-manager" rel="nofollow">vim-addon-manager</a> and a <a
+href="http://packages.debian.org/sid/vim-scripts" rel="nofollow">script collection</a> of giving VIM bells and whistles. So, enjoy VIM the Debian way(;</p> </small></li><li
+id="comment-553"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-553" title="">May 30th, 2009 at 1:12 pm</a> </small> <small><p>Thanks Tor,<br
+/> that&#8217;s a really nice hint. Last week I got <a
+href="http://eric-ide.python-projects.org/" rel="nofollow">Eric4</a> to fully work on WinXP thanks to a <a
+href="http://alphagemini.org/" rel="nofollow">dear friend</a> of mine. It really makes a good impression on me. But as of now &#8211; I&#8217;ll stick to VIM while refactoring (with the Bicycle Repair Man).</p> </small></li><li
+class="alt" id="comment-554"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-554" title="">May 30th, 2009 at 1:14 pm</a> </small> <small><p>@Shannon<br
+/> I can confirm that PyFlakes doesn&#8217;t work on stock MacVIM. That one is compiled with Python 2.3, because it also has to run on legacy OSX systems for some strange reason.. Building your own VIM isn&#8217;t too difficult though(stretching my knowledge a little bit here since I haven&#8217;t done it on a Mac until now). You could try using <a
+href="http://code.google.com/p/pysmell/" rel="nofollow">PySmell</a> for example.</p> </small></li><li
+id="comment-555"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-555" title="">May 30th, 2009 at 1:16 pm</a> </small> <small><p>@Shannon<br
+/> Thanks for your additional configuration.<br
+/> Thinking of autocomplete; my opinion is that not much beats VIM with the <a
+href="http://www.vim.org/scripts/script.php?script_id=1643" rel="nofollow">SuperTab</a> plugin, though.</p> </small></li><li
+class="alt" id="comment-556"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-556" title="">May 30th, 2009 at 1:23 pm</a> </small> <small><p>@Shannon<br
+/> I agree on a lot of your comments &#8211; I try not to be religious on most things nowadays, too. Well.. I quit my job at Sun working with cool Sparc machines, Solaris, DTrace to do commercial business software running on XP &#8220;servers&#8221; &#8211; that&#8217;s hard to beat, I guess. I also agree that Netbeans is simply the best when it comes to Java, especially since version 6.x; I want to add Ruby on Rails to that list, too.<br
+/> But what I want to add is one of my main reason for using VIM whenever possible &#8211; speed. I&#8217;m that kind of guy working with 20 windows and as many workspaces at once, I&#8217;m opening and closing files all the time. That might sound unprofessional and non-focused, but it works for me nice. I like usability and feel a lot more than a definite better feature set. I won&#8217;t argue that there are pros for Emacs and Netbeans, but darn are they slow compared to VIM &#8211; that&#8217;s a no-go for me in daily work. And then there&#8217;s one last thing &#8211; size. When I&#8217;m not at home or at work, I use a 13&#8243; Macbook &#8211; using a full blown IDE like Netbeans then leaves me with as much as 8x10cm space for coding.</p> </small></li><li
+id="comment-557"><div
+class="alignright"></div><a
+href='http://jjinux.blogspot.com' rel='external nofollow' class='url'>Shannon -jj Behrens</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-557" title="">May 30th, 2009 at 10:16 pm</a> </small> <small><p>I agree with your comments regarding speed and size.  I too love to open tons of Vim windows with tons of tabs.  I too have a 13&#8243; MacBook, and NetBeans is uncomfortably large for that.  I had to reduce the font size a bit to cope.  Thanks for all the other tips.  I&#8217;ve been checking them out as you&#8217;ve been providing them.</p> </small></li><li
+class="alt" id="comment-560"><div
+class="alignright"></div><a
+href='http://blogs.sun.com/tor' rel='external nofollow' class='url'>Tor Norbye</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-560" title="">May 31st, 2009 at 6:00 pm</a> </small> <small><p>Just a couple of more tips if you try NetBeans in the future, regarding your window screen size Shift-Escape will maximize the editor window (or whatever window has focus) &#8211; Shift-Escape again to toggle back. You can also run the IDE in fullscreen mode (no space for window decorations).</p><p>There&#8217;s also some refactoring operations such as find usages and rename, assign expression to var, etc.</p> </small></li><li
+id="comment-563"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-563" title="">June 25th, 2009 at 11:15 pm</a> </small> <small><p>@Tor @Shannon<br
+/> I just tried your latest stable build of NB 6.7<br
+/> I made my standard test: a new project, one variable holding some string content which I want to print. The debugger seemed to work, didn’t crash instantly this time. But when I wanted to change the content of the variable dynamically, Netbeans crashed on me again.<br
+/> But I have to say, I like the new looks &#8211; and whenever you add a couple more features other than “rename” to the Refactoring menu, I will certainly try it again.<br
+/> Anyway, as of now &#8211; three out of three fails when trying to debug a two line program; can’t use that in production as of now..<br
+/> @Tor Thank you for you shortcuts, I will try them in my current NB stable version for Ror and Java.</p> </small></li><li
+class="alt" id="comment-564"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-564" title="">June 25th, 2009 at 11:16 pm</a> </small> <small><p>@Shannon<br
+/> I just compiled a custom MacVim to include support for Python 2.5<br
+/> * Clone the MacVim.git repo: git clone git://repo.or.cz/MacVim.git vim7<br
+/> * Configure and build Vim: cd vim7/src; ./configure –enable-gui=macvim –enable-pythoninterp; make<br
+/> * Build MacVim.app: cd MacVim; xcodebuild<br
+/> * Run: open build/Release/MacVim.app<br
+/> Most of this is taken from the MacVim site.<br
+/> PyFlakes will work with it, but not too smooth &#8211; I have to keep refreshing PyFlakes myself. It’s a first step, though. Besides having Python 2.5 will probably prove useful in other ways, too.</p> </small></li><li
+id="comment-565"><div
+class="alignright"></div><a
+href='http://code.google.com/p/exvim/' rel='external nofollow' class='url'>KarasAya</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-565" title="">June 25th, 2009 at 11:18 pm</a> </small> <small><p>Nice article, especially the introduce of OmniComplete for python and VimPDB!<br
+/> Maybe you can check my project exVim:</p><p><a
+href="http://code.google.com/p/exvim/" rel="nofollow">http://code.google.com/p/exvim/</a></p><p>I used to use it to develop python.</p> </small></li><li
+class="alt" id="comment-566"><div
+class="alignright"></div>Peter <br
+/> <small
+class="commentmetadata"><a
+href="#comment-566" title="">June 25th, 2009 at 11:18 pm</a> </small> <small><p>A good alternative graphical degubber is winpdb &#8211; I also added a little section on embedded debugging a year or two ago using vim scripts as an example. winpdb is so useful if you want to extend vim.</p> </small></li><li
+id="comment-572"><div
+class="alignright"></div><a
+href='http://identi.ca/notice/5912262' rel='external nofollow' class='url'>frt's status on Tuesday, 30-Jun-09 20:07:45 UTC - Identi.ca</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-572" title="">June 30th, 2009 at 9:07 pm</a> </small> <small><p>[...] #4tw! <a
+href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/" rel="nofollow">http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/</a> [...]</p> </small></li><li
+class="alt" id="comment-573"><div
+class="alignright"></div><a
+href='http://identi.ca/notice/5913511' rel='external nofollow' class='url'>amandinhakee's status on Tuesday, 30-Jun-09 20:48:02 UTC - Identi.ca</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-573" title="">June 30th, 2009 at 9:48 pm</a> </small> <small><p>[...] @frt #vim #4tw! <a
+href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/" rel="nofollow">http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/</a> !vim | I &lt;3 vim [...]</p> </small></li><li
+id="comment-576"><div
+class="alignright"></div>Nilson <br
+/> <small
+class="commentmetadata"><a
+href="#comment-576" title="">July 1st, 2009 at 1:06 pm</a> </small> <small><p>Good job, i really liked it.</p> </small></li><li
+class="alt" id="comment-846"><div
+class="alignright"></div><a
+href='http://my.opera.com/curaloucura/' rel='external nofollow' class='url'>Anderson Santos</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-846" title="">August 6th, 2009 at 6:40 pm</a> </small> <small><p>A colleague mapped the buffer next, buffer previous to work with ctrl+tab, not sure if minbuftab does the same, but I find it very neat and just requires to write on .vimrc file</p><p>&#8221; Buffer navigation (Ctrl+Tab / Ctrl+Shift+Tab)<br
+/> nnoremap  :bnext<br
+/> nnoremap  :bprevious</p> </small></li><li
+id="comment-847"><div
+class="alignright"></div><a
+href='http://my.opera.com/curaloucura/' rel='external nofollow' class='url'>Anderson Santos</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-847" title="">August 6th, 2009 at 6:42 pm</a> </small> <small><p>ops, it was considered html</p><p>&#8221; Buffer navigation (Ctrl+Tab / Ctrl+Shift+Tab)<br
+/> nnoremap &lt;C-Tab&gt; :bnext&lt;CR&gt;<br
+/> nnoremap &lt;C-S-Tab&gt; :bprevious&lt;CR&gt;</p> </small></li><li
+class="alt" id="comment-1006"><div
+class="alignright"></div><a
+href='http://identi.ca/notice/14017154' rel='external nofollow' class='url'>Dayo (jargon) 's status on Saturday, 07-Nov-09 10:05:40 UTC - Identi.ca</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1006" title="">November 7th, 2009 at 11:05 am</a> </small> <small><p>[...] <a
+href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/" rel="nofollow">http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/</a> a few seconds ago  from web  in context [...]</p> </small></li><li
+id="comment-1153"><div
+class="alignright"></div><a
+href='http://blogs.interdose.com/sebastian/2009/06/03/links-for-2009-06-03/' rel='external nofollow' class='url'>links for 2009-06-03 | blog/shl@INTERDOSE</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1153" title="">December 22nd, 2009 at 12:58 pm</a> </small> <small><p>[...] VIM as Python IDE | Alain M. Lafon (tags: vim python) [...]</p> </small></li><li
+class="alt" id="comment-1163"><div
+class="alignright"></div>Peter <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1163" title="">January 23rd, 2010 at 6:49 pm</a> </small> <small><p>I found this tutorial useful and few months ago and came across it again a couple of days ago and it has such useful information on configuring vim/python I wanted to share a little idiom I&#8217;ve found useful for years in setting up vim for different jobs.</p><p>For example, for exiting xml I like to use only 2 spaces for tabs as the nesting for xml tends to be deep.  Python on the other hand has a coding standard, so I like to try to stick to to (not positive my config is currently correct in this regards but it&#8217;s close).</p><p>The auto file detection is best left down to vim if you can but in the following I&#8217;ll show how I use my own detection if necessary:</p><p>function! FixMurphy()<br
+/> if g:colors_name == &#8216;murphy&#8217;<br
+/> hi Folded guibg=Black<br
+/> endif<br
+/> endfunction</p><p>function! SetXMLFile()<br
+/> set tw=100<br
+/> set sw=2<br
+/> set ts=2<br
+/> &#8220;set guioptions+=m<br
+/> set foldmethod=marker<br
+/> call FixMurphy()<br
+/> digraphs RE 8477 fc 402 bb 8226<br
+/> &#8221; ℝ &#8211; set of real numbers<br
+/> &#8221; ƒ &#8211; function<br
+/> endfunction</p><p>function! SetPythonFile()<br
+/> set omnifunc=pythoncomplete#Complete</p><p> &#8220;tasklist<br
+/> map ttl :TaskList<br
+/> &#8220;taglist<br
+/> map ttt :TlistToggle<br
+/> let g:Tlist_GainFocus_On_ToggleOpen = 1<br
+/> let g:Tlist_Auto_Update = 1<br
+/> let g:Tlist_Compact_Format = 1</p><p> set expandtab<br
+/> set textwidth=72<br
+/> set tabstop=4<br
+/> set softtabstop=4<br
+/> set shiftwidth=4<br
+/> set autoindent<br
+/> endfunction</p><p>function! SetMakoFile()<br
+/> set tw=100<br
+/> set sw=2<br
+/> set ts=2<br
+/> endfunction</p><p>autocmd FileType xml,xslt,html,xhtml,xsd call SetXMLFile()<br
+/> autocmd FileType python call SetPythonFile()<br
+/> autocmd FileType mako call SetMakoFile()<br
+/> autocmd FileType java call SetJavaFile()</p><p>autocmd BufRead,BufNew,BufNewFile *.xsd,*.zcml,*.pt,*.kid set filetype=xml<br
+/> autocmd BufRead,BufNew,BufNewFile *.mak set filetype=mako</p><p>I&#8217;ve seen quite a bit on this subject but this is what I do. Its flexible, uses vim where possible to detect file types and applys configuration changes dependent on what I&#8217;m working on.</p> </small></li><li
+id="comment-1164"><div
+class="alignright"></div><a
+href='http://kcodel.wordpress.com/2010/01/31/setting-up-vim-as-a-python-ide/' rel='external nofollow' class='url'>Setting up VIM as a Python IDE &laquo; KcodeL</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1164" title="">January 31st, 2010 at 3:43 pm</a> </small> <small><p>[...] leave a comment &raquo; <a
+href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/" rel="nofollow">http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/</a> [...]</p> </small></li><li
+class="alt" id="comment-1165"><div
+class="alignright"></div><a
+href='http://anton.uz' rel='external nofollow' class='url'>Anton</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1165" title="">February 26th, 2010 at 6:21 am</a> </small> <small><p>Can you make, PACK with your VIM or show you vimrc<br
+/> PLEASE</p> </small></li><li
+id="comment-1182"><div
+class="alignright"></div><a
+href='http://rxwen.blogspot.com' rel='external nofollow' class='url'>rxwen</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1182" title="">June 3rd, 2010 at 3:47 pm</a> </small> <small><p>Great stuff. thanks</p> </small></li><li
+class="alt" id="comment-1192"><div
+class="alignright"></div><a
+href='http://me2day.net/anarch/2010/07/08#20:40:46' rel='external nofollow' class='url'>anarch's me2DAY</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1192" title="">July 8th, 2010 at 12:41 pm</a> </small> <small><p><strong>맹수의 느낌&#8230;</strong></p><p>VIM as Python IDE | Alain M. Lafon&#8230;</p> </small></li><li
+id="comment-1483"><div
+class="alignright"></div>thrope <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1483" title="">August 13th, 2010 at 11:47 am</a> </small> <small><p>This script makes a nice addition:<br
+/> <a
+href="http://www.vim.org/scripts/script.php?script_id=891" rel="nofollow">http://www.vim.org/scripts/script.php?script_id=891</a></p><p>Checks with pylint on every buffer write (optional) and displays errors in vim quickfix.</p><p>..</p> </small></li><li
+class="alt" id="comment-1485"><div
+class="alignright"></div><a
+href='http://djpool.wordpress.com/2010/08/13/vim-as-python-ide-alain-m-lafon/' rel='external nofollow' class='url'>VIM as Python IDE | Alain M. Lafon &laquo; BenGeek blog</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1485" title="">August 13th, 2010 at 12:17 pm</a> </small> <small><p>[...] as Python IDE | Alain M.&nbsp;Lafon Filed under: Uncategorized &#8212; djpool @ 11:17   VIM as Python IDE | Alain M. Lafon.    Laisser un [...]</p> </small></li><li
+id="comment-1623"><div
+class="alignright"></div>le <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1623" title="">August 31st, 2010 at 7:11 pm</a> </small> <small><p>can you publish your .vimrc and vimfiles,but I can&#8217;t as you like and I like it.<br
+/> please send to me ,thanks !</p> </small></li><li
+class="alt" id="comment-1785"><div
+class="alignright"></div><a
+href='http://www.sinkro.net/2010/09/24/links-for-2010-09-24/' rel='external nofollow' class='url'>Sinkro.net &middot; links for 2010-09-24</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-1785" title="">September 24th, 2010 at 8:03 pm</a> </small> <small><p>[...] VIM as Python IDE | Alain M. Lafon (tags: python vim vi editor configuration) [...]</p> </small></li><li
+id="comment-2555"><div
+class="alignright"></div><a
+href='http://real-url.org/twitted.php?id=26501654704' rel='external nofollow' class='url'>Twitted by jvalleroy</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-2555" title="">October 6th, 2010 at 12:51 am</a> </small> <small><p>[...] This post was Twitted by jvalleroy [...]</p> </small></li><li
+class="alt" id="comment-4008"><div
+class="alignright"></div><a
+href='http://forums.opensuse.org/english/development/programming-scripting/448438-python-problem-2.html#post2240497' rel='external nofollow' class='url'>python problem</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-4008" title="">October 19th, 2010 at 5:05 pm</a> </small> <small><p>[...] out how I can use vim as python editor. I installed gvim and did all the steps from this page : VIM as Python IDE | Alain M. Lafon  But still no luck.  Roelof           Reply With Quote              + Reply to [...]</p> </small></li><li
+id="comment-4009"><div
+class="alignright"></div><a
+href='http://forums.opensuse.org/english/development/programming-scripting/448463-python-vim-problem.html#post2240584' rel='external nofollow' class='url'>python - vim problem</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-4009" title="">October 19th, 2010 at 7:41 pm</a> </small> <small><p>[...] &#8211; vim problem     Hello,   I installed vim and the plugins according to this page : VIM as Python IDE | Alain M. Lafon  But nothing has changed.  What went wrong ?  Roelof           Reply With Quote              + [...]</p> </small></li><li
+class="alt" id="comment-4018"><div
+class="alignright"></div><a
+href='http://www.facebook.com/pages/Sandys-pizza/147770121934149?v=app_4949752878' rel='external nofollow' class='url'>Sandys Pizza Menu</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-4018" title="">October 21st, 2010 at 6:01 pm</a> </small> <small><p>Very informative. Are you going to post more on this?</p> </small></li><li
+id="comment-4029"><div
+class="alignright"></div><a
+href='http://sdfun.wordpress.com/2010/10/25/ide-for-python/' rel='external nofollow' class='url'>IDE for python &laquo; Yet Another Developers&#039; Blog</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-4029" title="">October 27th, 2010 at 4:36 am</a> </small> <small><p>[...] vim [...]</p> </small></li><li
+class="alt" id="comment-4129"><div
+class="alignright"></div><a
+href='http://www.reirii.com/blog/246' rel='external nofollow' class='url'>[Fwd:]Vim as Python IDE on windows | 活着&quot;只&quot;为改变世界</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-4129" title="">November 30th, 2010 at 5:22 pm</a> </small> <small><p>[...] VIM as Python IDE [...]</p> </small></li><li
+id="comment-5627"><div
+class="alignright"></div><a
+href='http://www.htrrgvgnn.com' rel='external nofollow' class='url'>Weldon Groch</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5627" title="">December 19th, 2010 at 7:53 pm</a> </small> <small><p>Julianne Hough, known as much for her Dancing With the Stars gig as for her country music, is achieving new popularity by combining both</p> </small></li><li
+class="alt" id="comment-5645"><div
+class="alignright"></div>luo <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5645" title="">December 23rd, 2010 at 9:04 am</a> </small> <small><p>hi Alain. I got a problem with taglist. The official document of taglist says: press  on file name tags to display the full path to the file. It works for me sometimes, sometimes it does not work or it works in one directory but does not work in another.It  just show the file name not the full path.</p> </small></li><li
+id="comment-5678"><div
+class="alignright"></div>yaami <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5678" title="">January 9th, 2011 at 8:21 am</a> </small> <small><p>Hi Alan, Great article. I&#8217;ve been looking for python autocomplete feature. Found here.  Thanks.</p><p>BTW what is the color scheme you are using looks good.</p> </small></li><li
+class="alt" id="comment-5679"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5679" title="">January 9th, 2011 at 11:21 am</a> </small> <small><p>Hi yaami,</p><p>great to hear that my blog was of value to you. The colorscheme used is &#8220;wombat&#8221;. You might also want to check out &#8220;zenburn&#8221;.</p><p>Best,<br
+/> Alain</p> </small></li><li
+id="comment-5681"><div
+class="alignright"></div><a
+href='http://michaelsmart.savinghuge.com' rel='external nofollow' class='url'>Online Auctions Not Ebay</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5681" title="">January 10th, 2011 at 4:35 am</a> </small> <small><p>I am going to strart an on line vendue website like ebay. Does anyone know where I can ascertain good auction software package. Most of the damages I have found out for software package has been $1000.00 and up. I would like to find a less expensive software system if possible.</p> </small></li><li
+class="alt" id="comment-5732"><div
+class="alignright"></div><a
+href='http://www.electronicbricks.it' rel='external nofollow' class='url'>Valter Foresto</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5732" title="">February 17th, 2011 at 5:46 pm</a> </small> <small><p>GREAT INFOS FOR PYTHONISTS, THANKS A LOT !</p> </small></li><li
+id="comment-5739"><div
+class="alignright"></div><a
+href='http://rochacbruno.com.br/blog/2011/02/meu-ambiente-de-trabalho-em-7-itens/' rel='external nofollow' class='url'>Meu ambiente de trabalho em 7 itens | rochacbruno</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5739" title="">February 21st, 2011 at 6:19 pm</a> </small> <small><p>[...] 4. VI/VIM [...]</p> </small></li><li
+class="alt" id="comment-5771"><div
+class="alignright"></div><a
+href='http://www.reirii.com/?p=246' rel='external nofollow' class='url'>[Fwd:]Vim as Python IDE on windows &#8211; All is well.</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5771" title="">March 1st, 2011 at 8:54 am</a> </small> <small><p>[...] VIM as Python IDE [...]</p> </small></li><li
+id="comment-5842"><div
+class="alignright"></div><a
+href='http://kaigaraonline.wordpress.com/2011/03/25/ide-for-python-with-vim/' rel='external nofollow' class='url'>IDE for Python with VIM &laquo; KAIGARA Online</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5842" title="">March 25th, 2011 at 1:40 pm</a> </small> <small><p>[...] <a
+href="http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/" rel="nofollow">http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/</a> [...]</p> </small></li><li
+class="alt" id="comment-5897"><div
+class="alignright"></div>Phil <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5897" title="">April 18th, 2011 at 11:20 pm</a> </small> <small><p>Hi! Thanks for the nice article!<br
+/> I am new to Python and I&#8217;m trying to figure out which editor/IDE to use. I tried WingIDE, and find it very nice (but still runs in XQuartz/X11 on Mac OSX). I have been checking out quite a few others too.</p><p>TextMate seems nice, as it has command completion, but it does not have Call Type hints. It does however help to type a lot. Like if I type class and press tab, it fills out lots of stuff &#8230;</p><p>But vi(m) is a nice friend, and quick, so I decided to give your setup a try. I got it installed and working (I think), haven&#8217;t seen error messages upon startup. Now I am trying to figure out what MacVim with this setup does.</p><p>Vim&#8217;s Omni Completion seems to have call type (lookup of functions, C-x C-o), but I don&#8217;t seem to get completion of commands, like print(), str(), list() and so on. Is that correct? Or am I missing something vital?</p><p>VimPdb seems to work nice, and I can step through the program(s), but (and this might be a n00b question) how do I just run the entire program in a separate buffer/window/tab?</p><p>If one wanted automated stuff like TextMate offer, text macros could help, but still there&#8217;s no way to make them as interactive as in TM? (Adding new defs as you add to the class and so on.)</p><p>&#8211;<br
+/> Phil 8)</p> </small></li><li
+id="comment-5910"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5910" title="">May 7th, 2011 at 4:23 pm</a> </small> <small><p>Hi there,</p><p>if you want to save more typing with automated macros like in TM, you could take a look at the ﻿SnipMate plugin.</p><p>Best,<br
+/> Alain</p> </small></li><li
+class="alt" id="comment-5915"><div
+class="alignright"></div><a
+href='http://www.fkrny.com/vb/member.php?u=203349' rel='external nofollow' class='url'>Kasha Peffly</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5915" title="">May 9th, 2011 at 5:10 pm</a> </small> <small><p>This is very attention-grabbing, You&#8217;re an overly professional blogger. I have joined your feed and sit up for in the hunt for extra of your excellent post. Additionally, I&#8217;ve shared your web site in my social networks!</p> </small></li><li
+id="comment-5943"><div
+class="alignright"></div><a
+href='http://thestandardoutput.com/2011/05/links-for-2011-05-29/' rel='external nofollow' class='url'>Links for 2011-05-29 at The Standard Output</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-5943" title="">May 30th, 2011 at 4:54 am</a> </small> <small><p>[...] Pycon! How this site was created Brushing up on Computer Science Part 1, Big O » Victus Spiritus VIM as Python IDE | Alain M. Lafon Python and vim: Make your own IDE | tail -f [...]</p> </small></li><li
+class="alt" id="comment-6140"><div
+class="alignright"></div>Aniket Deshpande <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6140" title="">August 27th, 2011 at 10:46 pm</a> </small> <small><p>I have recently started using vim, and programming in python. I like vim. I have a Macbook with OS X 10.6.8. I ran through your instructions till i hit a dead-end at &#8216;installing ctags&#8217;. At &#8216;./configure &amp;&amp; sudo make install&#8217; CONFIGURE is not part of the package I downloaded: the ctags58.zip from sourceforge.</p><p>As you might have guessed by my question, Im totally lost and dont know how to approach, or where to look for the solution to this problem. I do not know the directory structures of this particular mutant of UNIX, or which files do what, and do not know much of C except very very little and have no experience with tools like make.</p><p>Help me out. A mail, if possible, with detailed instructions would be something that&#8230; I will not find words to thank you with.</p><p>utmost regards</p> </small></li><li
+id="comment-6141"><div
+class="alignright"></div><a
+href='http://dispatched.ch' rel='external nofollow' class='url'>Alain M. Lafon</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6141" title="">August 28th, 2011 at 8:12 pm</a> </small> <small><p>Hi Aniket,</p><p>thank you for your interest in the article. I can help you out.</p><p>What is missing is a build system for C programs on your machine.<br
+/> The easiest way to get that in Mac OSX is to install XCode[1]<br
+/> from Apple.</p><p>Best to you and have fun using VIM,<br
+/> Alain</p><p>1. <a
+href="http://developer.apple.com/technologies/tools/" rel="nofollow">http://developer.apple.com/technologies/tools/</a></p> </small></li><li
+class="alt" id="comment-6147"><div
+class="alignright"></div><a
+href='http://www.pythonize.org/programando-em-python-no-vim/' rel='external nofollow' class='url'>Programando em Python no Vim | Pythonize</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6147" title="">September 8th, 2011 at 3:45 pm</a> </small> <small><p>[...] interessantes que podem ser adicionadas ao Vim para codificação Python podem ser vistas em: VIM as Python IDE.   [...]</p> </small></li><li
+id="comment-6148"><div
+class="alignright"></div>Hell-G <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6148" title="">September 9th, 2011 at 3:44 pm</a> </small> <small><p>Hi Alain</p><p>Thank you very much for this article! It helped me alot.<br
+/> I have one question, you mention &#8220;even the whole Pydoc gets to be displayed in a split window&#8221;. How did you manage to get this to work with omni completion? I can use omni completion alone fine and I get the Pydoc for the word under the cursor by hitting &#8220;K&#8221;, but how did you combine them?</p><p>Thanks for your help!</p><p>Regards,<br
+/> Hell-G</p> </small></li><li
+class="alt" id="comment-6149"><div
+class="alignright"></div><a
+href='http://www.quora.com/Which-is-the-better-Python-IDE-Komodo-IDE-PyCharm-WingIDE-or-something-else-and-why#ans173565' rel='external nofollow' class='url'>Which is the better Python IDE, Komodo IDE, PyCharm, WingIDE or something else and why? - Quora</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6149" title="">September 10th, 2011 at 5:41 am</a> </small> <small><p>[...] to customize for python dev.Here are a few link which may help you:<a
+href="http://wiki.python.org/moin/Vimhttp://blog.dispatched.ch/2009/0...In" rel="nofollow">http://wiki.python.org/moin/Vimhttp://blog.dispatched.ch/2009/0&#8230;In</a> my case, it took quite some time to put my .vimrc in shape for proper development.You should also [...]</p> </small></li><li
+id="comment-6151"><div
+class="alignright"></div>Sean E <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6151" title="">September 14th, 2011 at 7:29 pm</a> </small> <small><p>I had to add the following lines to my .vimrc for omnicompletion to work:</p><p>filetype plugin on<br
+/> set ofu=sytaxcomplete#Complete</p> </small></li><li
+class="alt" id="comment-6155"><div
+class="alignright"></div>Jose <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6155" title="">September 20th, 2011 at 7:00 pm</a> </small> <small><p>Well done, man. Very useful tips and plugins and quite clear explained. Thank you!</p> </small></li><li
+id="comment-6161"><div
+class="alignright"></div><a
+href='http://klen.github.com' rel='external nofollow' class='url'>klen</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6161" title="">October 11th, 2011 at 6:56 pm</a> </small> <small><p>Hello!</p><p>See my plugin for vim: <a
+href="https://github.com/klen/python-mode" rel="nofollow">https://github.com/klen/python-mode</a></p><p>Screencast here: <a
+href="http://t.co/3b0bzeXA" rel="nofollow">http://t.co/3b0bzeXA</a></p> </small></li><li
+class="alt" id="comment-6211"><div
+class="alignright"></div><a
+href='http://talueee.wordpress.com/2011/11/29/vim-as-a-python-ide/' rel='external nofollow' class='url'>VIM as a Python IDE. &laquo; Talueee&#039;s Blog</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6211" title="">November 29th, 2011 at 1:53 am</a> </small> <small><p>[...] Link Like this:LikeBe the first to like this post. [...]</p> </small></li><li
+id="comment-6217"><div
+class="alignright"></div><a
+href='http://www.jesonw.com' rel='external nofollow' class='url'>ToughGuy</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6217" title="">December 2nd, 2011 at 4:40 pm</a> </small> <small><p>nice post. that&#8217;s all i wanna say.</p><p>非常好的帖子~谢谢了。</p><p>Thank You!</p> </small></li><li
+class="alt" id="comment-6221"><div
+class="alignright"></div><a
+href='http://akeiexil.wordpress.com/2011/12/06/omni-completion/' rel='external nofollow' class='url'>Omni completion &laquo; Åke i exil</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6221" title="">December 6th, 2011 at 9:46 pm</a> </small> <small><p>[...] att ha läst ett intressant bloginlägg om att använda vim som Python-IDE har även jag konfigurerat upp vim att åtminstone låta mig [...]</p> </small></li><li
+id="comment-6223"><div
+class="alignright"></div>uggs <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6223" title="">December 10th, 2011 at 1:10 am</a> </small> <small><p>Fantastic web site. A lot of useful info here. I&#8217;m sending it to some pals ans also sharing in delicious. And certainly, thank you for your sweat!</p> </small></li><li
+class="alt" id="comment-6250"><div
+class="alignright"></div><a
+href='http://www.script-nulled.com/divers/' rel='external nofollow' class='url'>nullled script</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6250" title="">January 5th, 2012 at 11:59 am</a> </small> <small><p>Simply want to say your article is as astounding. The clarity in your post is simply spectacular and i could suppose you&#8217;re a professional in this subject. Well together with your permission allow me to take hold of your RSS feed to stay updated with forthcoming post. Thanks one million and please carry on the enjoyable work.</p> </small></li><li
+id="comment-6252"><div
+class="alignright"></div><a
+href='http://delivorias.me/2012/01/15/customising-osx/' rel='external nofollow' class='url'>Customising OSX &laquo; Life is a State of Mind</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6252" title="">January 15th, 2012 at 1:46 pm</a> </small> <small><p>[...] with python support. Any thoughts as to how I can do this? I have followed advice so far from these really good sources for this [...]</p> </small></li><li
+class="alt" id="comment-6260"><div
+class="alignright"></div>tshirtman <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6260" title="">February 6th, 2012 at 12:59 am</a> </small> <small><p>I want to point out, because i looked for this for a very long time, but i finally found a decent python completion/refactoring plugin for vim, none of the ones i tried before worked except for very simple cases, but this one seems to work way more reliably:</p><p><a
+href="https://github.com/klen/python-mode" rel="nofollow">https://github.com/klen/python-mode</a></p><p>installed with pathogen, work like a charm… at least…</p> </small></li><li
+id="comment-6272"><div
+class="alignright"></div>Tom <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6272" title="">February 29th, 2012 at 5:21 pm</a> </small> <small><p>Hey there,<br
+/> great work with the tutorial.<br
+/> I got everything working, even autocompletion works (better with the following: <a
+href="http://vim.wikia.com/wiki/VimTip1386" rel="nofollow">http://vim.wikia.com/wiki/VimTip1386</a> )<br
+/> BUT:<br
+/> I just cannot run the script. By pressing F5 it gets me into the strangest Python files. For example it opens __init__.py utf_8.py and codecs.py.<br
+/> By executing it with IDLE it works just fine&#8230;</p><p>(I am running Windows and gVim7.3 and Python 2.7)</p><p>@tshirtman<br
+/> I tried the python-mode as well, but in which folder is it to put?<br
+/> just vim/bundle/python-mode<br
+/> and then it is already loaded with the default _vimrc settings?</p> </small></li><li
+class="alt" id="comment-6275"><div
+class="alignright"></div><a
+href='http://linux2start.aires.com.br/?p=1185' rel='external nofollow' class='url'>aprendendo VIM @ Linux 2 Start</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6275" title="">March 15th, 2012 at 8:01 pm</a> </small> <small><p>[...] Porque é divertido aprender! Veja por exemplo : VIM as Python IDE. [...]</p> </small></li><li
+id="comment-6277"><div
+class="alignright"></div><a
+href='http://vimalkumar.in/2012/03/30/made-the-switch-to-vim-at-last/' rel='external nofollow' class='url'>Made the switch to Vim &#8211; at last! | vimalkumar.in</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6277" title="">March 30th, 2012 at 7:38 am</a> </small> <small><p>[...] vimrc Turning Vim into a modern Python IDE VIM as Python IDE Vim made easy: how to get your favorite IDE features in Vim Right margin in Vim Solarized color [...]</p> </small></li><li
+class="alt" id="comment-6278"><div
+class="alignright"></div><a
+href='http://cloud101.eu/blog/2012/04/01/vim-tips-and-tricks/' rel='external nofollow' class='url'>Vim: tips and tricks &raquo; cloud101</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6278" title="">April 1st, 2012 at 1:24 pm</a> </small> <small><p>[...] VIM as Python IDE       &nbsp;Tagged with: linux, tips, tricks, vim, vimrc [...]</p> </small></li><li
+id="comment-6291"><div
+class="alignright"></div><a
+href='http://www.youtube.com/user/SlingBlade31' rel='external nofollow' class='url'>sponsor child</a> <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6291" title="">May 22nd, 2012 at 9:33 am</a> </small> <small><p>Hello there, simply changed into alert to your blog thru Google, and located that it is truly informative. I am going to be careful for brussels. I will be grateful if you happen to proceed this in future. Many folks might be benefited out of your writing. Cheers!</p> </small></li><li
+class="alt" id="comment-6296"><div
+class="alignright"></div>Corey Richardson <br
+/> <small
+class="commentmetadata"><a
+href="#comment-6296" title="">June 3rd, 2012 at 10:08 pm</a> </small> <small><p>For those looking to manage &#8216;packages&#8217; in Vim: Vundle! (<a
+href="https://github.com/gmarik/vundle" rel="nofollow">https://github.com/gmarik/vundle</a>)</p> </small></li></ol> <br
+/><h3 id="respond">Leave a Reply</h3><form
+action="http://blog.dispatched.ch/wp-comments-post.php" method="post" id="commentform"><p
+align="left"><label
+for="author">Name (required)</label><input
+type="text" name="author" id="author" value="" size="22" tabindex="1" /></p><p
+align="left"><label
+for="email">Email (required) (will not be published)</label><input
+type="text" name="email" id="email" value="" size="22" tabindex="2" /></p><p
+align="left"><label
+for="url">Website</label><input
+type="text" name="url" id="url" value="" size="22" tabindex="3" /></p><p
+align="left"><label
+for="comment">Comment</label><br
+/><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p><p><input
+name="submit" type="submit" id="submit" tabindex="5" value="Say it!" /> <input
+type="hidden" name="comment_post_ID" value="777" /></p><p
+style="display: none;"><input
+type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="04e3cf6ce1" /></p></form><p
+align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></div><div
+id="footer"><p>&copy; 2012 Alain M. Lafon</p><!-- Generated in 0.706 seconds. Made 13 queries to database and 68 cached queries. Memory used - 21.43MB -->
+<!-- Cached by DB Cache Reloaded Fix -->
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+<!-- W3 Total Cache: Minify debug info:
+Engine:             disk: basic
+Theme:              44184
+Template:           single
+-->
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Served from: blog.dispatched.ch @ 2012-06-28 22:59:06 -->
+
+<!-- W3 Total Cache: Page cache debug info:
+Engine:             disk: basic
+Cache key:          w3tc_blog.dispatched.ch_1_page_5e2d9307106c83e140a42c68811636fd
+Caching:            enabled
+Status:             cached
+Creation Time:      0.004s
+Header info:
+Last-Modified:      Thu, 28 Jun 2012 21:59:06 GMT
+Vary:               Cookie
+X-Powered-By:       W3 Total Cache/0.9.2.4
+X-Pingback:         http://blog.dispatched.ch/xmlrpc.php
+Content-Type:       text/html; charset=UTF-8
+-->

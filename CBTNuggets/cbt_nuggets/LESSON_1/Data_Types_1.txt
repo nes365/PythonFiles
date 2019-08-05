@@ -1,0 +1,162 @@
+Data Types - 1
+==============
+Immutable: (once defined, the variable will be that data type forever)
+* number
+* string
+* tuple
+
+Mutable:
+* list 
+* dictionary (list and dictionary are both multi-item variables)
+* files (copy, create, move, ftp etc)
+
+Numbers
+-------
+Integer - a number without a decimal point
+Float - a number with a decimal point
+
+* type() -> verify data type
+* isinstance() -> test for data type, boolean
+
+>>> v1=3
+>>> isinstance(v1,int)
+True
+>>> v1='tim'
+>>> isinstance(v1,int)
+False
+>>>
+
+* int(); float() -> type conversion
+
+* An expression must have at least one 'operator':
+	+	-	ADD
+	-	- 	SUBTRACT
+	*	-	MULTIPLY
+	/	- 	DIVIDE
+	//	-	INTEGER DIVISION (NO REMAINDER)		
+	%	-	MODULO (DIVISION WHICH RETURNS ONLY THE REMAINDER)
+	**	-	EXPONENTIATION (x TO THE POWER OF y)	
+	<	-	LESS THAN
+	>	-	GREATER THAN
+	==	-	EQUAL TO (NOT A SINGLE EQUAL SIGN - THAT IS FOR ASSIGNMENT)
+	!=	-	NOT EQUAL TO
+	AND	-	BOOLEAN AND 	
+	OR	-	BOOLEAN OR
+	NOT	-	BOOLEAN NOT
+
+Order of operations (PEMDAS) Please Excuse My Dear Aunt Sally
+P: Parenthesis
+E: Exponentiation
+M: Multiplication
+D: Division
+A: Addition
+S: Subtraction
+
+Examples:
+>>> 10/3
+3.3333333333333335
+>>> 10//3
+3
+>>> 10 % 3
+1
+
+
+
+More Complex Math
+-----------------
+Standard libraries include modules for:
+* Fractions
+* Math - higher maths, triganometry
+
+Extra libraries:
+* Numpy
+* Scipy
+Higher order maths libraries, heavily used in education and industry.
+
+
+Strings
+=======
+A string is an ordered sequence of character data.
+Python2 used ASCII, Python3 uses unicode characters (UTF-8).
+
+Other sequenced data structures:
+* lists
+* tuples
+
+"String literal" - mapping a string to a fixed variable. ' == "
+Triplequotes """ multi-line strings.
+
+String Operations
+-----------------
+* len(s) -> gives char length
+* + 	 -> concatenation
+* s * 5  -> repitition
+* str(i) -> type "casting"
+
+>>> c = 'cbt'
+>>> n = "nuggets"
+>>> n*5
+'nuggetsnuggetsnuggetsnuggetsnuggets'
+>>> cnew = 'cbt '
+>>> cnew*5
+'cbt cbt cbt cbt cbt '
+>>> c + ' ' + n
+'cbt nuggets'
+>>> concat = c + ' ' + n
+>>> len(concat)
+11
+>>> number = 14.4
+>>> str(number)
+'14.4'
+>>> type(number)
+<class 'float'>
+>>> 
+
+String Slicing
+--------------
+
+0	1	2	3	4	5	6	7	8	9	10
+----------------------------------------------------------------------------------
+C	B	T		N	U	G	G	E	T	S
+----------------------------------------------------------------------------------
+-11	-10	-9	-8	-7	-6	-5	-4	-3	-2	-1
+
+A portion of a string is called a substring. Extracting a substring from a string is called slicing. 
+The left most position is position 0.
+Strings can also be evaluated in reverse, the final position is -1.
+
+A single character can be extracted:
+>>> o = 'CBT NUGGETS'
+>>> o[4]
+'N'
+>>> o[-6]
+'U'
+
+or a range of a characters:
+
+>>>o[6:10]
+'GGET'
+>>> o[-11:-7]
+'CBT '
+>>> 
+
+String Methods
+--------------
+
+## In the format object.method() ##
+
+* st.find()	-> gives offset ID
+
+>>> o
+'CBT NUGGETS'
+>>> o.find('CBT')
+0
+>>> o.find('UGG')
+5
+>>> o.split(' ')
+['CBT', 'NUGGETS']
+
+* st.replace()	-> replace substring
+* st.split()	-> cuts string at delimiter
+* st.upper()
+* st.lower()

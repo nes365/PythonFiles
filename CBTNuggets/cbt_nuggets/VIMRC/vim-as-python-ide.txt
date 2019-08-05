@@ -1,0 +1,981 @@
+
+
+
+                                                                  Home About CV
+
+
+code, life and struggles thereof
+****** Alain_M._Lafon ******
+***** VIM_as_Python_IDE *****
+Finding the perfect IDE for Python isn’t an easy feat. There are a great many
+to chose from, but even though some of them offer really nifty features, I
+can’t help myself but feel attracted to VIM anyway. I feel that no IDE
+accomplishes the task of giving the comfort of complete power over the code –
+something is always missing out. This is why I always come back to using IDLE
+and VIM. Those two seem to be best companions when doing some quick and agile
+hacking – but when it comes to managing bigger and longer term projects, this
+combo needs some tweaking. But when it’s done, VIM will be a powerful IDE for
+Python – including code completion(with pydoc display), graphical debugging,
+task-management and a project view.
+This is where we are going:
+[VIM_as_Python_IDE]
+So, these are my thoughts on a VIM setup for coding (Python).
+Modern GUI VIM implementations like GVIM or MacVIM give the user the
+opportunity to organize their open files in tabs. This might look convenient,
+but to me it is rather bad practice, because a second tab will not be in the in
+the same buffer scope as the first one which takes away from future interaction
+options between the two. Using MiniBufExplorer, however, gives the user tabs
+(not only in the GUI, but also in command line) and leaves the classic buffer
+interaction intact.
+[MiniBuf_Explorer]
+Being able to neatly work on multiple files, the user still misses the
+potential his favourite IDE gives him in visualizing classes, functions and
+variables. Luckily there are quite a few plugins around to accomplish this task
+just as well. My favourite one would be TagList. TagList uses Exuberant_Ctags
+for actually generating the tags(note: it really relies on this specific
+version of ctags – preinstalled implementations on UNIX systems won’t work).
+[TagList]
+A lot of coders have the habit of using TODO or FIXME statements in their code.
+Other IDEs often rely on having good third party project management software,
+but not VIM. There are great plugins like Tasklist reminding the programmer of
+those lines of code. Tasklist even implements custom lists – to me that’s an
+incredible productivity gain.
+[TaskList]
+In these times, the programmer knows his or her programming language more or
+less by interactively finding out what it can do. Therefore code completion
+(sometimes also called IntelliSense*ugh*) is a major feature. I have heard 
+many people saying that this is where VIM fails – but luckily they are plain
+wrong(; In V7, VIM introduced omni_completion – given it is configured to
+recognize Python (if not, this feature is only a plugin away) Ctrl+x Ctrl+o
+opens a drop down dialog like any other IDE – even the whole Pydoc gets to be
+displayed in a split window.
+[Omni_Completion]
+Probably the most wanted feature(besides code completion) is debugging
+graphically. VimPDB is a plugin that lets you do just that(. I acknowledge it
+is no complete substitution for a full fledged graphical debugger, but I honour
+the thought that having to rely on a debugger (often), is a hint of bad design.
+[VimPDB]
+–
+From the eye-candy to the implementation. Don’t worry, it’s no sorcery.
+First of all, make sure you have VIM version 7.x installed, compiled with
+Python support. To check for the second, enter :python print “hello, world”
+into VIM. If you see an error message like “E319: Sorry, the command is not
+available in this version”, then it’s time to get a new one. If you’re on a
+Mac, just install MacVIM(there’s also a binary for the console in /
+Applications/MacVim.app/Contents/MacOS/). If you’re on Windows, GVIM will
+suffice(for versions != 2.4 search for the right plugin). If you’re on any
+other machine, you will probably know how to compile your very own VIM with
+Python support.
+Second, check if you have a plugin directory. In Unix it would typically be
+located in $HOME/.vim/plugin, in Windows in the Program Filesdirectory. If it
+doesn’t exist, create it.
+Now, let’s start with the MiniBufExplorer. Get it and copy it into your plugin
+directory. To start it automatically when needed and be able to use it with
+keyboard and mouse commands, append these lines in your vimrc configuration:
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+For a project view, get TagList and Exuberant_Ctags. To install Ctags, unpack
+it, go into the directory and do a compile/install via:
+./configure &amp;&amp; sudo make install
+Ctags will then be installed in /usr/local/bin. When using a Windows machine, I
+recommend Cygwin with GCC and Make; it’ll work just fine. If you don’t want to
+tamper with your original ctags installation, you can propagate the location to
+VIM by appending the following line to vimrc:
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+To install TagList, just drop it into VIMs plugin directory. You will now be
+able to use the project view by typing the command :TlistToggle.
+Tasklist is a simple plugin, too. Copying it into the plugin directory will
+suffice. I like to have shortcuts and have added
+
+map T :TaskList<CR>
+map P :TlistToggle<CR>
+to vimrc. Pressing Twill then open the TaskList if there are any tasks to
+process. qquits the TaskList again.
+VimPDB is a plugin, as well. Install as before and see the readme for
+documentation. If it doesn’t work out of the box, watch for the known issues.
+To enable code(omni) completion, add this line to your vimrc:
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+If it doesn’t work then, you’ll need this plugin.
+My last two recommondations are setting these lines to comply to PEP_8(Pythons’
+style guide) and to have decent eye candy:
+set expandtab
+set textwidth=79
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+:syntax on
+There are certainly a lot more flags to help productivity, but those will
+probably be more user specific.
+Have fun coding Python while not being bound to a specific IDE, but having all
+the benefits of VIM bundled with a few helping hands. Enjoy, everyone.
+If you liked this article, please feel free to re-tweet it and let others know.
+   You should follow me on twitter here
+     [twitter_preek]
+Category: articles| Tags: coding, ctags, exuberant_ctags, ide, minibuf, omni
+completion, pep_8, programming, python, python_ide, taglist, tasklist,
+tutorial, vi, vim, vimpdb, walkthrough 105_comments_&raquo;
+**** 105 Responses to “VIM as Python IDE” ****
+   1. VIM_as_Python_IDE_|_Alain_M._Lafon_&laquo;_Netcrema_-_creme_de_la_social
+      news_via_digg_+_delicious_+_stumpleupon_+_reddit
+      May_24th,_2009_at_6:39_am
+      [...] VIM as Python IDE | Alain M. Lafon [...]
+   2. popurls.com_//_popular_today
+      May_24th,_2009_at_6:54_am
+      popurls.com // popular today…
+      story has entered the popular today section on popurls.com…
+   3. Twitted_by_preek
+      May_24th,_2009_at_9:34_am
+      [...] This post was Twitted by preek – Real-url.org [...]
+   4. pekuja
+      May_24th,_2009_at_10:06_am
+      You don’t actually need MiniBufExplorer to get tabs in Vim. Vim 7 comes
+      with tab support built right in! Just :tabe myfile to edit a file in a
+      new tab, then :tabp and :tabn to switch between tabs.
+      There’s a little tutorial that explains more about using the feature at:
+      http://www.linux.com/archive/articles/59533
+   5. Alain_M._Lafon
+      May_24th,_2009_at_12:01_pm
+      Hiho pekuja,
+      you’re right, tabs are built in nowadays. But if you’re using those,
+      using buffers will be quite uncomfortable. Your tab-names will keep
+      changing and ultimately you’ll lose oversight. With MiniBuf everything
+      keeps in place.
+      Best,
+      Alain
+   6. mark
+      May_24th,_2009_at_12:06_pm
+      Thanks, in particular for taglist, that’ll make things easier.
+      Technically your settings for PEP8 conformance are incorrect, instead you
+      should use:
+      set tabstop=8
+      set expandtab
+      set softtabstop=4
+      set shiftwidth=4
+      set textwidth=79
+      the difference being that the actual tab character is still eight columns
+      wide (as specified by the python language), but using the tab key,
+      backspace and indent/deindent ( keys) will correctly shift you by 4
+      spaces.
+   7. steve
+      May_24th,_2009_at_2:09_pm
+      I’m so glad I don’t code in a language that requires soft-tabs
+   8. Alain_M._Lafon
+      May_24th,_2009_at_2:21_pm
+      @Mark.
+      You’re absolutely right – I have corrected it right away. Thanks for the
+      advice.
+   9. Alain_M._Lafon
+      May_24th,_2009_at_2:22_pm
+      @Steve
+      Well.. requires probably isn’t quite that right. To quote PEP 8:
+      “The most popular way of indenting Python is with spaces only. The
+      second-most popular way is with tabs only.”
+  10. NexNova_&raquo;_Blog_Archive_&raquo;_Links_del_giorno:_May_24,_2009
+      May_24th,_2009_at_7:25_pm
+      [...] VIM as Python IDE | Alain M. Lafon [...]
+  11. Bomif
+      May_24th,_2009_at_7:50_pm
+      Hey Alain,
+      much respect for ur article, u really didn’t need to complete studies
+      with the rest of us like it seems :)
+      Good luck for ur future
+      Manuel
+  12. links_for_2009-05-24_at_DeStructUred_Blog
+      May_25th,_2009_at_2:56_am
+      [...] VIM as Python IDE | Alain M. Lafon (tags: python Vim programming
+      IDE tips howto) [...]
+  13. Daelin the Cruel
+      May_25th,_2009_at_7:00_am
+      God, that image zoom script is SLOW!
+  14. Alain_M._Lafon
+      May_25th,_2009_at_7:41_am
+      @Daelin
+      Sorry to say, but that would be your machine. My server is on gigabit, so
+      it should feed you the images quick enough. And it work’s on my
+      workstation.
+      I hope you enjoyed the article, anyways. Take care Mr. Cruel.
+  15. Shannon_-jj_Behrens
+      May_25th,_2009_at_8:26_am
+      I’m a Vim diehard, but I’ve really been enjoying NetBeans with the jVi
+      plugin. It feels like Vim, but has the additional benefits of an IDE.
+      Being a Vim fanatic, I didn’t really fully understand those benefits
+      until I tried it out for a few days.
+      http://jjinux.blogspot.com/2009/01/ide-netbeans.html
+      http://jjinux.blogspot.com/2009/01/vim-jvi.html
+  16. Geek_Stuff:_VIM_als_Python_IDE_–_Der_Schockwellenreiter
+      May_25th,_2009_at_10:24_am
+      [...] sich den VIM zurechtgelegt hat, bastelt sich auch eine Python-IDE
+      damit. So auch Alain M. Lafon: VIM as Python IDE. Mein Editor meines
+      Vertrauens ist ja bekanntlich TextWrangler, der freie (frei wie Freibier)
+      [...]
+  17. Alain_M._Lafon
+      May_25th,_2009_at_12:02_pm
+      @Shannon-jj Behrens
+      Hi there,
+      as a former Sun employee(back in the days.. before Oracle*urgh*), I am
+      quite familiar with Netbeans and jVi. To say the truth, I never felt
+      quite satisfied with the Vi implementation there and always went back to
+      plain Netbeans.
+      However, Netbeans is no option, because Python is not supported. There’s
+      a team working on it, but it’s far from being usable at the moment.
+      Thanks for your comment and congrats to the storks present(;
+  18. &raquo;_Vim_come_IDE_per_Python
+      May_25th,_2009_at_7:05_pm
+      [...] Via | Dispatched [...]
+  19. Shannon_-jj_Behrens
+      May_25th,_2009_at_9:55_pm
+      Alain, I too worked at Sun–very long ago.
+      jVi is definitely not perfect, but it’s the best Vi emulation that I’ve
+      ever used. Most Vi emulators drive me nuts (for instance, the Vi
+      emulation in WingIDE or KomodoEdit), perhaps because I prefer Vim. I
+      guess jVi is close enough that it doesn’t drive me nuts.
+      I like all the other goodies I get with NetBeans. I still use Vim in
+      those cases where NetBeans isn’t helpful.
+      Can you tell me more about why you prefer MiniBufExplorer over tabs? I
+      used to use MiniBufExplorer, but when tabs came out, I switched to those
+      instead. I create a new tab for every file (using :tabedit filename), and
+      I even have a shell alias (gvim –remote-tab filename) so that I can open
+      up a file in a new tab from the shell. Hence, I follow the one tab for
+      every file rule, and I never get confused. Can you walk me through why
+      MiniBufExplorer is better?
+      > Thanks for your comment and congrats to the storks present(;
+      Thanks! :)
+  20. Shannon_-jj_Behrens
+      May_25th,_2009_at_10:24_pm
+      > However, Netbeans is no option, because Python is not supported.
+      Why do you say that? http://www.netbeans.org/features/python/index.html
+      It might not be quite as polished as WingIDE (which really, really
+      understand Python), but it’s not bad at all. (I prefer NetBeans over
+      WingIDE because I also have to code HTML, CSS, JavaScript, PHP, Ruby,
+      etc.
+      IntelliSense, warnings, documentation, etc. all work: http://
+      jjinux.blogspot.com/2009/01/ide-netbeans.html
+  21. Shannon_-jj_Behrens
+      May_26th,_2009_at_4:52_am
+      > Netbeans is no option, because Python is not supported.
+      Why do you say that? See http://www.netbeans.org/features/python/
+      index.html.
+      I think it works fairly well with Python. See http://jjinux.blogspot.com/
+      2009/01/ide-netbeans.html. Autocomplete, tags, previewing documentation,
+      etc. all work. It’s not perfect yet, since Python support is fairly new,
+      but it’s definitely workable. I like the way it even tells me when I’m
+      doing stupid things like unused imports, etc.
+  22. Alain_M._Lafon
+      May_26th,_2009_at_7:00_am
+      Welcome, then, former Sunny. It really is a good feeling to have you
+      write comments here, even though I don’t post under blogs.sun.com anymore
+      (;
+      I think you are perfectly right, VI emulation in commercial editors is
+      especially bad implemented – there’s no way I could use them seriously.
+      And while jVi might not be a bad implementation, Netbeans felt obstructed
+      to me anyway. I just felt the workflow being interrupted by it, even
+      though I really gave it a weeks try. Personally, I didn’t experience that
+      much a gain, but limited in the use of Netbeans’ internal features.
+      Certainly that’s a very personal opinion – maybe boosted, because I
+      prefer VIM over VI, too.
+      The MiniBuf over Tabs preference, however, is a objectively measurable
+      reason. If you work with legacy software (like TagList which I have
+      described in the article), they will most likely work with buffers, not
+      tabs. Of course tabs share a buffer namespace(I wrote they didn’t, but I
+      chose this phrasing to not confuse a beginner even more), but in a very
+      jumbling way.
+      Say you open file A and B in tabs. While still working in tab A, you do :
+      bNext. You will have your second buffer/file opened, but your tabs will
+      now display B and B – buffer/file A isn’t lost, but you can’t see or
+      click it anymore.
+      Of course this example is constructed, because the right way to change
+      tabs is :tabNext, but when you use Vimscripts, they often use buffers and
+      will therefore produce a lot of confusion on the screen.
+      The -remote-tab feature is certainly nice, indeed. But I try to get along
+      and use the mouse sometime. In GVim dragging a new file in the GUI will
+      result in opening it in a new buffer – MiniBuf will create a new tab for
+      me and everything moves along smoothly.
+  23. Alain_M._Lafon
+      May_26th,_2009_at_7:14_am
+      Well, I say that, because Netbeans for Python is still in Alpha/(Beta?).
+      Only last week I tried it again – all I did was a “Hello, world” mockup
+      with a single variable which I tried to debug. While doing that, Netbeans
+      crashed. Besides Jython took like.. a minute or so to power up on my
+      Core2Duo machine.
+      I tried it once before, then the debugger worked, but well.. it gave me
+      the whole Jython stacktrace – finding my variables was more confusing
+      than in a J2EE app^^ And then.. it crashed, too.
+      I’ll certainly give it more tries in the future, because I really like
+      Netbeans and feel very comfortable using it in my J2SE, J2EE and RoR
+      apps. But for the moment, I will respect the tag “early access”.
+      Your article seems to imply that it works for you better, than it did for
+      me, though. I haven’t read it yet – I should get ready for work where I
+      will have the time to do so^^
+      But even if it did work, the features you named (autocomplete, preview
+      pydoc, unused imports..) are all available in VIM, too. Autocomplete and
+      preview via OmniComplete and unused imports via PyFlakes, for example.
+      I don’t know fore sure as of now, but probably I’ll stick with VIM for
+      Python even if Netbeans will support Python as it does Ruby. Imho Python
+      doesn’t need as much IDE comfort as other languages(like Java). I think I
+      gain more performance in being able to completely configure my IDE – use
+      custom snippets, chose a well suited color scheme for the current
+      daylight, even write my own Vimscripts using Python(;
+      Besides, my last reasoning will always be, that I can use VIM on servers
+      (my own as well as from clients). My server is running Solaris 10 and my
+      prefered access is via SSH. And on a clients server, there’s always the
+      need for a quickfix(yeah, I know it’s bad practice – but it’s not always
+      my code or choice^^).
+  24. Philluminati
+      May_26th,_2009_at_7:28_am
+      Excellent article!
+      Also I found out today you can do :set mouse=a which gives you the
+      ability to click to position the cursor and visual selection with the
+      cursor which is very cool.
+      This aught to be posted to the Vim reddit purely so it “lives longer”
+      there and becomes a better knowledge base for vim,
+  25. kilowatt
+      May_26th,_2009_at_7:29_am
+      /shameless self-plug[in]
+      With pyflakes-vim, vim will check your code on the fly for obvious
+      errors. You never have to check in a NameError typo again :p
+      http://www.vim.org/scripts/script.php?script_id=2441
+  26. talklittle
+      May_26th,_2009_at_7:29_am
+      Whoa nice article, I didn’t know about omni completion. I’d been trying
+      to tell myself that not having intellisense is a good thing in some ways,
+      but pshh yeah right, I’m thrilled to learn that vim has it.
+  27. adamzap
+      May_26th,_2009_at_7:30_am
+      this set of cheat sheets is a great way to learn vim. master one at a
+      time
+      http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
+  28. erlanger
+      May_26th,_2009_at_7:34_am
+      My favorite Vim customization for Python coding:
+      :nnoremap :w !python
+      Also works for PHP
+      :nnoremap :w !php
+      You put these in the respective ftplugin files.
+  29. wooby
+      May_26th,_2009_at_7:34_am
+      Similar setup for PHP: http://gravitonic.com/files/talks/php-quebec-2009/
+      vim-for-php-programmers.pdf
+  30. slmbrhrt
+      May_26th,_2009_at_7:35_am
+      grr, formatting.
+      http://ed.cranford.googlepages.com/vimrc if you’re really interested in
+      seeing my vimrc. I’m not fond of plugins.
+  31. Shannon_-jj_Behrens
+      May_27th,_2009_at_6:46_am
+      Alain,
+      Yeah, NetBeans definitely works better for me than it does for you. It’s
+      never crashed on me, and it doesn’t take a minute to start. Perhaps the
+      difference is that I don’t use Jython–Jython’s slow.
+      As for the coolness of Vim, you don’t have to convince me! I’ve been
+      using Vim as my main editor for years, and I consider myself a low-level
+      expert. I only switched to NetBeans because I was burnt out and was
+      looking for ways to “mix it up”.
+      As for your mouse problem, if I really needed to do that, I would do :
+      tabnew and then drag the file to the window.
+      I agree that Python doesn’t need an IDE–which is one of the reasons I use
+      it ;) I also use Vim when logging into remote servers. However, there’s
+      nothing wrong with using something more friendly when editing locally.
+      Thanks for the heads up about pyflakes-vim. I knew about it, but had
+      never tried it.
+      I use TagList, and it seems to work just fine with tabs.
+      One thing I really like about tabs in Vim on my Mac is that tabs work the
+      same in the shell, in Vim, and in Firefox. That’s a huge win because I
+      have the hot keys (Apple-Shift-{ and Apple-Shift-}) memorized.
+      I rarely use bNext, so I don’t encounter the problem you mentioned. If I
+      do need to operate on multiple buffers instead of tabs (for instance if I
+      pass multiple files on the command line), I open up another window. In
+      general, I stick to the one buffer per one tab rule, so things make
+      sense.
+      I haven’t tried to debug anything in NetBeans. I always use pdb in the
+      shell for some reason, perhaps because I don’t know how to connect the
+      debugger to my Web server process.
+      I’ve used Vim for about 10 years now at a pretty advanced level. However,
+      as part of my plan to recover from burnout, I decided to open my mind a
+      bit. As much as I like Vim, the fact of the matter is that you’re better
+      off using Emacs for Lisp, Erlang, and Oz. You’re better off using
+      IntelliJ or NetBeans for Java. I think editing CSS and JavaScript in
+      NetBeans is nicer than in Vim. Fortunately, Python is easy to work with
+      in a range of editors and IDEs. I still use Vim as my main editor and for
+      editing my TODO file which I keep in outline form (I love the VimOutliner
+      plugin).
+      I’m trying to be less religious about it these days and be more
+      pragmatic. That’s why I like the jVi plugin so much. It was written by a
+      fellow Vim fanatic, so I can use NetBeans without having to learn a new
+      keyset. Although, apparently, it works better for me than for you.
+      Happy Hacking!
+      -jj
+  32. Shannon_-jj_Behrens
+      May_27th,_2009_at_9:07_am
+      I have a few more tips. I like different indentation settings for
+      different languages, so I have the following:
+      augroup vimrc
+      au!
+      autocmd FileType css setlocal sw=4 sts=4 et
+      autocmd FileType eruby setlocal sw=2 sts=2 et
+      autocmd FileType haskell setlocal sw=4 sts=4 et
+      autocmd FileType htmlcheetah setlocal sw=2 sts=2 et
+      autocmd FileType html setlocal sw=2 sts=2 et
+      autocmd FileType javascript setlocal sw=2 sts=2 et
+      autocmd FileType java setlocal sw=4 sts=4 et
+      autocmd FileType mason setlocal sw=2 sts=2 et
+      autocmd FileType ocaml setlocal sw=2 sts=2 et
+      autocmd FileType perl setlocal sw=4 sts=4 et
+      autocmd FileType php setlocal sw=4 sts=4 et
+      autocmd FileType python setlocal sw=4 sts=4 et tw=72
+      autocmd FileType ruby setlocal sw=2 sts=2 et
+      autocmd FileType scheme setlocal sw=2 sts=2 et
+      autocmd FileType sql setlocal et
+      autocmd FileType text setlocal sw=2 sts=2 et tw=79
+      augroup END
+      Note, I set tw=72 for Python because the PEP 8 says that comments should
+      be wrapped at 72 columns.
+      To use tags more completely:
+      Setup:
+      Install exuberant-ctags.
+      :cd project_root
+      :!ctags -R .
+      :set tags=tags
+      Jump to the definition of the symbol under the cursor:
+      ^]
+      Go back to where you were:
+      ^o
+      I still think NetBeans’ autocomplete is better and WingIDE’s is best, but
+      to tell you the truth, one of my favorite things in Vim is ^n which will
+      finish typing whatever word you were currently typing based on other
+      words in the current buffer. ^n works everywhere. It’s super stupid, and
+      super useful.
+  33. Shannon_-jj_Behrens
+      May_27th,_2009_at_9:24_am
+      Hmm, I wanted to try out pyflakes.vim, but it looks like MacVim comes
+      compiled with Python 2.3 so pyflakes.vim crashes horribly. Can anyone
+      else confirm this?
+  34. What_text_editor_is_everyone_using_for_Python_-_Page_4_|_keyongtech
+      May_27th,_2009_at_12:01_pm
+      [...] | > `
+  35. Tor_Norbye
+      May_27th,_2009_at_11:35_pm
+      Don’t get the NetBeans Python “EA” access bits from here:
+      http://www.netbeans.org/features/python/index.html
+      Those bits are really really old (as in 6 months or more). There’s a lot
+      of new functionality, and many fixes, since then. I think the development
+      update centers have up to date bits, if not, you can grab a kit here:
+      http://deadlock.netbeans.org/hudson/job/python/
+      For some of the features added since then, see
+      http://blogs.sun.com/tor/category/NetBeans
+      (scroll past the first entry on JavaScript) — code coverage, test runner,
+      type assertions, etc.
+      – Tor
+  36. Shannon_-jj_Behrens
+      May_28th,_2009_at_12:33_am
+      Hmm, I’m also having a problem with minibufexpl. If I’m editing a Vim
+      outline file, I can’t use ^k to jump to the window with the buffer list.
+      It says something about “no TAGS file”. It works just fine when editing
+      other types of files. Weird. I can’t use ^up either since my Mac switches
+      to a different space (i.e. virtual desktop) when I do that. ^tab works,
+      but that’s painful. Hmm. There’s definitely a benefit to having Vim tabs
+      behave like tabs in Terminal.app and Firefox :-/ I wonder if there’s a
+      Vim setting to enforce the rule of one tab per writable buffer, which I
+      enforce informally.
+  37. VIM_as_Python_IDE_|_Wisdom_and_Wonder
+      May_28th,_2009_at_4:44_am
+      [...] Here is a nice article about using VIM as a Python IDE. [...]
+  38. drozzy
+      May_28th,_2009_at_4:57_pm
+      Why can’t all of this be BUILT-IN into Vim?
+      Really – why must I much arund with all these plugin that don’t work
+      together half of the time… how hard would it be to just integrate it into
+      the vim installer?
+      Or at least make some kind of central repo for an easier way of
+      installing them, something like apt-get:
+      vim install package-name
+  39. Alain_M._Lafon
+      May_28th,_2009_at_9:14_pm
+      Well, that one is easy. VIM already ships with a ton of features built-
+      in, which make it one of the greatest editors around. But on top of that
+      VIM is able to provide a framework for job-related customization. It
+      doesn’t matter if you need to write your next paper in LaTex/Roff, if
+      you’re a sys admin and confronted with logs, if you’re not satisfied with
+      your installed pagers(less/more), if you need to extend your other
+      applications(like mutt), if you’re writing C or in this case Python. It
+      doesn’t enforce a certain feature-set like the big IDEs, it doesn’t wedge
+      you into a macro-world of possibilities, but rather opens up all the
+      opportunities – like every other good UNIX derived tool.
+      Besides.. since you implied you were using Debian; there’s a vim-addon-
+      manager and a script_collection of giving VIM bells and whistles. So,
+      enjoy VIM the Debian way(;
+  40. Alain_M._Lafon
+      May_30th,_2009_at_1:12_pm
+      Thanks Tor,
+      that’s a really nice hint. Last week I got Eric4 to fully work on WinXP
+      thanks to a dear_friend of mine. It really makes a good impression on me.
+      But as of now – I’ll stick to VIM while refactoring (with the Bicycle
+      Repair Man).
+  41. Alain_M._Lafon
+      May_30th,_2009_at_1:14_pm
+      @Shannon
+      I can confirm that PyFlakes doesn’t work on stock MacVIM. That one is
+      compiled with Python 2.3, because it also has to run on legacy OSX
+      systems for some strange reason.. Building your own VIM isn’t too
+      difficult though(stretching my knowledge a little bit here since I
+      haven’t done it on a Mac until now). You could try using PySmell for
+      example.
+  42. Alain_M._Lafon
+      May_30th,_2009_at_1:16_pm
+      @Shannon
+      Thanks for your additional configuration.
+      Thinking of autocomplete; my opinion is that not much beats VIM with the
+      SuperTab plugin, though.
+  43. Alain_M._Lafon
+      May_30th,_2009_at_1:23_pm
+      @Shannon
+      I agree on a lot of your comments – I try not to be religious on most
+      things nowadays, too. Well.. I quit my job at Sun working with cool Sparc
+      machines, Solaris, DTrace to do commercial business software running on
+      XP “servers” – that’s hard to beat, I guess. I also agree that Netbeans
+      is simply the best when it comes to Java, especially since version 6.x; I
+      want to add Ruby on Rails to that list, too.
+      But what I want to add is one of my main reason for using VIM whenever
+      possible – speed. I’m that kind of guy working with 20 windows and as
+      many workspaces at once, I’m opening and closing files all the time. That
+      might sound unprofessional and non-focused, but it works for me nice. I
+      like usability and feel a lot more than a definite better feature set. I
+      won’t argue that there are pros for Emacs and Netbeans, but darn are they
+      slow compared to VIM – that’s a no-go for me in daily work. And then
+      there’s one last thing – size. When I’m not at home or at work, I use a
+      13″ Macbook – using a full blown IDE like Netbeans then leaves me with as
+      much as 8x10cm space for coding.
+  44. Shannon_-jj_Behrens
+      May_30th,_2009_at_10:16_pm
+      I agree with your comments regarding speed and size. I too love to open
+      tons of Vim windows with tons of tabs. I too have a 13″ MacBook, and
+      NetBeans is uncomfortably large for that. I had to reduce the font size a
+      bit to cope. Thanks for all the other tips. I’ve been checking them out
+      as you’ve been providing them.
+  45. Tor_Norbye
+      May_31st,_2009_at_6:00_pm
+      Just a couple of more tips if you try NetBeans in the future, regarding
+      your window screen size Shift-Escape will maximize the editor window (or
+      whatever window has focus) – Shift-Escape again to toggle back. You can
+      also run the IDE in fullscreen mode (no space for window decorations).
+      There’s also some refactoring operations such as find usages and rename,
+      assign expression to var, etc.
+  46. Alain_M._Lafon
+      June_25th,_2009_at_11:15_pm
+      @Tor @Shannon
+      I just tried your latest stable build of NB 6.7
+      I made my standard test: a new project, one variable holding some string
+      content which I want to print. The debugger seemed to work, didn’t crash
+      instantly this time. But when I wanted to change the content of the
+      variable dynamically, Netbeans crashed on me again.
+      But I have to say, I like the new looks – and whenever you add a couple
+      more features other than “rename” to the Refactoring menu, I will
+      certainly try it again.
+      Anyway, as of now – three out of three fails when trying to debug a two
+      line program; can’t use that in production as of now..
+      @Tor Thank you for you shortcuts, I will try them in my current NB stable
+      version for Ror and Java.
+  47. Alain_M._Lafon
+      June_25th,_2009_at_11:16_pm
+      @Shannon
+      I just compiled a custom MacVim to include support for Python 2.5
+      * Clone the MacVim.git repo: git clone git://repo.or.cz/MacVim.git vim7
+      * Configure and build Vim: cd vim7/src; ./configure –enable-gui=macvim
+      –enable-pythoninterp; make
+      * Build MacVim.app: cd MacVim; xcodebuild
+      * Run: open build/Release/MacVim.app
+      Most of this is taken from the MacVim site.
+      PyFlakes will work with it, but not too smooth – I have to keep
+      refreshing PyFlakes myself. It’s a first step, though. Besides having
+      Python 2.5 will probably prove useful in other ways, too.
+  48. KarasAya
+      June_25th,_2009_at_11:18_pm
+      Nice article, especially the introduce of OmniComplete for python and
+      VimPDB!
+      Maybe you can check my project exVim:
+      http://code.google.com/p/exvim/
+      I used to use it to develop python.
+  49. Peter
+      June_25th,_2009_at_11:18_pm
+      A good alternative graphical degubber is winpdb – I also added a little
+      section on embedded debugging a year or two ago using vim scripts as an
+      example. winpdb is so useful if you want to extend vim.
+  50. frt's_status_on_Tuesday,_30-Jun-09_20:07:45_UTC_-_Identi.ca
+      June_30th,_2009_at_9:07_pm
+      [...] #4tw! http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/ [...]
+  51. amandinhakee's_status_on_Tuesday,_30-Jun-09_20:48:02_UTC_-_Identi.ca
+      June_30th,_2009_at_9:48_pm
+      [...] @frt #vim #4tw! http://blog.dispatched.ch/2009/05/24/vim-as-python-
+      ide/ !vim | I <3 vim [...]
+  52. Nilson
+      July_1st,_2009_at_1:06_pm
+      Good job, i really liked it.
+  53. Anderson_Santos
+      August_6th,_2009_at_6:40_pm
+      A colleague mapped the buffer next, buffer previous to work with
+      ctrl+tab, not sure if minbuftab does the same, but I find it very neat
+      and just requires to write on .vimrc file
+      ” Buffer navigation (Ctrl+Tab / Ctrl+Shift+Tab)
+      nnoremap :bnext
+      nnoremap :bprevious
+  54. Anderson_Santos
+      August_6th,_2009_at_6:42_pm
+      ops, it was considered html
+      ” Buffer navigation (Ctrl+Tab / Ctrl+Shift+Tab)
+      nnoremap <C-Tab> :bnext<CR>
+      nnoremap <C-S-Tab> :bprevious<CR>
+  55. Dayo_(jargon)_'s_status_on_Saturday,_07-Nov-09_10:05:40_UTC_-_Identi.ca
+      November_7th,_2009_at_11:05_am
+      [...] http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/ a few
+      seconds ago from web in context [...]
+  56. links_for_2009-06-03_|_blog/shl@INTERDOSE
+      December_22nd,_2009_at_12:58_pm
+      [...] VIM as Python IDE | Alain M. Lafon (tags: vim python) [...]
+  57. Peter
+      January_23rd,_2010_at_6:49_pm
+      I found this tutorial useful and few months ago and came across it again
+      a couple of days ago and it has such useful information on configuring
+      vim/python I wanted to share a little idiom I’ve found useful for years
+      in setting up vim for different jobs.
+      For example, for exiting xml I like to use only 2 spaces for tabs as the
+      nesting for xml tends to be deep. Python on the other hand has a coding
+      standard, so I like to try to stick to to (not positive my config is
+      currently correct in this regards but it’s close).
+      The auto file detection is best left down to vim if you can but in the
+      following I’ll show how I use my own detection if necessary:
+      function! FixMurphy()
+      if g:colors_name == ‘murphy’
+      hi Folded guibg=Black
+      endif
+      endfunction
+      function! SetXMLFile()
+      set tw=100
+      set sw=2
+      set ts=2
+      “set guioptions+=m
+      set foldmethod=marker
+      call FixMurphy()
+      digraphs RE 8477 fc 402 bb 8226
+      ” ℝ – set of real numbers
+      ” ƒ – function
+      endfunction
+      function! SetPythonFile()
+      set omnifunc=pythoncomplete#Complete
+      “tasklist
+      map ttl :TaskList
+      “taglist
+      map ttt :TlistToggle
+      let g:Tlist_GainFocus_On_ToggleOpen = 1
+      let g:Tlist_Auto_Update = 1
+      let g:Tlist_Compact_Format = 1
+      set expandtab
+      set textwidth=72
+      set tabstop=4
+      set softtabstop=4
+      set shiftwidth=4
+      set autoindent
+      endfunction
+      function! SetMakoFile()
+      set tw=100
+      set sw=2
+      set ts=2
+      endfunction
+      autocmd FileType xml,xslt,html,xhtml,xsd call SetXMLFile()
+      autocmd FileType python call SetPythonFile()
+      autocmd FileType mako call SetMakoFile()
+      autocmd FileType java call SetJavaFile()
+      autocmd BufRead,BufNew,BufNewFile *.xsd,*.zcml,*.pt,*.kid set
+      filetype=xml
+      autocmd BufRead,BufNew,BufNewFile *.mak set filetype=mako
+      I’ve seen quite a bit on this subject but this is what I do. Its
+      flexible, uses vim where possible to detect file types and applys
+      configuration changes dependent on what I’m working on.
+  58. Setting_up_VIM_as_a_Python_IDE_&laquo;_KcodeL
+      January_31st,_2010_at_3:43_pm
+      [...] leave a comment &raquo; http://blog.dispatched.ch/2009/05/24/vim-
+      as-python-ide/ [...]
+  59. Anton
+      February_26th,_2010_at_6:21_am
+      Can you make, PACK with your VIM or show you vimrc
+      PLEASE
+  60. rxwen
+      June_3rd,_2010_at_3:47_pm
+      Great stuff. thanks
+  61. anarch's_me2DAY
+      July_8th,_2010_at_12:41_pm
+      맹수의 느낌…
+      VIM as Python IDE | Alain M. Lafon…
+  62. thrope
+      August_13th,_2010_at_11:47_am
+      This script makes a nice addition:
+      http://www.vim.org/scripts/script.php?script_id=891
+      Checks with pylint on every buffer write (optional) and displays errors
+      in vim quickfix.
+      ..
+  63. VIM_as_Python_IDE_|_Alain_M._Lafon_&laquo;_BenGeek_blog
+      August_13th,_2010_at_12:17_pm
+      [...] as Python IDE | Alain M. Lafon Filed under: Uncategorized — djpool
+      @ 11:17 VIM as Python IDE | Alain M. Lafon. Laisser un [...]
+  64. le
+      August_31st,_2010_at_7:11_pm
+      can you publish your .vimrc and vimfiles,but I can’t as you like and I
+      like it.
+      please send to me ,thanks !
+  65. Sinkro.net_·_links_for_2010-09-24
+      September_24th,_2010_at_8:03_pm
+      [...] VIM as Python IDE | Alain M. Lafon (tags: python vim vi editor
+      configuration) [...]
+  66. Twitted_by_jvalleroy
+      October_6th,_2010_at_12:51_am
+      [...] This post was Twitted by jvalleroy [...]
+  67. python_problem
+      October_19th,_2010_at_5:05_pm
+      [...] out how I can use vim as python editor. I installed gvim and did
+      all the steps from this page : VIM as Python IDE | Alain M. Lafon But
+      still no luck. Roelof Reply With Quote + Reply to [...]
+  68. python_-_vim_problem
+      October_19th,_2010_at_7:41_pm
+      [...] – vim problem Hello, I installed vim and the plugins according to
+      this page : VIM as Python IDE | Alain M. Lafon But nothing has changed.
+      What went wrong ? Roelof Reply With Quote + [...]
+  69. Sandys_Pizza_Menu
+      October_21st,_2010_at_6:01_pm
+      Very informative. Are you going to post more on this?
+  70. IDE_for_python_&laquo;_Yet_Another_Developers'_Blog
+      October_27th,_2010_at_4:36_am
+      [...] vim [...]
+  71. [Fwd:]Vim_as_Python_IDE_on_windows_|_活着&quot;只&quot;为改变世界
+      November_30th,_2010_at_5:22_pm
+      [...] VIM as Python IDE [...]
+  72. Weldon_Groch
+      December_19th,_2010_at_7:53_pm
+      Julianne Hough, known as much for her Dancing With the Stars gig as for
+      her country music, is achieving new popularity by combining both
+  73. luo
+      December_23rd,_2010_at_9:04_am
+      hi Alain. I got a problem with taglist. The official document of taglist
+      says: press on file name tags to display the full path to the file. It
+      works for me sometimes, sometimes it does not work or it works in one
+      directory but does not work in another.It just show the file name not the
+      full path.
+  74. yaami
+      January_9th,_2011_at_8:21_am
+      Hi Alan, Great article. I’ve been looking for python autocomplete
+      feature. Found here. Thanks.
+      BTW what is the color scheme you are using looks good.
+  75. Alain_M._Lafon
+      January_9th,_2011_at_11:21_am
+      Hi yaami,
+      great to hear that my blog was of value to you. The colorscheme used is
+      “wombat”. You might also want to check out “zenburn”.
+      Best,
+      Alain
+  76. Online_Auctions_Not_Ebay
+      January_10th,_2011_at_4:35_am
+      I am going to strart an on line vendue website like ebay. Does anyone
+      know where I can ascertain good auction software package. Most of the
+      damages I have found out for software package has been $1000.00 and up. I
+      would like to find a less expensive software system if possible.
+  77. Valter_Foresto
+      February_17th,_2011_at_5:46_pm
+      GREAT INFOS FOR PYTHONISTS, THANKS A LOT !
+  78. Meu_ambiente_de_trabalho_em_7_itens_|_rochacbruno
+      February_21st,_2011_at_6:19_pm
+      [...] 4. VI/VIM [...]
+  79. [Fwd:]Vim_as_Python_IDE_on_windows_–_All_is_well.
+      March_1st,_2011_at_8:54_am
+      [...] VIM as Python IDE [...]
+  80. IDE_for_Python_with_VIM_&laquo;_KAIGARA_Online
+      March_25th,_2011_at_1:40_pm
+      [...] http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/ [...]
+  81. Phil
+      April_18th,_2011_at_11:20_pm
+      Hi! Thanks for the nice article!
+      I am new to Python and I’m trying to figure out which editor/IDE to use.
+      I tried WingIDE, and find it very nice (but still runs in XQuartz/X11 on
+      Mac OSX). I have been checking out quite a few others too.
+      TextMate seems nice, as it has command completion, but it does not have
+      Call Type hints. It does however help to type a lot. Like if I type class
+      and press tab, it fills out lots of stuff …
+      But vi(m) is a nice friend, and quick, so I decided to give your setup a
+      try. I got it installed and working (I think), haven’t seen error
+      messages upon startup. Now I am trying to figure out what MacVim with
+      this setup does.
+      Vim’s Omni Completion seems to have call type (lookup of functions, C-
+      x C-o), but I don’t seem to get completion of commands, like print(), str
+      (), list() and so on. Is that correct? Or am I missing something vital?
+      VimPdb seems to work nice, and I can step through the program(s), but
+      (and this might be a n00b question) how do I just run the entire program
+      in a separate buffer/window/tab?
+      If one wanted automated stuff like TextMate offer, text macros could
+      help, but still there’s no way to make them as interactive as in TM?
+      (Adding new defs as you add to the class and so on.)
+      –
+      Phil 8)
+  82. Alain_M._Lafon
+      May_7th,_2011_at_4:23_pm
+      Hi there,
+      if you want to save more typing with automated macros like in TM, you
+      could take a look at the ﻿SnipMate plugin.
+      Best,
+      Alain
+  83. Kasha_Peffly
+      May_9th,_2011_at_5:10_pm
+      This is very attention-grabbing, You’re an overly professional blogger. I
+      have joined your feed and sit up for in the hunt for extra of your
+      excellent post. Additionally, I’ve shared your web site in my social
+      networks!
+  84. Links_for_2011-05-29_at_The_Standard_Output
+      May_30th,_2011_at_4:54_am
+      [...] Pycon! How this site was created Brushing up on Computer Science
+      Part 1, Big O » Victus Spiritus VIM as Python IDE | Alain M. Lafon Python
+      and vim: Make your own IDE | tail -f [...]
+  85. Aniket Deshpande
+      August_27th,_2011_at_10:46_pm
+      I have recently started using vim, and programming in python. I like vim.
+      I have a Macbook with OS X 10.6.8. I ran through your instructions till i
+      hit a dead-end at ‘installing ctags’. At ‘./configure &amp;&amp; sudo
+      make install’ CONFIGURE is not part of the package I downloaded: the
+      ctags58.zip from sourceforge.
+      As you might have guessed by my question, Im totally lost and dont know
+      how to approach, or where to look for the solution to this problem. I do
+      not know the directory structures of this particular mutant of UNIX, or
+      which files do what, and do not know much of C except very very little
+      and have no experience with tools like make.
+      Help me out. A mail, if possible, with detailed instructions would be
+      something that… I will not find words to thank you with.
+      utmost regards
+  86. Alain_M._Lafon
+      August_28th,_2011_at_8:12_pm
+      Hi Aniket,
+      thank you for your interest in the article. I can help you out.
+      What is missing is a build system for C programs on your machine.
+      The easiest way to get that in Mac OSX is to install XCode[1]
+      from Apple.
+      Best to you and have fun using VIM,
+      Alain
+      1. http://developer.apple.com/technologies/tools/
+  87. Programando_em_Python_no_Vim_|_Pythonize
+      September_8th,_2011_at_3:45_pm
+      [...] interessantes que podem ser adicionadas ao Vim para codificação
+      Python podem ser vistas em: VIM as Python IDE. [...]
+  88. Hell-G
+      September_9th,_2011_at_3:44_pm
+      Hi Alain
+      Thank you very much for this article! It helped me alot.
+      I have one question, you mention “even the whole Pydoc gets to be
+      displayed in a split window”. How did you manage to get this to work with
+      omni completion? I can use omni completion alone fine and I get the Pydoc
+      for the word under the cursor by hitting “K”, but how did you combine
+      them?
+      Thanks for your help!
+      Regards,
+      Hell-G
+  89. Which_is_the_better_Python_IDE,_Komodo_IDE,_PyCharm,_WingIDE_or_something
+      else_and_why?_-_Quora
+      September_10th,_2011_at_5:41_am
+      [...] to customize for python dev.Here are a few link which may help you:
+      http://wiki.python.org/moin/Vimhttp://blog.dispatched.ch/2009/0…In my
+      case, it took quite some time to put my .vimrc in shape for proper
+      development.You should also [...]
+  90. Sean E
+      September_14th,_2011_at_7:29_pm
+      I had to add the following lines to my .vimrc for omnicompletion to work:
+      filetype plugin on
+      set ofu=sytaxcomplete#Complete
+  91. Jose
+      September_20th,_2011_at_7:00_pm
+      Well done, man. Very useful tips and plugins and quite clear explained.
+      Thank you!
+  92. klen
+      October_11th,_2011_at_6:56_pm
+      Hello!
+      See my plugin for vim: https://github.com/klen/python-mode
+      Screencast here: http://t.co/3b0bzeXA
+  93. VIM_as_a_Python_IDE._&laquo;_Talueee's_Blog
+      November_29th,_2011_at_1:53_am
+      [...] Link Like this:LikeBe the first to like this post. [...]
+  94. ToughGuy
+      December_2nd,_2011_at_4:40_pm
+      nice post. that’s all i wanna say.
+      非常好的帖子~谢谢了。
+      Thank You!
+  95. Omni_completion_&laquo;_Åke_i_exil
+      December_6th,_2011_at_9:46_pm
+      [...] att ha läst ett intressant bloginlägg om att använda vim som
+      Python-IDE har även jag konfigurerat upp vim att åtminstone låta mig
+      [...]
+  96. uggs
+      December_10th,_2011_at_1:10_am
+      Fantastic web site. A lot of useful info here. I’m sending it to some
+      pals ans also sharing in delicious. And certainly, thank you for your
+      sweat!
+  97. nullled_script
+      January_5th,_2012_at_11:59_am
+      Simply want to say your article is as astounding. The clarity in your
+      post is simply spectacular and i could suppose you’re a professional in
+      this subject. Well together with your permission allow me to take hold of
+      your RSS feed to stay updated with forthcoming post. Thanks one million
+      and please carry on the enjoyable work.
+  98. Customising_OSX_&laquo;_Life_is_a_State_of_Mind
+      January_15th,_2012_at_1:46_pm
+      [...] with python support. Any thoughts as to how I can do this? I have
+      followed advice so far from these really good sources for this [...]
+  99. tshirtman
+      February_6th,_2012_at_12:59_am
+      I want to point out, because i looked for this for a very long time, but
+      i finally found a decent python completion/refactoring plugin for vim,
+      none of the ones i tried before worked except for very simple cases, but
+      this one seems to work way more reliably:
+      https://github.com/klen/python-mode
+      installed with pathogen, work like a charm… at least…
+ 100. Tom
+      February_29th,_2012_at_5:21_pm
+      Hey there,
+      great work with the tutorial.
+      I got everything working, even autocompletion works (better with the
+      following: http://vim.wikia.com/wiki/VimTip1386 )
+      BUT:
+      I just cannot run the script. By pressing F5 it gets me into the
+      strangest Python files. For example it opens __init__.py utf_8.py and
+      codecs.py.
+      By executing it with IDLE it works just fine…
+      (I am running Windows and gVim7.3 and Python 2.7)
+      @tshirtman
+      I tried the python-mode as well, but in which folder is it to put?
+      just vim/bundle/python-mode
+      and then it is already loaded with the default _vimrc settings?
+ 101. aprendendo_VIM_@_Linux_2_Start
+      March_15th,_2012_at_8:01_pm
+      [...] Porque é divertido aprender! Veja por exemplo : VIM as Python IDE.
+      [...]
+ 102. Made_the_switch_to_Vim_–_at_last!_|_vimalkumar.in
+      March_30th,_2012_at_7:38_am
+      [...] vimrc Turning Vim into a modern Python IDE VIM as Python IDE Vim
+      made easy: how to get your favorite IDE features in Vim Right margin in
+      Vim Solarized color [...]
+ 103. Vim:_tips_and_tricks_&raquo;_cloud101
+      April_1st,_2012_at_1:24_pm
+      [...] VIM as Python IDE  Tagged with: linux, tips, tricks, vim, vimrc
+      [...]
+ 104. sponsor_child
+      May_22nd,_2012_at_9:33_am
+      Hello there, simply changed into alert to your blog thru Google, and
+      located that it is truly informative. I am going to be careful for
+      brussels. I will be grateful if you happen to proceed this in future.
+      Many folks might be benefited out of your writing. Cheers!
+ 105. Corey Richardson
+      June_3rd,_2012_at_10:08_pm
+      For those looking to manage ‘packages’ in Vim: Vundle! (https://
+      github.com/gmarik/vundle)
+
+**** Leave a Reply ****
+Name (required)[author                ]
+Email (required) (will not be published)[email                 ]
+Website[url                   ]
+[Say it!]
+                                          
+© 2012 Alain M. Lafon
+

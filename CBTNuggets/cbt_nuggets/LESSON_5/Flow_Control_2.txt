@@ -1,0 +1,261 @@
+Flow Control 2/2
+================
+
+* Counting with for loops
+* Evaluating with while loops
+
+The FOR loop
+------------
+
+for variable in iterable:
+    # loop body using variable (i,j,k)
+else:
+    # invoked if no 'break'
+
+* iterable: string, list, tuple, dictionary
+* counting
+* can be nested, for/if
+* excellent for scanning files
+* range() function -> step range(0,5) or range(5) {0,1,2,3,4}
+
+Examples:
+
+## iterable is a string
+
+>>> for letter in 'Python':
+	print('Current letter is: ', letter)
+
+	
+Current letter is:  P
+Current letter is:  y
+Current letter is:  t
+Current letter is:  h
+Current letter is:  o
+Current letter is:  n
+
+## iterable is a list
+
+>>> for veg in ['celery', 'mushroom', 'okra']:
+	print('Current vegetable is: ', veg)
+
+	
+Current vegetable is:  celery
+Current vegetable is:  mushroom
+Current vegetable is:  okra
+
+## using ranges
+
+>>> for i in range(1,5):
+	print(i)
+
+	
+1
+2
+3
+4
+
+
+>>> for i in range(5):
+	print(i)
+
+	
+0
+1
+2
+3
+4
+
+## using tuples as an iterable
+
+>>> tuplist = [(1, 2), (3, 4), (5, 6)]
+>>> for (a, b) in tuplist:
+	print(a, b)
+
+	
+1 2
+3 4
+5 6
+
+## Using the import os module to query environment variables
+
+>>> import os
+>>> for k, v in os.environ.items():
+	print('%s = %s' % (k, v))
+
+	
+USERNAME = nicksouthorn
+LANG = en_GB
+GNOME_KEYRING_SOCKET = /tmp/keyring-3rqJjg/socket
+SHELL = /bin/bash
+GDM_XSERVER_LOCATION = local
+XDG_SESSION_COOKIE = f9884dc54322a7ab02a38705496cb689-1340275009.474381-1950736079
+XDG_DATA_DIRS = /usr/local/share/:/usr/share/:/usr/share/gdm/
+SSH_AUTH_SOCK = /tmp/keyring-3rqJjg/ssh
+DESKTOP_SESSION = default
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-xQTNt7B7Nm,guid=7f51ea9bb6b3b6946ad851354fe2f941
+GDM_LANG = en_GB
+GDMSESSION = default
+PWD = /home/nicksouthorn
+WINDOWPATH = 7:7
+LOGNAME = nicksouthorn
+USER = nicksouthorn
+GNOME_KEYRING_PID = 5394
+HOME = /home/nicksouthorn
+PATH = /home/nicksouthorn/.bin:/home/nicksouthorn/bin:/usr/bin/crunchbang:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+DISPLAY = :0
+XAUTHORITY = /home/nicksouthorn/.Xauthority 
+
+
+## Reading lines from a file
+
+>>> f = open('/home/nicksouthorn/documents/Python_learning/LESSON_5/spam.txt')
+>>> for line in f:
+	print(line)
+
+	
+This is the first line.
+
+This is the second line.
+
+This is the third line.
+
+## Reading keys and values from a dictionary
+
+>>> nm = {'key 1':'value 1', 'key 2':'value 2', 'key 3':'value 3'}
+>>> for k, v in nm.items():
+	print(k, v)
+
+	
+key 1 value 1
+key 2 value 2
+key 3 value 3
+
+## Embedded statements within a for loop
+
+>>> i = ["abc", 123, (5, 6), 4.20]
+>>> type(i)
+<class 'list'>
+>>> query = [(5, 6), 3.14]
+		
+>>> for key in query:
+	if key in i:
+		print(key, "was found")
+	else:
+		print(key, "not found!")
+
+		
+(5, 6) was found
+3.14 not found!
+
+## Create a multiplication table using for loops and ranges with a bit of simple math
+
+for multiplier in range(4,7): # runs 3 iterations, 4, 5 and 6
+    for i in range(1,11): # going to print a single multiplication table
+        print(i, "x", multiplier, "=", i * multiplier)
+    print()
+
+1 x 4 = 4
+2 x 4 = 8
+3 x 4 = 12
+4 x 4 = 16
+5 x 4 = 20
+6 x 4 = 24
+7 x 4 = 28
+8 x 4 = 32
+9 x 4 = 36
+10 x 4 = 40
+
+1 x 5 = 5
+2 x 5 = 10
+3 x 5 = 15
+4 x 5 = 20
+5 x 5 = 25
+6 x 5 = 30
+7 x 5 = 35
+8 x 5 = 40
+9 x 5 = 45
+10 x 5 = 50
+
+1 x 6 = 6
+2 x 6 = 12
+3 x 6 = 18
+4 x 6 = 24
+5 x 6 = 30
+6 x 6 = 36
+7 x 6 = 42
+8 x 6 = 48
+9 x 6 = 54
+10 x 6 = 60
+
+
+The While Loop
+--------------
+
+while <test>: # must evaluate to TRUE to continue
+    <statement block>
+else: # optional
+    <statement block> # run in absense of 'break'
+
+* Repeatably loop until test == false
+* While TRUE -> Infinite Loop
+
+
+While True:
+	print('20 GOTO 10')
+
+	
+20 GOTO 10
+20 GOTO 10
+20 GOTO 10
+20 GOTO 10	
+etc
+
+Examples:
+
+
+## Iterate until x is FALSE, i.e. when x is not less than y 
+
+>>> x = 0
+>>> y = 13
+>>> while x < y:
+	print(x)
+	x += 1 # x = x + 1
+
+	
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+
+## Using continue and break statements to control the flow conditions
+
+>> a = 0
+>>> while a < 13:
+	a +=1
+	if a ==5:
+		continue
+	if a ==10:
+		break
+	print(a)
+
+	
+1
+2
+3
+4
+6
+7
+8
+9 
+
+
+

@@ -1,0 +1,192 @@
+Accessing the LAN and The Internet
+==================================
+* LAN Resources
+* Web sites
+* FTP Sites
+
+Standard Library Modules
+------------------------
+OS
+socket 	   - where networking starts, the TCPIP socket
+email      - SMTP, POP, IMAP
+ftplib     - client library
+urllib(2)  - higher level of abstraction
+httplib    - deals closer with the protocol than urllib(2)
+smtplib
+
+Technologies
+------------
+IronPython - integration with .net environment
+Jython     - integration with java vm environment
+pywin32    - integration with legacy com engine
+
+Sites
+-----
+PyPi
+StackOverflow
+ActiveState Code
+
+Good example on pseudocode:
+http://www.codinghorror.com/blog/2009/05/pseudocode-or-code.html
+
+Examples only given on Windows 
+------------------------------
+IDLE 2.6.4 (v2 used as it has better networking support)
+
+# Create list remote files and create a new one.
+
+>>> import os
+>>> dir = os.listdir('\\\\192.168.1.106\\share')
+>>> type(dir)
+<type 'list'>
+>>> dir
+['serverfile.txt']
+>>> file = open('\\\\192.168.1.106\\share\\testdoc.txt', 'w')
+>>> file.write('Hello there from across the network')
+>>> file.close()
+
+# Remote batch copy
+
+import os
+import shutil
+path = os.path.join("C:/", "files")
+destination = os.path.join("\\\\192.168.1.106", "share")
+for r,d,f in os.walk(path):
+    for files in f:
+        if files.endswith(".txt");
+            try:
+	        shutil.copy(os.path.join(r, files), destination)
+            except IOError,e:
+	        print e
+                
+
+Accessing web pages in Python
+-----------------------------
+* urllib.urlopen()     -> RO access
+* httplib              -> client interface (POST)
+* Twisted              -> event-driven networking framework - twistedmatrix.com/track
+
+Examples:
+
+## Read raw html contents of a webpage
+
+>>> import os
+>>> import urllib
+>>> import sys
+>>> wpage = urllib.urlopen('http://cbtnuggets.com')
+>>> for line in wpage:
+	sys.stdout.write(line)
+
+<!DOCTYPE html>
+
+<html xmlns:og="http://opengraphprotocol.org/schema/" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+	<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta id="ctl00_fbdesc" property="og:description" content="IT video training for IT professionals at all levels. Whether you are looking for Cisco, Microsof..." /><meta id="ctl00_fbtitle" property="og:title" content="CBT Nuggets - The Best Way to 
+
+etc
+
+
+## Get information about a webpage
+
+>>> print wpage.info()
+Cache-Control: private
+Content-Type: text/html; charset=utf-8
+Date: Wed, 27 Jun 2012 10:56:30 GMT
+P3P: policyref="/w3c/p3p.xml", CP="CAO CURa ADMa DEVa TAIa CONa OUR DELa BUS IND PHY ONL UNI PUR COM NAV INT DEM STA"
+Server: Microsoft-IIS/7.5
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Content-Length: 39972
+Connection: Close
+
+
+## Getting information about redirected URLs
+
+>>> redirect = urllib.urlopen('http://microsoft.org')
+>>> redirect.geturl()
+'http://www.microsoft.com/en-us/default.aspx'
+
+
+## Simple script to get the root index.html and doc/index.html pages from a website
+
+import httplib
+' create a comma seperate list of files to retrieve
+files = ['/index.html', '/doc/index.html']
+' create the url handler h for a connection to python.org
+h = httplib.HTTPConnection('www.python.org', 80)
+' connect to the web page
+h.connect()
+
+for f in files:
+    h.request('GET',f)
+    ' bit of error handling to only print if the web page is found
+    r = h.getresponse()
+    if r.status == httplib.OK:
+        data=r.read()
+	' using mapping to print the file name (f) before showing its contents
+        print ':::: %s ::::' % f
+	
+        print data
+h.close()
+
+
+:::: /index.html ::::
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+etc
+
+:::: /doc/index.html ::::
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+etc
+
+
+## Mapping a network drive (Windows)
+# adapted from ozoneasylum.com
+# maps a network drive in Windows
+
+import win32wnet
+from win32netcon import RESOURCETYPE_DISK as DISK
+
+drive_letter = "R:"
+path = "\\\\192.168.1.106\\share"
+win32net.WNetAddConnection2(DISK, drive_letter, path)
+
+
+
+FTP Accessing
+-------------
+* FTP/TFTP
+* Chilkat module for Python(2)
+	FTPS
+	COMP
+* urllib provides a higher-level interface
+
+## NOTE - you can cut down on RAM use by importing only the part of library needed.
+## from ftplib import FTP
+
+## Connect to anonymous FTP site, navigate to a directory and list the contents
+
+>>> from ftplib import FTP
+>>> ftp = FTP('ftp.redhat.com')
+>>> type(ftp)
+<type 'instance'>
+>>> ftp.login()
+'230 Login successful.'
+>>> d = 'redhat/linux'
+>>> ftp.cwd(d)
+'250 Directory successfully changed.'
+>>> print ftp.dir()
+-rw-r--r--    1 ftp      ftp           131 Dec 20  2005 README
+drwxr-xr-x    3 ftp      ftp          4096 Feb 21 05:44 beta
+drwxr-xr-x    6 ftp      ftp          4096 Jun 14  2007 eal
+drwxrwsr-x   14 ftp      ftp          4096 Jul 25  2011 enterprise
+drwxr-xr-x    2 ftp      ftp          4096 Feb 12  2006 preview
+drwxr-xr-x    2 ftp      ftp          4096 Dec 03  2008 rawhide
+drwxrwsr-x    4 ftp      ftp          4096 Sep 26  2008 updates
+None
+
+
+##
+
+

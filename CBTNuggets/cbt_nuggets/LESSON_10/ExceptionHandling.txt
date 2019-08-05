@@ -1,0 +1,277 @@
+Exception Handling
+==================
+* Understanding exceptions
+* Raising and catching exceptions
+
+What are exceptions?
+--------------------
+* Exceptional events:
+	IO
+	Syntax
+	Data types
+
+Unit testing should be looking for edge cases (the user response you don't expect them to do!)
+
+example:
+
+>>> 10/0
+Traceback (most recent call last):           
+  File "<pyshell#47>", line 1, in <module>
+    10/0
+ZeroDivisionError: integer division or modulo by zero
+>>>
+
+* Raise or throw exception
+* Handle or catch exception (trap)
+* Call stack, "bubbling up"
+* Built in exceptions
+
+Have a look at docs.python.org for "Built in exceptions"
+
+Exceptions should be class objects. The exceptions are defined in the module 'exceptions'.
+This module never needs to be imported explicitly; the exceptions are provided in the
+built-in namespace as well as the 'exceptions' module.
+
+Raising and Trapping Exceptions
+-------------------------------
+* Raise statement
+
+* Try-except blocks
+	try:
+	    <code>
+	except _ :
+	    <handler code>
+	finally:
+	    <cleanup>
+
+If the code in the try-except block completes without exception then it escapes the block
+and continues to process.
+
+Finally is run wether or not the try block completes succesfully or not.
+
+Programming idioms....
+"Look before you leap...."
+	-> Lots of if, then , else blocks. Very conservative programming.
+	-> Can look cluttered and unreadable
+
+"It's easier to ask for forgiveness than permission"
+	-> Instead of being ultra careful like above, just program and take care of any issues
+	   with the exception handling.
+
+
+Note: Built in exceptions are all CAPITALISED
+
+Examples:
+
+## Basic raise exception
+
+# Returns a blank exception
+>>> raise Exception
+Traceback (most recent call last):
+  File "<pyshell#4>", line 1, in <module>
+    raise Exception
+Exception
+
+# Include some meaningful text with the exception
+>>> raise Exception('The flux capacitor is broken')
+Traceback (most recent call last):
+  File "<pyshell#5>", line 1, in <module>
+    raise Exception('The flux capacitor is broken')
+Exception: The flux capacitor is broken
+
+
+
+## Simple script to divide one number by another
+
+a = int(input('First number, please: '))
+b = int(input('Second number: '))
+print('Your result is ', a/b)
+
+# Any input other than a non-zero integer will result in an error!
+
+# ZeroDivisionError
+Traceback (most recent call last):
+  File "/home/nicksouthorn/documents/Python_learning/LESSON_10/exception.py", line 4, in <module>
+    print('Your result is ', a/b)
+ZeroDivisionError: int division or modulo by zero
+
+# ValueError
+Traceback (most recent call last):
+  File "/home/nicksouthorn/documents/Python_learning/LESSON_10/exception.py", line 3, in <module>
+    b = int(input('Second number: '))
+ValueError: invalid literal for int() with base 10: '4.1'
+
+# A try-except block can be added to catch if a '0' value is entered
+
+try:
+    a = int(input('First number, please: '))
+    b = int(input('Second number: '))
+    print('Your result is ', a/b)
+except ZeroDivisionError:
+    print('Error: Division by zero will not work.')
+
+# Now if a '0' value is entered, the following message is returned. 
+
+First number, please: 34
+Second number: 0
+Error: Division by zero will not work.
+>>> # note that the program terminates!
+
+## Catching multiple exceptions 
+
+try:
+    a = float(input('First number, please: '))
+    b = float(input('Second number: '))
+    print('Your result is ', a/b)
+except ZeroDivisionError:
+    print('Error: Division by zero will not work.')
+except ValueError, IOError:     
+    print('Error: You used an incorrect data type.')
+
+
+# results
+
+# note that floating point values are now accepted as inputs
+First number, please: 56
+Second number: 2.34
+Your result is  23.9316239316
+>>> ================================ RESTART ================================
+>>> 
+First number, please: 44
+Second number: 0
+Error: Division by zero will not work.
+>>> ================================ RESTART ================================
+>>> 
+First number, please: 345
+Second number: c
+Error: You used an incorrect data type.
+
+
+## Catching multiple exceptions in one hit
+
+
+try:
+    a = float(input('First number, please: '))
+    b = float(input('Second number: '))
+    print('Your result is ', a/b)
+except (ZeroDivisionError, ValueError, TypeError): #tuple
+    print('Error: Invalid input provided.')
+
+
+# results, note the static error message output buy the print statement
+
+First number, please: 65
+Second number: 3
+Your result is  21.6666666667
+>>> ================================ RESTART ================================
+>>> 
+First number, please: 45
+Second number: 0
+Error: Invalid input provided.
+>>> ================================ RESTART ================================
+>>> 
+First number, please: 345
+Second number: v
+Error: Invalid input provided.
+>>> 
+
+
+# exceptions with more dynamic exception message text
+
+try:
+    a = float(input('First number, please: '))
+    b = float(input('Second number: '))
+    print('Your result is ', a/b)
+except (ZeroDivisionError, ValueError, TypeError) as e:
+    print('Error: ', e)
+
+
+# results, error message is now determined by the exception handler
+
+>>> 
+First number, please: 657
+Second number: c
+Error:  could not convert string to float: c
+>>> ================================ RESTART ================================
+>>> 
+First number, please: 222
+Second number: 0
+Error:  float division
+>>> 
+
+## Keep the program running after catching an exception
+
+while True: #remember that break/continue req. a loop
+    try:
+        a = float(input('First number, please: '))
+        b = float(input('Second number: '))
+        print('Your result is ', a/b)
+    except:
+        print('Invalid input. Please retry.')
+    else:
+        break
+
+
+## Using finally to clean up after an exception
+
+def divlog(x, y):
+    try:
+        f = open('C:/files/divlog.txt', 'a')
+        f.write('{0:g} / {1:g} = {2:g}\n'.format(x, y, (x/y)))
+    except ZeroDivisionError:
+        f.write('Error: Zero division not allowed\n')
+        raise
+    finally:
+        f.close() # to ensure that divlog.txt has been closed
+
+
+
+Creating custom exceptions
+--------------------------
+* Subclass any of the standard exception classes
+
+class CustomError(Exception):
+    pass
+
+>>> raise CustomError('Something went balls up!')
+
+Classes
+-------
+A class is like a blueprint. Bit like the templates that come with MS Word.
+They include their own properties that define characteristics of that class and their own methods.
+When you open a file from template in MS Word you open an instance of that template, not the original template.
+This is how classes work. An instance of a class is opened. 
+A custom class can inherit the methods and properties of the parent class. Encapsulation describes the
+behaviour of having its own methods and properties.
+Modifying the parent class, modifies all the classes inheriting from it.
+
+Classes are written in "CamelCase" notation.
+
+The string in the brackets is the parent class from which the CustomClass is inheriting. 
+
+class CustomError(Exception):    # inherit from the parent Exception class
+    pass                         # inherit the "pass" statement from "Exception"
+
+>>> raise CustomError('Something went balls up!')    # manually raise the class
+
+
+
+
+* pass: null, placeholder statement
+* base Exception -> Exception
+* invoke CustomClass with raise, check for CustomClass exception
+ 
+
+>>> raise CustomError('Something went balls up.')
+
+Traceback (most recent call last):
+  File "<pyshell#19>", line 1, in <module>
+    raise CustomError('Something went balls up.')
+CustomError: Something went balls up.
+
+
+
+
+
+
+

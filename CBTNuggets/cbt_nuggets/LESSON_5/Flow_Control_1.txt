@@ -1,0 +1,156 @@
+Flow Control 1/2
+================
+* The if statement
+* Boolean Logic (conditional logic)
+* Break and continue
+
+The if statement
+----------------
+* Decision making, branching, conditional logic
+
+if <test01>:
+	<statement block>
+elif <test02>:
+	<statement block>
+else: #optional
+	<statement block>
+
+Semantics: Foundation of the language, how we apply the grammar of a programming language and 
+what the syntax of that grammar means. 
+
+Similar to the switch statement in C
+
+* Operators:
+==	equal to
+!=	not equal to
+<	less than
+>	greater than
+<=	less than or equal to
+=>      greater than or equal to
+and     both conditions are true
+or      either condition is true
+not	condition is not true
+
+Note; no whitespace in the => <= statements
+
+Example:
+
+#!/usr/bin/python
+
+num = input("Enter an integer: ")
+num = int(num)
+
+if num < 0:
+    print("The absolute value of", num, "is", -num)
+else:
+    print("The absolute value of", num, "is", num)
+
+
+The code above takes an integer as the stdin and returns its absolute value.
+
+Enter an integer: 4
+('The absolute value of', 4, 'is', 4)
+
+Enter an integer: -3
+('The absolute value of', -3, 'is', 3)
+
+
+However there is no exception handling or input sanitisation to cover non integer inputs. 
+
+Enter an integer: b
+Traceback (most recent call last):
+  File "./if1.py", line 11, in <module>
+    num = input("Enter an integer: ")
+  File "<string>", line 1, in <module>
+NameError: name 'b' is not defined
+
+
+Cases
+-----
+Cases can be used to check input options.
+Options can be held in a form and indexed by the if statement. 
+Input that is not exactly the same as an entry in the form will be picked up the else
+statement and a warning message will be displayed.
+
+#!/usr/bin/python3.1
+forms=['animal', 'mineral', 'vegetable']
+answer=input("Are you animal, mineral or vegetable? ")
+
+if answer == forms[0]:
+    print("You are an animal, GRR!")
+elif answer == forms[1]:
+    print("You are a mineral, you must be healthy.")
+elif answer == forms[2]:
+    print("You are a vegetable, wibble")
+else:
+    print("You did not give a valid response!")
+
+
+
+Boolean Logic
+-------------
+
+x or y: if x is TRUE, return y, otherwise return x
+
+x and y: if x is FALSE, return x, otherwise return y
+
+not x: if x is FALSE, return 1, else return 0
+
+x is in y - TRUE
+x is not in y - FALSE
+
+Examples:
+>>> a=50
+>>> b=25
+>>> c='spam'
+>>> a==b
+False
+>>> a>b
+True
+>>> b<=a
+True
+>>> a!=b
+True
+>>> d=50
+>>> a is d
+True
+>>> e='eggs'
+>>> c is not e
+True
+>>> 
+
+
+Break and Continue
+------------------
+
+break: jumps out of closest loop (not if loops, only for/while loops)
+
+continue: jumps to the header of the closest enclosing loop
+
+while <test1>:
+    <statements>
+    if <test2>:
+        break # exit loop, skip else
+    if <test3>:
+        continue ~ go back to test1
+else:
+    <statements2> # processed if no 'break'
+
+Example:
+
+#!/usr/bin/python3.1
+while True:
+    s = input('Enter a string of at least 4 characters, or q to quit: ')
+    if s == 'q':
+              break
+    if len(s) < 4:
+              print("Value is too small.")
+              continue
+    print("The string was of sufficient length")
+    raise SystemExit
+
+
+
+
+
+

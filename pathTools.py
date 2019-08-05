@@ -7,13 +7,13 @@ Created on Tue Nov  3 15:50:16 2015
 
 import os
 
-print("Path at terminal when executing this file")
+print("Current working directory")
 print(os.getcwd() + "\n")
 
-print("This file path, relative to os.getcwd()")
+print("Absolute path")
 print(__file__ + "\n")
 
-print("This file full path (following symlinks)")
+print("Absolute path (following symlinks)")
 full_path = os.path.realpath(__file__)
 print(full_path + "\n")
 

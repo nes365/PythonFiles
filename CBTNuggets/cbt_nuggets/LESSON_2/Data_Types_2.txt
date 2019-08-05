@@ -1,0 +1,259 @@
+Data Types - 2
+==============
+* tuples
+* lists
+* dictionaries
+
+Tuples
+------
+* A sequence (like strings + lists)
+* An immutable (r/o) list
+	- static program data
+* Definition:
+	- an ordered set of data
+	- a single row in a DB table
+
+atuple = ('perl', 'ruby', 'python', 3.14, 4000)
+
+More than one data type can be contained within a tuple.
+
+* You cannot modify elements within a tuple once defined: 
+	append() 
+	extend()
+	insert()
+	remove()
+	pop()
+
+* len() can be used to count the number of elements
+* type conversion can be used:
+	list()
+	tuple()
+
+Why use tuples?
+---------------
+* Tuples are faster than lists because of immutability, tuple objects are pre-calculated during each programs first run.
+* Can "write protect data"
+* Tuples can be used as dictionary keys
+
+
+
+Slicing Tuples
+--------------
+
+   0        1       2     3
+-----------------------------
+("CBT", "Nuggets", "is", 1.0)
+-----------------------------
+  -4       -3      -2    -1
+
+You cannot append data to a tuple.
+You can slice tuples, but unlike a string where each character is indexed, each data set has an index.
+
+>>> atuple=("CBT", "Nuggets", "is", 1.0)
+>>> type(atuple)
+<class 'tuple'>
+>>> len(atuple)
+4
+>>> type(atuple[1])
+<class 'str'>
+>>> type(atuple[3])
+<class 'float'>
+
+>>> newtup=atuple[0:2]
+>>> newtup
+('CBT', 'Nuggets')
+
+Using functions with the tuple
+------------------------------
+
+>>> newtup
+('CBT', 'Nuggets')
+>>> newtup.index('Nuggets')
+1
+
+>>> multituple=('tim', "is", 'tim', 12, 'tim')
+>>> multituple.count('tim')
+3
+>>> 
+
+
+
+Lists
+-----
+* Mutable sequence data structure
+
+            0     1      2      3
+-----------------------------------
+alist = ["Sales", 25, "Admin", 1.0]
+-----------------------------------
+           -4    -3     -2     -1
+
+
+* A true workhorse data type. Contents can be edited. Basic construction is the same as tuple.
+* Slicing is exactly the same as a tuple.
+
+Methods support by the list:
+
+Method			Purpose
+------                  -------
+append( item )		Inserts item as the end of the list
+count( item )		Returns the numberof occurances of item in the list
+extend( newList )	Inserts newList at the end of the list
+index( item )		Returns the index of the first occurance of item in the list. If the element is not in the list,
+			a valueError exception occurs
+insert( index, item )   Inserts item at position index
+pop( [index] ) 		Removes and returns the last element in the list. If the optional parameter index, is specified, 
+			removes and returns the element at position index.
+remove( item ) 		Removes the first occurance of item from the list. If the item is not in the list, a valueError
+			exception occurs
+reverse()		Reverses the items in the list
+sort( [function] )	Sorts the items in the list. Optional parameter function is a comparison function that may be 
+			user defined
+
+Examples:
+
+# type()
+
+>>> foo = ["spam", 355, "eggs", 323.234]
+>>> foo
+['spam', 355, 'eggs', 323.234]
+>>> type(foo)
+<class 'list'>
+
+# remove()
+
+>>> foo2 = foo[0:3]
+>>> foo2
+['spam', 355, 'eggs']
+>>> foo2.remove(355)
+>>> foo2
+['spam', 'eggs']
+
+# tuple() ...change from a list to a tuple
+
+>>> footuple = tuple(foo2)
+>>> footuple
+('spam', 'eggs')
+>>> type(footuple)
+<class 'tuple'>
+
+# count() and append()
+
+>>> foo2
+['spam', 'eggs', 3.14]
+>>> foo2.count('eggs')
+1
+>>> foo2.append('eggs')
+>>> foo2
+['spam', 'eggs', 3.14, 'eggs']
+>>> foo2.count('eggs')
+2
+
+## reverse()
+
+>>> foo
+['spam', 355, 'eggs', 323.234]
+>>> foo.reverse()
+>>> foo
+[323.234, 'eggs', 355, 'spam']
+
+## sort()
+	 
+>>> sortie = ['cc','aa','bb']
+>>> sortie
+['cc', 'aa', 'bb']
+>>> sortie.sort()
+>>> sortie
+['aa', 'bb', 'cc']
+>>> 
+
+
+Dictionaries
+------------
+* Mutable, unordered set of key:value pairs (not a sequence)
+* Also called associated arrays or hash tables
+* They are quick for lookup because each value is associated with a key.
+* Dictionary keys and values can be any combination of mutable data types: strings, integers or tuples
+
+adict = {'one':'uno', 'two':'dos', 'three':'tres'}
+
+* Tuples as keys -> YES (all elements immutable)
+* Lists as keys  -> NO  (mutable)
+
+* Slicing is not possible as the key:value pairs are unordered and therefore have no intrinsic position.
+
+Dictionary methods:
+
+
+* keys()
+* items()
+* values() all retrieval methods
+
+* pop()    removes key from dictionary
+* clear()  removes all items
+
+Examples:
+
+## create dictionary, use type()
+
+>>> months={1: "January", 2: "Febuary", 3: "March"}
+>>> type(months)
+<class 'dict'>
+
+## Returning values for keys
+
+>>> months[1]
+'January'
+>>> months[3]
+'March'
+>>> months[4] = "April"
+>>> months
+{1: 'January', 2: 'Febuary', 3: 'March', 4: 'April'}
+
+## Returning all keys or all values
+
+>>> months.keys()
+dict_keys([1, 2, 3, 4])
+>>> months.values()
+dict_values(['January', 'Febuary', 'March', 'April'])
+
+## Changing a value for a given key
+
+>>> months[4] = "Avril"
+>>> months
+{1: 'January', 2: 'Febuary', 3: 'March', 4: 'Avril'}
+>>> months[4] = "April"
+>>> months
+{1: 'January', 2: 'Febuary', 3: 'March', 4: 'April'}
+
+## Creating lists from dictionaries
+
+>>> month2list = list(months)
+>>> month2list
+[1, 2, 3, 4]
+>>> month2list2 =list(months.values())
+>>> month2list2
+['January', 'Febuary', 'March', 'April']
+
+## Adding values to a dictionary from a tuple
+
+>>> tuple = ("May")
+>>> months[5]=tuple
+>>> months
+{1: 'January', 2: 'Febuary', 3: 'March', 4: 'April', 5: 'May'}
+
+
+## len()
+
+>>> adict
+{'three': 'tres', 'two': 'dos', 'one': 'uno'}
+>>> len(adict)
+3
+
+
+## pop()
+
+>>> adict.pop('three')
+'tres'
+>>> adict
+{'two': 'dos', 'one': 'uno'}

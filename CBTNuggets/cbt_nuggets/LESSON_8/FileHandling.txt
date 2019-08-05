@@ -1,0 +1,383 @@
+File Handling
+=============
+* Accessing the file system
+* Reading a writing files
+
+The Filesystem
+--------------
+
+* OS Module:
+	getcwd()
+	chdir()
+	listdir()
+	path.join()  (build directory paths)
+
+* os.name:
+	os specific
+	sys.platform
+
+* shutil module
+	batch copy
+	batch removal
+
+Import the OS Module
+--------------------
+>>> import os
+>>> dir(os)
+['EX_CANTCREAT', 'EX_CONFIG', 'EX_DATAERR', 'EX_IOERR', 'EX_NOHOST', 'EX_NOINPUT', 'EX_NOPERM', 'EX_NOUSER', 'EX_OK', 'EX_OSERR', 'EX_OSFILE', 'EX_PROTOCOL', 'EX_SOFTWARE', 'EX_TEMPFAIL', 'EX_UNAVAILABLE', 'EX_USAGE', 'F_OK', 'MutableMapping', 'NGROUPS_MAX', 'O_APPEND', 'O_ASYNC', 'O_CREAT', 'O_DIRECT', 'O_DIRECTORY', 'O_DSYNC', 'O_EXCL', 'O_LARGEFILE', 'O_NDELAY', 'O_NOATIME', 'O_NOCTTY', 'O_NOFOLLOW', 'O_NONBLOCK', 'O_RDONLY', 'O_RDWR', 'O_RSYNC', 'O_SYNC', 'O_TRUNC', 'O_WRONLY', 'P_NOWAIT', 'P_NOWAITO', 'P_WAIT', 'R_OK', 'SEEK_CUR', 'SEEK_END', 'SEEK_SET', 'ST_APPEND', 'ST_MANDLOCK', 'ST_NOATIME', 'ST_NODEV', 'ST_NODIRATIME', 'ST_NOEXEC', 'ST_NOSUID', 'ST_RDONLY', 'ST_RELATIME', 'ST_SYNCHRONOUS', 'ST_WRITE', 'TMP_MAX', 'WCONTINUED', 'WCOREDUMP', 'WEXITSTATUS', 'WIFCONTINUED', 'WIFEXITED', 'WIFSIGNALED', 'WIFSTOPPED', 'WNOHANG', 'WSTOPSIG', 'WTERMSIG', 'WUNTRACED', 'W_OK', 'X_OK', '_Environ', '__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '_copyreg', '_execvpe', '_exists', '_exit', '_get_exports_list', '_keymap', '_make_stat_result', '_make_statvfs_result', '_pickle_stat_result', '_pickle_statvfs_result', '_putenv', '_spawnvef', '_unsetenv', '_wrap_close', 'abort', 'access', 'altsep', 'chdir', 'chmod', 'chown', 'chroot', 'close', 'closerange', 'confstr', 'confstr_names', 'ctermid', 'curdir', 'defpath', 'device_encoding', 'devnull', 'dup', 'dup2', 'environ', 'errno', 'error', 'execl', 'execle', 'execlp', 'execlpe', 'execv', 'execve', 'execvp', 'execvpe', 'extsep', 'fchdir', 'fchmod', 'fchown', 'fdatasync', 'fdopen', 'fork', 'forkpty', 'fpathconf', 'fstat', 'fstatvfs', 'fsync', 'ftruncate', 'getcwd', 'getcwdb', 'getegid', 'getenv', 'geteuid', 'getgid', 'getgroups', 'getloadavg', 'getlogin', 'getpgid', 'getpgrp', 'getpid', 'getppid', 'getsid', 'getuid', 'isatty', 'kill', 'killpg', 'lchown', 'linesep', 'link', 'listdir', 'lseek', 'lstat', 'major', 'makedev', 'makedirs', 'minor', 'mkdir', 'mkfifo', 'mknod', 'name', 'nice', 'open', 'openpty', 'pardir', 'path', 'pathconf', 'pathconf_names', 'pathsep', 'pipe', 'popen', 'putenv', 'read', 'readlink', 'remove', 'removedirs', 'rename', 'renames', 'rmdir', 'sep', 'setegid', 'seteuid', 'setgid', 'setgroups', 'setpgid', 'setpgrp', 'setregid', 'setreuid', 'setsid', 'setuid', 'spawnl', 'spawnle', 'spawnlp', 'spawnlpe', 'spawnv', 'spawnve', 'spawnvp', 'spawnvpe', 'stat', 'stat_float_times', 'stat_result', 'statvfs', 'statvfs_result', 'strerror', 'symlink', 'sys', 'sysconf', 'sysconf_names', 'system', 'tcgetpgrp', 'tcsetpgrp', 'times', 'ttyname', 'umask', 'uname', 'unlink', 'unsetenv', 'urandom', 'utime', 'wait', 'wait3', 'wait4', 'waitpid', 'walk', 'write']
+
+
+Examples:
+
+## Setting a path
+
+>>> path = os.path.dirname('/home/nicksouthorn/documents/Python_learning/LESSON_8/')
+>>> path
+'/home/nicksouthorn/documents/Python_learning/LESSON_8'
+>>> type(path)
+<class 'str'>
+
+## List contents of a folder
+
+>>> path
+'/home/nicksouthorn/documents/Python_learning/LESSON_8'
+>>> os.listdir(path)
+['file2.txt', '.FileHandling.txt.swp', 'file1.txt', '.FileHandling.txt.swo', 'file3.txt']
+
+# or you can hard code the path
+
+>>> os.listdir('/home/nicksouthorn/documents/Python_learning/LESSON_8/')
+['file2.txt', '.FileHandling.txt.swp', 'file1.txt', '.FileHandling.txt.swo', 'file3.txt']
+
+## Display information about the system
+
+>>> os.name
+'posix'
+
+>>> import sys
+>>> sys.platform
+'linux2'
+
+>>> print(list(os.environ.items()))
+[('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LOGNAME', 'nicksouthorn'), ('USER', 'nicksouthorn'), ('PATH', '/home/nicksouthorn/.bin:/home/nicksouthorn/bin:/usr/bin/crunchbang:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games'), ('HOME', '/home/nicksouthorn'), ('WINDOWPATH', '7'), ('LANG', 'en_GB'), ('TERM', 'xterm'), ('SHELL', '/bin/bash'), ('XDG_SESSION_COOKIE', 'f9884dc54322a7ab02a38705496cb689-1340626005.534769-1065488619'), ('SHLVL', '1'), ('DISPLAY', ':0.0'), ('WINDOWID', '37748739'), ('_', '/usr/bin/idle-python3.1'), ('USERNAME', 'nicksouthorn'), ('GDM_XSERVER_LOCATION', 'local'), ('SSH_AUTH_SOCK', '/tmp/keyring-4bOR9M/ssh'), ('DESKTOP_SESSION', 'default'), ('GDMSESSION', 'default'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:abstract=/tmp/dbus-0KefnB4moP,guid=dacb00ab6af6960b536383e54fe85456'), ('ORBIT_SOCKETDIR', '/tmp/orbit-nicksouthorn'), ('XAUTHORITY', '/home/nicksouthorn/.Xauthority'), ('GNOME_KEYRING_SOCKET', '/tmp/keyring-4bOR9M/socket'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GNOME_KEYRING_PID', '5023'), ('OLDPWD', '/home/nicksouthorn/documents/Python_learning'), ('GDM_LANG', 'en_GB'), ('HISTCONTROL', 'ignoreboth'), ('XDG_DATA_DIRS', '/usr/local/share/:/usr/share/:/usr/share/gdm/'), ('PWD', '/home/nicksouthorn/documents/Python_learning/LESSON_8'), ('COLORTERM', 'gnome-terminal'), ('LS_COLORS', 'no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.svgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:')]
+
+## a nicer way of presenting this would be using an iterative loop
+
+for param in os.environ.keys():
+    print(param, os.environ[param])
+
+LESSOPEN | /usr/bin/lesspipe %s
+LOGNAME nicksouthorn
+USER nicksouthorn
+PATH /home/nicksouthorn/.bin:/home/nicksouthorn/bin:/usr/bin/crunchbang:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+HOME /home/nicksouthorn
+WINDOWPATH 7
+LANG en_GB
+TERM xterm
+SHELL /bin/bash
+XDG_SESSION_COOKIE f9884dc54322a7ab02a38705496cb689-1340626005.534769-1065488619
+SHLVL 1
+DISPLAY :0.0
+WINDOWID 37748739
+_ /usr/bin/idle-python3.1
+USERNAME nicksouthorn
+GDM_XSERVER_LOCATION local
+SSH_AUTH_SOCK /tmp/keyring-4bOR9M/ssh
+DESKTOP_SESSION default
+GDMSESSION default
+DBUS_SESSION_BUS_ADDRESS unix:abstract=/tmp/dbus-0KefnB4moP,guid=dacb00ab6af6960b536383e54fe85456
+ORBIT_SOCKETDIR /tmp/orbit-nicksouthorn
+XAUTHORITY /home/nicksouthorn/.Xauthority
+GNOME_KEYRING_SOCKET /tmp/keyring-4bOR9M/socket
+LESSCLOSE /usr/bin/lesspipe %s %s
+GNOME_KEYRING_PID 5023
+OLDPWD /home/nicksouthorn/documents/Python_learning
+GDM_LANG en_GB
+HISTCONTROL ignoreboth
+XDG_DATA_DIRS /usr/local/share/:/usr/share/:/usr/share/gdm/
+PWD /home/nicksouthorn/documents/Python_learning/LESSON_8
+COLORTERM gnome-terminal
+LS_COLORS no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.svgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:
+
+
+## working out where we are
+
+>>> os.getcwd()
+'/home/nicksouthorn/documents/Python_learning/LESSON_8'
+>>> os.listdir(os.curdir)
+['environ.txt', 'file2.txt', '.FileHandling.txt.swp', 'file1.txt', '.FileHandling.txt.swo', 'file3.txt']
+
+## changing directory
+
+>>> os.chdir('/home/nicksouthorn/documents/Python_learning/LESSON_7/')
+>>> os.getcwd()
+'/home/nicksouthorn/documents/Python_learning/LESSON_7'
+
+## renaming files
+
+>>> os.listdir('.')
+['environ.txt', 'file2.txt', '.FileHandling.txt.swp', 'file1.txt', '.FileHandling.txt.swo', 'file3.txt']
+>>> os.rename('file1.txt', 'new_file1.txt')
+>>> os.listdir('.')
+['new_file1.txt', 'environ.txt', 'file2.txt', '.FileHandling.txt.swp', '.FileHandling.txt.swo', 'file3.txt']
+
+>> os.listdir(os.curdir)
+['new_file1.txt', 'environ.txt', 'file2.txt', '.FileHandling.txt.swp', '.FileHandling.txt.swo', 'file3.txt']
+
+## creating and deleting folders
+
+>>> os.mkdir('New Folder')
+>>> os.listdir(os.curdir)
+['New Folder', 'new_file1.txt', 'environ.txt', 'file2.txt', '.FileHandling.txt.swp', '.FileHandling.txt.swo', 'file3.txt']
+>>> os.rmdir('New Folder')
+>>> os.listdir(os.curdir)
+['new_file1.txt', 'environ.txt', 'file2.txt', '.FileHandling.txt.swp', '.FileHandling.txt.swo', 'file3.txt']
+>>> 
+
+Opening Files
+-------------
+
+myfile = open('/home/nicksouthorn/documents/Python_learning/LESSON_8/file2.txt', 'r') 
+r = proc mode
+'w' - write, or create new file
+'a' - append
+'b' - open up binary files rather than ascii or unicode (unmasks binary mappings) 
+
+* Path can be explicit or implicit
+
+
+myfile.write('Hello World!\n') - for single line entry (or triple quoted strings)
+
+myfile.writelines() - can read in a list
+
+myfile.readline()   - reads a single line for each execution
+myfile.readlines()  - reads multiple lines into a list of strings
+myfile.read()       - reads the whole file into one string
+
+
+myfile.close()      - clean programming, prevents the file being locked open by the operating system
+
+* Iterator is the best method for reading (cleaner and better on memory consumption)
+
+
+Examples:
+
+## Creating a new file
+
+>>> file = open('test1.txt', 'w')
+>>> type(file)
+<class '_io.TextIOWrapper'>
+>>> os.listdir('.')
+['test1.txt', 'environ.txt', 'file2.txt', '.FileHandling.txt.swp', 'FileHandling.txt', '.FileHandling.txt.swo', 'file3.txt']
+
+# Add content to the file
+
+>>> file.write('This is the first line of text.\n')
+32
+>>> 
+>>> file.write('This is the second line of text.\n')
+33
+
+# open the file by assiging to an object
+
+>>> file = open('test1.txt')
+
+# read file contents
+
+>>> file.readline()
+'This is the first line of text.\n'
+>>> file.readline()
+'This is the second line of text.\n'
+>>> file.readline()
+''
+
+# Return the cursor to the top of the file
+
+>>> file.seek(0)
+0
+>>> file.read()
+'This is the first line of text.\nThis is the second line of text.\n'
+
+# file is now read and and the cursor is at EOF so it needs returning to the top of the file again
+
+>>> file.read()
+''
+>>> print(file.read())
+>>> file.seek(0)
+0
+
+# close the file
+
+>>> print(file.read())
+This is the first line of text.
+This is the second line of text.
+
+>>> file.close()
+
+
+## appending text to a file
+
+>>> print(file.read())
+This is the first line of text.
+This is the second line of text.
+
+>>> file.close()
+>>> file = open('test1.txt', 'a')
+>>> file.write('''Now is the time for all good men...
+
+to come to the aid of their country.''')
+73
+>>> file.close()
+>>> file = open('test1.txt')
+>>> print(file.read())
+This is the first line of text.
+This is the second line of text.
+Now is the time for all good men...
+
+to come to the aid of their country.
+>>> 
+
+## issues with using write rather than append
+
+>>> namelist = ['TIm', 'Susan', 'Zoey']
+>>> file = open('test1.txt', 'w')
+
+# the write() function can only take a string input
+#  writelines() can take other data types
+
+>>> file.write(namelist)
+Traceback (most recent call last):
+  File "<pyshell#104>", line 1, in <module>
+    file.write(namelist)
+TypeError: must be str, not list
+>>> 
+
+>>> namelist = ['Tim', 'Susan', 'Zoey']
+>>> file = open('test1.txt', 'w')
+>>> file.writelines(namelist)
+>>> file.close()
+>>> file = open('test1.txt')
+>>> print(file.read())
+TimSusanZoey
+
+# Using 'w' instead of 'a' has overwritten the previous file contents
+# The data passed to the file has been converted to a string
+
+>>> type(file.read())
+<class 'str'>
+
+## More memory efficient ways by bringing back lines in files as iterators instead of packing data into a single string
+
+>>> for line in open('file2.txt').readlines():
+	print(line, end='')
+
+	
+perl
+python
+ruby
+erlang
+Alice
+ABC
+C
+BASIC
+Java
+>>>
+
+
+
+More Files & Folder Tricks
+--------------------------
+* os.walk()     -> traverse recursive directory structures
+* glob.glob()   -> wildcard processing, pattern matching (import glob) *.txt etc, Regular Expressions
+* pickle module -> allows portable storage of structured data
+		   bit like zipping up code
+		   can take the following inputs:
+			xml
+			json (JavaScript Object Notation)
+			dicts
+			lists
+
+## Example of using Pickle:
+
+# Creating a list and importing the pickle module
+>>> a = ['globby', 2323, 'text', 23.2342]
+>>> import pickle
+
+# Opening a file and setting it write binary mode and pickling the contents of list a to it
+>>> f = open('/home/nicksouthorn/documents/Python_learning/LESSON_8/file3.txt', 'wb')
+>>> pickle.dump(a,f)
+>>> f.close()
+
+
+# read binary the contents of the file and unpickle it
+>>> f2 = open('/home/nicksouthorn/documents/Python_learning/LESSON_8/file3.txt', 'rb')
+>>> a = pickle.load(f2)
+>>> f2.close()
+>>> a
+['globby', 2323, 'text', 23.2342]
+>>> 
+
+>>> a = pickle.load(f2)
+
+Pickle packs data into a persistent state.
+However there is no security for pickle, be careful opening unknown pickle dumps.
+
+##  Examples of using os.walk()
+
+
+>>> import os
+>>> os.getcwd()
+'/home/nicksouthorn/documents/Python_learning/LESSON_8'
+>>> for root, dirs, files in os.walk(os.curdir):
+	print('{0} has {1} files'.format(root, len(files)))
+
+	
+. has 7 files
+./sub has 5 files
+
+## Example of using Glob to return files based on a wildcard + filetype
+
+>>> import glob
+>>> glob.glob('/home/nicksouthorn/documents/Python_learning/LESSON_8/sub/*.txt')
+['/home/nicksouthorn/documents/Python_learning/LESSON_8/sub/nick.txt', '/home/nicksouthorn/documents/Python_learning/LESSON_8/sub/roy.txt', '/home/nicksouthorn/documents/Python_learning/LESSON_8/sub/jan.txt', '/home/nicksouthorn/documents/Python_learning/LESSON_8/sub/laura.txt', '/home/nicksouthorn/documents/Python_learning/LESSON_8/sub/mick.txt']
+
+
+
+>>> for name in glob.glob('/home/nicksouthorn/documents/Python_learning/LESSON_8/*'):
+	print(name)
+
+/home/nicksouthorn/documents/Python_learning/LESSON_8/test1.txt
+/home/nicksouthorn/documents/Python_learning/LESSON_8/sub
+/home/nicksouthorn/documents/Python_learning/LESSON_8/environ.txt
+/home/nicksouthorn/documents/Python_learning/LESSON_8/file2.txt
+/home/nicksouthorn/documents/Python_learning/LESSON_8/FileHandling.txt
+/home/nicksouthorn/documents/Python_learning/LESSON_8/file3.txt
+
+Opening other file types
+------------------------
+* Images: 
+	Python Imaging Library
+	PIL   -> Image modulei (was only available for Python 2, check for Python 3)
+
+* MS Office:
+	pywin32 (python for windows)
+	python office (Excel)
+
+* PDF: 
+	Reportlab
+	SWFTOOLS - gfx module
+
+
+# Example of opening a picture file (jpg)
+
+>>> import os
+>>> os.getcwd()
+'/home/nicksouthorn/documents/Python_learning/LESSON_8'
+>>> import Image
+>>> im = Image.open('/home/nicksouthorn/documents/Python_learning/LESSON_8/test.jpg')
+>>> type(im)
+<type 'instance'>
+>>> im.show()
+
+
+

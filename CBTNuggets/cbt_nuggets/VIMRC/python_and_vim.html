@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<TITLE>Notes on using Vim with Python</TITLE>
+</HEAD>
+<BODY BGCOLOR="#CCCC99">
+<P><FONT SIZE="+2" COLOR="#FF0000">Useful VIM Settings</FONT> for working 
+  with Python:</P>
+<DIV ALIGN="CENTER">
+  <TABLE WIDTH="96%" BORDER="1" CELLSPACING="0" CELLPADDING="5">
+    <TR BGCOLOR="#996633"> 
+      <TD><FONT COLOR="#99FF99"><B>Setting</B></FONT></TD>
+      <TD ALIGN="CENTER"><FONT COLOR="#99FF99"><B>Abbr.</B></FONT></TD>
+      <TD><FONT COLOR="#99FF99"><B>Explanation</B></FONT></TD>
+    </TR>
+    <TR> 
+      <TD><TT>tabstop=4</TT></TD>
+      <TD ALIGN="CENTER">ts</TD>
+      <TD>A four-space tab indent width is the prefered coding style for Python 
+        (and everything else!), although of course some disagree. This page 
+        generally assumes you want 4-space indents.</TD>
+    </TR>
+    <TR> 
+      <TD><TT>shiftwidth=4</TT></TD>
+      <TD ALIGN="CENTER">sw</TD>
+      <TD>This allows you to use the <TT>&lt;</TT> and <TT>&gt;</TT> keys 
+        from VIM's visual (marking) mode to block indent/unindent regions</TD>
+    </TR>
+    <TR> 
+      <TD><TT>smarttab</TT></TD>
+      <TD ALIGN="CENTER">sta</TD>
+      <TD>Use the &quot;<TT>shiftwidth</TT>&quot; setting for inserting <TT>&lt;TAB&gt;</TT>s 
+        instead of the &quot;tabstop&quot; setting, when at the beginning 
+        of a line. This may be redundant for most people, but some poeple 
+        like to keep their <TT>tabstop=8</TT> for compatability when loading 
+        files, but setting <TT>shiftwidth=4</TT> for nicer coding style. </TD>
+    </TR>
+    <TR> 
+      <TD><TT>expandtab</TT></TD>
+      <TD ALIGN="CENTER">et</TD>
+      <TD>Insert spaces instead of <TT>&lt;TAB&gt;</TT> character when the 
+        <TT>&lt;TAB&gt;</TT> key is pressed. This is also the prefered method 
+        of Python coding, since Python is especially sensitive to problems 
+        with indenting which can occur when people load files in different 
+        editors with different tab settings, and also cutting and pasting 
+        between applications (ie email/news for example) can result in problems. 
+        It is safer and more portable to use spaces for indenting.</TD>
+    </TR>
+    <TR>
+      <TD><TT>softtabstop=4</TT></TD>
+      <TD ALIGN="CENTER">sts</TD>
+      <TD>People like using real tab character instead of spaces because it 
+        makes it easier when pressing <TT>BACKSPACE</TT> or <TT>DELETE</TT>, 
+        since if the indent is using spaces it will take 4 keystrokes to delete 
+        the indent. Using this setting, however, makes VIM see multiple space 
+        characters as tabstops, and so <TT>&lt;BS&gt;</TT> does the right 
+        thing and will delete four spaces (assuming 4 is your setting).</TD>
+    </TR>
+    <TR>
+      <TD><TT>autoindent</TT></TD>
+      <TD ALIGN="CENTER">ai</TD>
+      <TD>Very painful to live without this (especially with Python)! It means 
+        that when you press <TT>RETURN</TT> and a new line is created, the 
+        indent of the new line will match that of the previous line. </TD>
+    </TR>
+    <TR>
+      <TD>&nbsp;</TD>
+      <TD ALIGN="CENTER">&nbsp;</TD>
+      <TD>&nbsp;</TD>
+    </TR>
+    <TR>
+      <TD>&nbsp;</TD>
+      <TD ALIGN="CENTER">&nbsp;</TD>
+      <TD>&nbsp;</TD>
+    </TR>
+    <TR>
+      <TD>&nbsp;</TD>
+      <TD ALIGN="CENTER">&nbsp;</TD>
+      <TD>&nbsp;</TD>
+    </TR>
+    <TR>
+      <TD>&nbsp;</TD>
+      <TD ALIGN="CENTER">&nbsp;</TD>
+      <TD>&nbsp;</TD>
+    </TR>
+  </TABLE>
+  <FONT SIZE="-1">Remember. You can do <TT>:help <I>command</I></TT> to get 
+  more info on these settings from inside VIM.</FONT> 
+  <P>&nbsp;</P>
+</DIV>
+<P>More complicated settings:</P>
+<HR>
+<FONT SIZE="+2" COLOR="#FF0000">SmartIndent</FONT>
+<BLOCKQUOTE>
+  <P> The following line sets the smartindent mode for *.py files. It means 
+    that after typing lines which start with any of the keywords in the list 
+    (ie. <TT>def</TT>, <TT>class</TT>, <TT>if</TT>, etc) the next line will 
+    <I>automatically</I> indent itself to the next level of indentation:</P>
+</BLOCKQUOTE>
+<P><TT>autocmd&nbsp;BufRead&nbsp;*.py&nbsp;set&nbsp;smartindent&nbsp;cinwords=if,elif,else,for,while,try,except,finally,def,class 
+  </TT> </P>
+<BLOCKQUOTE>
+  <P>Another approach is to create a key mapping which detects when you type 
+    a colon (<TT>:</TT>) followed by a <TT>RETURN</TT> (<TT>&lt;CR&gt;</TT>), 
+    and adds a <TT>&lt;TAB&gt;</TT> keypress to the end.</P>
+</BLOCKQUOTE>
+<P><TT>im :&lt;CR> :&lt;CR>&lt;TAB></TT></P>
+<HR>
+<P><FONT SIZE="+2" COLOR="#FF0000">Trim Trailing Whitespace</FONT></P>
+<BLOCKQUOTE> 
+  <P>Many people like to remove any extra whitespace from the ends of lines. 
+    Here is one way to do it when saving your file.</P>
+</BLOCKQUOTE>
+<P><TT>autocmd&nbsp;BufWritePre&nbsp;*.py&nbsp;normal&nbsp;m`:%s/\s\+$//e&#13;``</TT></P>
+<HR>
+<FONT SIZE="-1">TSend tips to x at vex.net</FONT>
+<P>&nbsp;</P>
+</BODY>
+</HTML>

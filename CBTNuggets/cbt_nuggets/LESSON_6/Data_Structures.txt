@@ -1,0 +1,204 @@
+Data Structures Revisited
+=========================
+* Sets
+* List comprehensions
+
+What are sets?
+--------------
+
+* maths: collection of distinct objects considered as an object
+* python: unordered collection of unique, immutable elements
+	- not a sequence (string, list, tuple
+	- not a mapping (dictionary)
+
+myset = set('python')
+myset2 = set([0, 1, 2, 3, 4])
+
+Example of a set being unordered:
+
+>>> s1 = set([0, 2, 4, 6])
+>>> type(s1)
+<class 'set'>
+>>> s2 = set('cbtnuggets')
+>>> s1
+{0, 2, 4, 6}
+>>> s2
+{'c', 'b', 'e', 'g', 'n', 's', 'u', 't'}
+
+## Sets can be added in union using the update function
+
+>>> s3 = ([10, 12, 14, 16])
+>>> s1.update(s3)
+>>> s1
+{0, 2, 4, 6, 10, 12, 14, 16}
+>>> newset = set(s1)
+>>> newset
+{0, 2, 4, 6, 10, 12, 14, 16}
+
+## Using the ID function to prove that each set is a discrete object in memory even if they have the same contents
+## ID refers to the location in memory
+
+>>> id(s1)
+3062348908
+>>> id(newset)
+3062553484
+
+## The garbage collection will clear out the previous location in memory
+
+>>> sx = s1
+>>> id(s1)
+3062348908
+>>> id(sx)
+3062348908
+
+## pop Function
+## pop will remove and return an arbitrary set element
+
+>>> s1
+{2, 4, 6, 10, 12, 14, 16}
+>>> s1.pop()
+2
+>>> s1
+{4, 6, 10, 12, 14, 16}
+
+
+## boolean with sets
+
+>>> s1={4, 6, 10, 12, 14, 16}
+>>> 4 in s1
+True
+>>> 5 in s1
+False
+>>> 
+
+## clear the set
+
+>>> s1.clear()
+>>> s1
+set()
+
+## create an empty list
+
+>>> elist=[]
+>>> type(elist)
+<class 'list'>
+>>> 
+
+
+More about sets
+---------------
+* valueless dictionaries (keys only)
+* good for isolating uniques (each member in the collection must be unique)
+* set operations:
+	union - blend 2 sets into 1
+	intersection - take common items from each set and creating a new set
+	difference - taking unique items from each set and creating a new set
+* membership testing:
+	in - test to set if an item is in a set
+	issubset -  	 
+	issuperset - 
+
+Examples:
+
+## creating an empty set and then adding to it
+
+>>> s1= set()
+>>> s1.add(0)
+>>> s1.add(1)
+>>> s1
+{0, 1}
+>>> s2 = set([2, 3, 4, 5])
+>>> s1.update(s2)
+>>> s1
+{0, 1, 2, 3, 4, 5}
+
+## creating a set from a list
+
+>>> lang = ['lisp', 'python', 'abc', 'c', 'python', 'ruby', 'perl', 'ruby']
+>>> l1 = set(lang)
+>>> l1
+{'c', 'abc', 'lisp', 'perl', 'python', 'ruby'} # Note that the duplicates are removed!
+
+## showing the difference between 2 sets
+
+>>> morelang = ['sql', 'erlang', 'perl', 'haskell']
+>>> l2 = set(morelang)
+>>> l1
+{'c', 'abc', 'lisp', 'perl', 'python', 'ruby'}
+>>> l2
+{'haskell', 'perl', 'erlang', 'sql'}
+>>> l1 - l2
+{'lisp', 'python', 'c', 'abc', 'ruby'} # perl is not unique and is therefore removed
+
+## showing the intersection of two sets
+
+>>> morelang = ['sql', 'erlang', 'perl', 'haskell']
+>>> l2 = set(morelang)
+>>> l1
+{'c', 'abc', 'lisp', 'perl', 'python', 'ruby'}
+>>> l2
+{'haskell', 'perl', 'erlang', 'sql'}
+>>> 
+>>> l1.intersection(l2)
+{'perl'} # perl is common in both sets
+
+## union of two sets, note that duplicates have been removed
+
+>>> u = l1.union(l2)
+>>> u
+{'python', 'c', 'abc', 'sql', 'lisp', 'erlang', 'ruby', 'haskell', 'perl'}
+>>> type(u)
+<class 'set'>
+
+## Using a for loop to iterate through a set
+
+>>> l1
+{'c', 'abc', 'lisp', 'perl', 'python', 'ruby'}
+>>> for i in l1:
+	print(i)
+
+	
+c
+abc
+lisp
+perl
+python
+ruby
+
+
+## Checking to see if a set is a subset of another
+
+>>> s1 = set([0, 2, 4, 6])
+>>> s2 = set([10, 12, 14, 16])
+>>> s1.update(s2)
+>>> s1
+{0, 2, 4, 6, 10, 12, 14, 16}
+>>> s1.issubset(s2)  # s1 is not a subset of s2
+False
+>>> s2.issubset(s1)  # s2 is a subset of s1
+
+## set comprehensions, applying maths to sets
+
+>>> s2 = set([10, 12, 14, 16])
+>>> type(s2)
+<class 'set'>
+>>> s2
+{16, 10, 12, 14}
+>>> setcomp = {i * 2 for i in s2}
+>>> setcomp
+{32, 24, 20, 28}
+
+
+
+Map functions
+-------------
+def mult(val):
+    return val * 2
+
+my_list = [0, 1, 2, 10, 100, 1000]
+
+iter = map(mult, my_list)
+
+print(list(iter))
+
+

@@ -1,0 +1,266 @@
+Functions
+=========
+* Function Components
+* Calling Functions
+* Return Values
+
+What is a funtion?
+------------------
+A block of code that performs a specific action and returns a result.
+
+Advantages:
+* Reusable code
+* Easier to maintain
+* Increased readability
+* Hides complexity from the user
+
+* Function based proceduring programming leads to object-oriented programming
+
+Function Syntax
+---------------
+
+name = my_func(arg1, arg2, arg='Default')
+
+* Parameter -> design time placeholders (i.e. arg1, arg2, arg etc)
+Some functions don't need arguments, i.e. str.upper()
+
+arg1, arg2 are positional
+arg is a keyword, being passed a default value at runtime
+
+* Argument  -> runtime data object
+
+Functions run without a binding name lose their data after running. Using 'name' allows for the results to be captured and reused.
+
+
+Built in functions
+------------------
+* __builtin__ (p2k) or builtins (p3k)
+
+The built-in __name__ objects are typically called "special" methods or "magic" methods
+
+* mylist.__len__() -> mylist.len() ## Syntactic sugar!
+
+The reason why Python "magic" methods and attributes use the __name__ notation is to avoid collisions with user-defined names
+
+All built-in functions:
+
+>>> import builtins
+>>> dir(builtins)
+['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'BufferError', 'BytesWarning', 'DeprecationWarning', 'EOFError', 'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FloatingPointError', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError', 'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'NameError', 'None', 'NotImplemented', 'NotImplementedError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'ReferenceError', 'RuntimeError', 'RuntimeWarning', 'StopIteration', 'SyntaxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'True', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning', 'ZeroDivisionError', '__build_class__', '__debug__', '__doc__', '__import__', '__name__', '__package__', 'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'bytearray', 'bytes', 'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'exit', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'license', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']
+
+>>> help(builtins.len)
+Help on built-in function len in module builtins:
+
+len(...)
+    len(object) -> integer
+    
+    Return the number of items of a sequence or mapping.
+
+
+
+The Python "dot" notation also gives you access to attributes (properties) that are associated with a given name.
+
+>>> builtins.__doc__
+"Built-in functions, exceptions, and other objects.\n\nNoteworthy: None is the `nil' object; Ellipsis represents `...' in slices."
+
+Have a look at www.voidspace.org.uk/python/articles/duck_typing.shtml
+
+
+Functions vs Methods
+--------------------
+
+* Function: stand-alone code block. Called independantly by name
+
+* Method: function that is bound to or associated with a particular object
+
+* Namespace + modules
+
+mylist = mylist.append('New Element')
+
+For an excellent guide to Python namespaces, see:
+bytebaker.com/2008/07/30/python-namespaces/
+
+## Method applied to an object
+
+>>> randint(1,10)
+Traceback (most recent call last):
+  File "<pyshell#18>", line 1, in <module>
+    randint(1,10)
+NameError: name 'randint' is not defined
+>>> 
+>>> 
+>>> import random
+>>> random.randint(1,10)
+6
+>>> 
+
+
+
+
+Creating Functions
+------------------
+
+def power(p): *1
+    '''
+    Calculates 2 to the power of p *2
+    '''
+    r = 2 ** p
+    return r *3
+print('2 to the power of 2 is', power(2))
+
+*1 Dynamically typed parameter
+*2 Docstring indented (PEP 257); Sphinx (used for generating docstrings)
+*3 Return value (optional)
+
+Python functions always have a return value
+-------------------------------------------
+* Names defined in a function go away when f(x) exist
+
+	BUT -> None (if you do not specify a return then the function will return none)
+
+* Single-value return
+	return x
+
+* multiple-value return -> tuple
+	return x, y
+
+Examples:
+
+## Simple function taking a string input and converting it to upper case then passing to stdout.
+
+>>> def uc(a):
+	a = a.upper()
+	print(a)
+	
+>>> uc('python')
+PYTHON
+>>> uc('crISPs')
+CRISPS
+
+>>> result = uc('pYtHon')
+PYTHON
+>>> result
+>>> ## NOTHING...THE OUTPUT IS LOST
+
+## Because there is no return value specified when uc is invoked, nothing further can be done with the results.
+## So this time, a return value is used
+
+>>> def uc(a):
+	a = a.upper()
+	print(a)
+	return a
+
+>>> result2 = uc('thIs iS IN MIxed Case')
+THIS IS IN MIXED CASE
+>>> result2
+'THIS IS IN MIXED CASE'
+>>> type(result2)
+<class 'str'>
+
+## Function without a return value
+
+# no return value
+def typer(x):
+    '''
+    Returns datatype for x (limited use)
+    '''
+    if type(x) == int:
+        print('This is an integer')
+    elif type(x) == str:
+        print('This is a string')
+    else:
+        print('This is neither an integer nor a string')
+
+print(typer(200))
+
+>>> ================================ RESTART ================================
+>>> 
+This is an integer
+None ## None is returned as no return is defined
+
+## Now save this function in the class path, removing the line print(typer(200))
+
+>>> import m8 ## To import the function as you would with a built-in
+
+## Call the function using strict notation module.function(arg)
+>>> m8.typer(190)
+This is an integer
+>>> 
+
+
+## Creating a function that returns a user supplied value and a default value
+' m9.py
+def namer(firstname, lastname='Southorn'):
+    # Return value, default value
+    r = print('Your name is' , firstname, lastname)
+    return r
+
+
+>>> import m9
+>>> dir(m9)
+['__builtins__', '__doc__', '__file__', '__name__', '__package__', 'namer']
+>>> fullname = m9.namer('Nick')
+Your name is Nick Southorn
+
+
+## CHECK OUT www.java2s.com
+
+## Adding some string formatting to a function
+
+def fun(name, location, year=2010):
+    nly = "%s/%s/%d" % (name, location, year)
+    print(nly)
+    return nly
+
+# Keyword arguments can be passed into the function in arbitrary order
+# fun(location="Leiceseter", year=2012, name="Nick Southorn")
+# fun("Nick Southorn", "Leicester", "2012")
+
+>>> import m10
+>>> dir(m10)
+['__builtins__', '__doc__', '__file__', '__name__', '__package__', 'fun']
+>>> 
+>>> rz = m10.fun(location="Leicester", year=2012, name="Nick Southorn")
+Nick Southorn/Leicester/2012
+>>> rz
+'Nick Southorn/Leicester/2012'
+
+# rz is immutable and bound to 'Nick Southorn/Leicester/2012'
+
+Arbitrary number of arguments
+-----------------------------
+*args (star args)            -> single arguments 
+**kwargs (star star kwargs)  -> arbitrary keyword assignments
+
+def foo(a, b, *args, **kwargs):      # 2 positional arguments, *args and **kwargs
+    print("Here is 'a'", a)
+    print("Here is 'b'", b)
+    print("Here is '*args'", *args)
+
+print(foo('spam', 'eggs', 'arb1', 'arb2', 'arb3'))
+
+arb1,arb2,arb3 will be passed to *args
+
+>>> import m11
+>>> m11.foo('spam', 'eggs', 'arb1', 'arb2', 'arb3')
+Here is 'a' spam
+Here is 'b' eggs
+Here is '*args' arb1 arb2 arb3
+
+Variable Scope
+--------------
+* Global
+* Local
+
+Any names define within a function are local to that function and not available outside the function,
+
+
+
+
+
+## Look up EVALUATION STRATEGY
+
+The semantics of call-by-sharing differ from call-by-reference in that assignments to function arguments within the function aren't visible to the caller (unlike by-reference semantics). 
+However, since the function has access to the same object as the caller (no copy is made), mutations to those objects within the function are visible to the caller, which differs from call-by-value semantics. 
+
+Although this term has widespread usage in the Python community, identical semantics in other languages such as Java and Visual Basic are often rescribed as call-by-value, where the object is implied to be a reference to the object.
