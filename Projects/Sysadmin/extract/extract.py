@@ -3,7 +3,7 @@ import sys
 
 try:
     # open tarfile
-    tar = tarfile.open(sys.argv[1], "r:tar")
+    tar = tarfile.open(sys.argv[1], "r:file.tar")
 
     # present menu and get selection
     selection = raw_input("Enter\n\
